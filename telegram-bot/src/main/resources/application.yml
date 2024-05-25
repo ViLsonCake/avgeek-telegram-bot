@@ -6,7 +6,13 @@ spring:
     hibernate:
       ddl-auto: update
 
+
   datasource:
     url: jdbc:postgresql://localhost:5433/${POSTGRES_DB}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
+
+
+bot:
+  name: ${BOT_MAME}
+  token: ${BOT_TOKEN}
