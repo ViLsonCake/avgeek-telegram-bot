@@ -40,3 +40,5 @@ out/
 
 .env
 *.env
+
+*_Bot*
