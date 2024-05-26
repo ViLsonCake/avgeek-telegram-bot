@@ -13,11 +13,20 @@ async def pong(api_key=Depends(api_key_auth)) -> str:
     return 'pong'
 
 
-@app.get('/aircraft/{icao}')
-async def get_aircraft_by_icao(icao: str, api_key=Depends(api_key_auth)) -> dict:
-    flights: list = flightradar_api.get_flights(aircraft_type=icao)
-    flights = [str(flight) for flight in flights]
-    return {'flights': flights}
+@app.get('/aircraft/{aircraft_code}/{airport_code}')
+async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=Depends(api_key_auth)):
+    flights: list = flightradar_api.get_flights(aircraft_type=aircraft_code)
+    airport = flightradar_api.get_airport(airport_code)
+    flights = [{
+        'id': flight.id,
+        'code': flight.aircraft_code,
+        'altitude': flight.altitude,
+        'ground_speed': flight.ground_speed,
+        'latitude': flight.latitude,
+        'longitude': flight.longitude,
+        'distance': f'{int(flight.get_distance_from(airport))} km'
+    } for flight in flights]
+    return flights
 
 
 @app.get('/airport/name/{icao}')
@@ -55,6 +64,7 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dic
     formatted_arrivals: list = []
 
     for arrival in arrivals:
+        id: str = str(arrival['flight']['identification']['row'])
         code: str = arrival['flight']['aircraft']['model']['code']
         airport: str = arrival['flight']['airport']['origin']['name']
 
@@ -64,6 +74,7 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dic
             airline_name = 'Unknown'
 
         formatted_arrivals.append({
+            'id': id,
             'code': code,
             'airline_name': airline_name,
             'airport': airport
