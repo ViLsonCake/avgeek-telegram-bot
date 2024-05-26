@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -30,6 +31,9 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private UserState state;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<FlightEntity> flights;
 
     public UserEntity(String username, Long chatId, UserState state) {
         this.username = username;

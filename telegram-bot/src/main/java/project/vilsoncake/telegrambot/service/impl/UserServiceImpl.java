@@ -8,6 +8,9 @@ import project.vilsoncake.telegrambot.exception.UserNotFoundException;
 import project.vilsoncake.telegrambot.repository.UserRepository;
 import project.vilsoncake.telegrambot.service.UserService;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -23,6 +26,11 @@ public class UserServiceImpl implements UserService {
     public UserEntity getUserByUsername(String username) {
         return userRepository.findByUsernameIgnoreCase(username).orElseThrow(() ->
                 new UserNotFoundException(String.format("User \"%s\" not found", username)));
+    }
+
+    @Override
+    public List<UserEntity> findAllUsers() {
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false).toList();
     }
 
     @Override
