@@ -2,8 +2,11 @@ package project.vilsoncake.telegrambot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import project.vilsoncake.telegrambot.constant.MessageConst;
+import project.vilsoncake.telegrambot.dto.AirportNameDto;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.service.BotService;
@@ -14,6 +17,7 @@ import project.vilsoncake.telegrambot.service.UserService;
 public class BotServiceImpl implements BotService {
 
     private final UserService userService;
+    private final WebClient webClient;
 
     @Override
     public SendMessage startBotCommand(String username, Long chatId) {
@@ -36,10 +40,7 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public SendMessage changeUserAirportCommand(String username, String code, Long chatId) {
-
-        // TODO add code validation
-
+    public SendMessage changeUserAirportCommand(String username, Long chatId) {
         userService.changeUserState(username, UserState.CHOOSING_AIRPORT);
 
         SendMessage message = new SendMessage();
@@ -50,16 +51,28 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public SendMessage changeUserAirport(String username, String code) {
+    public SendMessage changeUserAirport(String username, String code, Long chatId) {
+        AirportNameDto airportNameDto;
+        try {
+            airportNameDto = webClient.get()
+                    .uri("/airport/name/" + code)
+                    .retrieve()
+                    .bodyToMono(AirportNameDto.class)
+                    .block();
+        } catch (WebClientResponseException e) {
+            SendMessage message = new SendMessage();
+            message.setChatId(chatId);
+            message.setText(String.format(MessageConst.INVALID_AIRPORT_CODE_TEXT, code));
 
-        // TODO add code validation
+            return message;
+        }
 
         userService.changeUserAirport(username, code);
-        UserEntity user = userService.changeUserState(username, UserState.CHOSEN_AIRPORT);
+        userService.changeUserState(username, UserState.CHOSEN_AIRPORT);
 
         SendMessage message = new SendMessage();
-        message.setChatId(user.getChatId());
-        message.setText(String.format(MessageConst.CHOOSE_AIRPORT_TEXT, code));
+        message.setChatId(chatId);
+        message.setText(String.format(MessageConst.CHOOSE_AIRPORT_TEXT, airportNameDto.getName()));
 
         return message;
     }

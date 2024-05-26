@@ -16,3 +16,7 @@ spring:
 bot:
   name: ${BOT_MAME}
   token: ${BOT_TOKEN}
+
+flightradar-api:
+  api-key: ${API_KEY}
+  url: ${API_URL}

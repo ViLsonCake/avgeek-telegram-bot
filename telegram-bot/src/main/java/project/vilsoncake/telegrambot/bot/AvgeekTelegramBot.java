@@ -51,9 +51,8 @@ public class AvgeekTelegramBot extends AbilityBot {
                 throw new RuntimeException(e);
             }
         } else if (update.getMessage().getText().equals("/change-airport")) {
-            String airportCode = update.getMessage().getText().trim().toLowerCase();
             try {
-                execute(botService.changeUserAirportCommand(username, airportCode, update.getMessage().getChatId()));
+                execute(botService.changeUserAirportCommand(username, update.getMessage().getChatId()));
                 return;
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
@@ -64,7 +63,7 @@ public class AvgeekTelegramBot extends AbilityBot {
             if (botService.getUserState(username).equals(UserState.CHOOSING_AIRPORT)) {
                 String airportCode = update.getMessage().getText().trim().toLowerCase();
                 try {
-                    execute(botService.changeUserAirport(username, airportCode));
+                    execute(botService.changeUserAirport(username, airportCode, update.getMessage().getChatId()));
                 } catch (TelegramApiException e) {
                     throw new RuntimeException(e);
                 }

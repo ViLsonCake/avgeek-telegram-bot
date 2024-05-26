@@ -5,8 +5,8 @@ import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
 public interface BotService {
     SendMessage startBotCommand(String username, Long chatId);
-    SendMessage changeUserAirportCommand(String username, String code, Long chatId);
-    SendMessage changeUserAirport(String username, String code);
+    SendMessage changeUserAirportCommand(String username, Long chatId);
+    SendMessage changeUserAirport(String username, String code, Long chatId);
     UserState getUserState(String username);
     boolean isUserRegistered(String username);
 }
