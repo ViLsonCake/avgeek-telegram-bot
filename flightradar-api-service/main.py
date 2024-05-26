@@ -20,6 +20,7 @@ async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=De
     flights = [{
         'id': flight.id,
         'code': flight.aircraft_code,
+        'callsign': flight.callsign,
         'altitude': flight.altitude,
         'ground_speed': flight.ground_speed,
         'latitude': flight.latitude,
