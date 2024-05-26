@@ -17,3 +17,11 @@ def get_white_list_plane_codes(flights: list) -> list:
             white_list_planes.append(flight)
 
     return white_list_planes
+
+
+def convert_feet_to_meters(feets: int) -> int:
+    return int(feets * 0.3048)
+
+
+def convert_knots_to_kmh(knots: int) -> int:
+    return int(knots * 1.852)

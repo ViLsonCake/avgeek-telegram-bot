@@ -2,7 +2,7 @@ from FlightRadar24.errors import AirportNotFoundError
 from fastapi import FastAPI, Depends, HTTPException, status
 from security.api_key_security import api_key_auth
 from FlightRadar24 import FlightRadar24API
-from utils.flight_utils import get_white_list_plane_codes
+from utils.flight_utils import get_white_list_plane_codes, convert_feet_to_meters, convert_knots_to_kmh
 
 app = FastAPI()
 flightradar_api: FlightRadar24API = FlightRadar24API()
@@ -14,20 +14,20 @@ async def pong(api_key=Depends(api_key_auth)) -> str:
 
 
 @app.get('/aircraft/{aircraft_code}/{airport_code}')
-async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=Depends(api_key_auth)):
+async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=Depends(api_key_auth)) -> dict:
     flights: list = flightradar_api.get_flights(aircraft_type=aircraft_code)
     airport = flightradar_api.get_airport(airport_code)
     flights = [{
         'id': flight.id,
         'code': flight.aircraft_code,
         'callsign': flight.callsign,
-        'altitude': flight.altitude,
-        'ground_speed': flight.ground_speed,
+        'altitude': convert_feet_to_meters(flight.altitude),
+        'ground_speed': convert_knots_to_kmh(flight.ground_speed),
         'latitude': flight.latitude,
         'longitude': flight.longitude,
         'distance': f'{int(flight.get_distance_from(airport))} km'
     } for flight in flights]
-    return flights
+    return {'flights': flights}
 
 
 @app.get('/airport/name/{icao}')
