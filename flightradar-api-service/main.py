@@ -20,7 +20,23 @@ async def get_aircraft_by_icao(icao: str, api_key=Depends(api_key_auth)) -> dict
     return {'flights': flights}
 
 
-@app.get('/airport/{icao}')
+@app.get('/airport/name/{icao}')
+async def get_airport_by_code(icao: str, api_key=Depends(api_key_auth)) -> dict:
+    try:
+        return {'name': flightradar_api.get_airport(icao).name}
+    except AirportNotFoundError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f'Airport with code "{icao}" not found'
+        )
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f'The code "{icao}" is not valid. It must be the IATA or ICAO of the airport'
+        )
+
+
+@app.get('/airport/flights/{icao}')
 async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dict:
     try:
         details = flightradar_api.get_airport_details(icao)
