@@ -66,8 +66,12 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dic
 
     for arrival in arrivals:
         id: str = str(arrival['flight']['identification']['row'])
-        code: str = arrival['flight']['aircraft']['model']['code']
         airport: str = arrival['flight']['airport']['origin']['name']
+
+        try:
+            code: str = arrival['flight']['aircraft']['model']['code']
+        except TypeError:
+            code = 'Unknown'
 
         try:
             airline_name: str = arrival['flight']['airline']['name']

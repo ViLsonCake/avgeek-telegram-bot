@@ -1,8 +1,9 @@
+import os
 import json
 
 
 def get_json_config() -> list[str]:
-    with open('config/white-list-plane-codes.json', 'r') as config_file:
+    with open(os.getcwd() + '/app/config/white-list-plane-codes.json', 'r') as config_file:
         string_json = config_file.read()
 
     return json.loads(string_json)['white_list_codes']
