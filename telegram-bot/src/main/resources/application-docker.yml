@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: telegram-bot
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_DOCKER_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+
+bot:
+  name: ${BOT_MAME}
+  token: ${BOT_TOKEN}
+
+flightradar-api:
+  api-key: ${API_KEY}
+  url: ${API_DOCKER_URL}

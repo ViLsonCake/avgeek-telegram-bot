@@ -20,6 +20,15 @@ public class BotServiceImpl implements BotService {
     private final WebClient webClient;
 
     @Override
+    public SendMessage pingCommand(Long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText("pong");
+
+        return message;
+    }
+
+    @Override
     public SendMessage startBotCommand(String username, Long chatId) {
 
         UserEntity user = new UserEntity(
@@ -46,6 +55,23 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(MessageConst.CHANGE_AIRPORT_TEXT);
+
+        return message;
+    }
+
+    @Override
+    public SendMessage getUserAirportCommand(String username, Long chatId) {
+        String airportCode = userService.getUserByUsername(username).getAirport();
+
+        AirportNameDto airportNameDto = webClient.get()
+                .uri("/airport/name/" + airportCode)
+                .retrieve()
+                .bodyToMono(AirportNameDto.class)
+                .block();
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(String.format(MessageConst.CURRENT_AIRPORT_TEXT, airportNameDto.getName(), airportCode));
 
         return message;
     }

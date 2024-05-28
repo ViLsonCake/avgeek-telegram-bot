@@ -1,4 +1,31 @@
+version: '3'
+
 services:
+
+  flightradar-api:
+    container_name: flightradar-api
+    build:
+      context: ./flightradar-api-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - '8000:8000'
+
+  avgeek-telegram-bot:
+    container_name: avgeek-telegram-bot
+    build:
+      context: ./telegram-bot
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+
   postgres:
     container_name: avgeek_bot_postgres
     image: postgres:latest

@@ -2,7 +2,6 @@ package project.vilsoncake.telegrambot.bot;
 
 import org.springframework.stereotype.Component;
 import org.telegram.abilitybots.api.bot.AbilityBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
@@ -35,24 +34,32 @@ public class AvgeekTelegramBot extends AbilityBot {
         }
 
         String username = update.getMessage().getChat().getUserName();
+        Long chatId = update.getMessage().getChatId();
 
         if (update.getMessage().getText().equals("/start")) {
             try {
-                execute(botService.startBotCommand(username, update.getMessage().getChatId()));
+                execute(botService.startBotCommand(username, chatId));
                 return;
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
         } else if (update.getMessage().getText().equals("/ping")) {
             try {
-                execute(new SendMessage(update.getMessage().getChatId().toString(), "pong"));
+                execute(botService.pingCommand(chatId));
                 return;
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
-        } else if (update.getMessage().getText().equals("/change-airport")) {
+        } else if (update.getMessage().getText().equals("/changeairport")) {
             try {
-                execute(botService.changeUserAirportCommand(username, update.getMessage().getChatId()));
+                execute(botService.changeUserAirportCommand(username, chatId));
+                return;
+            } catch (TelegramApiException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (update.getMessage().getText().equals("/currentairport")) {
+            try {
+                execute(botService.getUserAirportCommand(username, chatId));
                 return;
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
@@ -63,7 +70,7 @@ public class AvgeekTelegramBot extends AbilityBot {
             if (botService.getUserState(username).equals(UserState.CHOOSING_AIRPORT)) {
                 String airportCode = update.getMessage().getText().trim().toLowerCase();
                 try {
-                    execute(botService.changeUserAirport(username, airportCode, update.getMessage().getChatId()));
+                    execute(botService.changeUserAirport(username, airportCode, chatId));
                 } catch (TelegramApiException e) {
                     throw new RuntimeException(e);
                 }
