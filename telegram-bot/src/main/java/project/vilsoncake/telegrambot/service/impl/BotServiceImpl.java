@@ -61,6 +61,14 @@ public class BotServiceImpl implements BotService {
 
     @Override
     public SendMessage getUserAirportCommand(String username, Long chatId) {
+        if (userService.getUserByUsername(username).getState().equals(UserState.CHOOSING_AIRPORT)) {
+            SendMessage message = new SendMessage();
+            message.setChatId(chatId);
+            message.setText(MessageConst.USER_CANNOT_CHOOSE_AIRPORT_TEXT);
+
+            return message;
+        }
+
         String airportCode = userService.getUserByUsername(username).getAirport();
 
         AirportNameDto airportNameDto = webClient.get()
