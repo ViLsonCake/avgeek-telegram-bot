@@ -47,7 +47,7 @@ async def get_airport_by_code(icao: str, api_key=Depends(api_key_auth)) -> dict:
 
 
 @app.get('/airport/flights/{icao}')
-async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dict:
+async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)):
     try:
         details = flightradar_api.get_airport_details(icao)
     except AirportNotFoundError:
@@ -65,8 +65,15 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dic
     formatted_arrivals: list = []
 
     for arrival in arrivals:
-        id: str = str(arrival['flight']['identification']['row'])
+        id: str = arrival['flight']['identification']['id']
+
+        if id is None:
+            id = str(arrival['flight']['identification']['row'])
+
         airport: str = arrival['flight']['airport']['origin']['name']
+        callsign: str = arrival['flight']['identification']['callsign']
+        live: bool = arrival['flight']['status']['live']
+        text: str = arrival['flight']['status']['text']
 
         try:
             code: str = arrival['flight']['aircraft']['model']['code']
@@ -82,7 +89,10 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)) -> dic
             'id': id,
             'code': code,
             'airline_name': airline_name,
-            'airport': airport
+            'airport': airport,
+            'callsign': callsign,
+            'live': live,
+            'text': text
         })
 
     return {'flights': get_white_list_plane_codes(formatted_arrivals)}
