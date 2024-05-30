@@ -25,7 +25,7 @@ async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=De
         'ground_speed': convert_knots_to_kmh(flight.ground_speed),
         'latitude': flight.latitude,
         'longitude': flight.longitude,
-        'distance': f'{int(flight.get_distance_from(airport))} km'
+        'distance': int(flight.get_distance_from(airport))
     } for flight in flights]
     return {'flights': flights}
 
