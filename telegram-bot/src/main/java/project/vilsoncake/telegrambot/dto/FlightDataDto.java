@@ -17,4 +17,13 @@ public class FlightDataDto {
 
     @JsonAlias("airport")
     private String airport;
+
+    @JsonAlias("callsign")
+    private String callsign;
+
+    @JsonAlias("live")
+    private boolean live;
+
+    @JsonAlias("text")
+    private String text;
 }

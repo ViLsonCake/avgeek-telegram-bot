@@ -124,11 +124,14 @@ public class ScheduleSender {
                             flight.getAirport(), flight.getCode(), flight.getAirlineName(), user.getAirport()
                     ));
 
-                    try {
-                        absSender.execute(message);
-                    } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
-                    }
+                    absSender.execute(message);
+                } else if (flightService.existsByUserAndFlightId(user, flight.getId()) && flight.isLive() && !flightService.findByUserAndFlightId(user, flight.getId()).isActive()) {
+                    flightService.changeFlightActive(flightService.findByUserAndFlightId(user, flight.getId()), true);
+                    SendMessage message = new SendMessage();
+                    message.setChatId(user.getChatId());
+                    message.setText(String.format(MessageConst.LIVE_FLIGHT_TEXT, flight.getAirport(), flight.getCode(), flight.getAirlineName(), flight.getCallsign(), flight.getId()));
+
+                    absSender.execute(message);
                 }
             }
         }
