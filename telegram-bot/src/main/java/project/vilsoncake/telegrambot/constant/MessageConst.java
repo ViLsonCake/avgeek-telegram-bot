@@ -24,7 +24,23 @@ public class MessageConst {
             An-124 in the air right now.
             Altitude: %sm:
             Ground speed: %skm/h
-            Distance from your airport: %s
+            Distance from your airport: %skm
+            View there:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT = """
+            An-124 NEARLY CLOSE TO YOUR AIRPORT right now.
+            Altitude: %sm:
+            Ground speed: %skm/h
+            Distance from your airport: %skm
+            View there:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
+            An-124 IN YOUR AIRPORT RIGHT NOW.
+            Altitude: %sm:
+            Ground speed: %skm/h
+            Distance from your airport: %skm
             View there:
             https://www.flightradar24.com/%s/%s
             """;

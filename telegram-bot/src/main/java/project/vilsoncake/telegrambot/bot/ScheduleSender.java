@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.constant.MessageConst;
-import project.vilsoncake.telegrambot.constant.TimeConst;
+import project.vilsoncake.telegrambot.constant.NumberConst;
 import project.vilsoncake.telegrambot.dto.An124FlightDataDto;
 import project.vilsoncake.telegrambot.dto.An124FlightsDto;
 import project.vilsoncake.telegrambot.dto.FlightDataDto;
@@ -22,6 +22,8 @@ import project.vilsoncake.telegrambot.service.UserService;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static project.vilsoncake.telegrambot.constant.NumberConst.*;
+
 @Component
 @RequiredArgsConstructor
 public class ScheduleSender {
@@ -32,7 +34,7 @@ public class ScheduleSender {
     private final WebClient webClient;
 
     @Transactional
-    @Scheduled(fixedDelay = TimeConst.FLIGHT_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelay = NumberConst.FLIGHT_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void checkNewFlightAndSendsThem() throws TelegramApiException {
         List<UserEntity> users = userService.findAllUsers();
 
@@ -47,15 +49,60 @@ public class ScheduleSender {
             for (An124FlightDataDto flight : an124FlightsDto.getFlights()) {
                 if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
                     FlightEntity flightEntity = new FlightEntity(flight.getId(), user);
+                    flightEntity.setDistance(flight.getDistance());
                     flightService.addFlightToUser(flightEntity);
 
-                    SendMessage message = new SendMessage();
-                    message.setChatId(user.getChatId());
-                    message.setText(String.format(MessageConst.AN_124_FLIGHT_TEXT,
-                            flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
-                    ));
+                    if (flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_IN_AIRPORT_ALTITUDE_IN_M) {
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setText(String.format(MessageConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT,
+                                flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                        ));
+                        absSender.execute(message);
+                    } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM) {
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setText(String.format(MessageConst.AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT,
+                                flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                        ));
+                        absSender.execute(message);
+                    } else {
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setText(String.format(MessageConst.AN_124_FLIGHT_TEXT,
+                                flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                        ));
+                        absSender.execute(message);
+                    }
 
-                    absSender.execute(message);
+                } else {
+                    FlightEntity flightEntity = flightService.findByUserAndFlightId(user, flight.getId());
+                    if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_IN_AIRPORT_ALTITUDE_IN_M && flightEntity.isActive()) {
+                        flightService.changeFlightDistance(flightEntity, flight.getDistance());
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setText(String.format(MessageConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT,
+                                flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                        ));
+                        absSender.execute(message);
+                    } else if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < NOTIFY_AGAIN_DISTANCE_IN_KM && flightEntity.isActive()) {
+                        flightService.changeFlightDistance(flightEntity, flight.getDistance());
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setText(String.format(MessageConst.AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT,
+                                flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                        ));
+                        absSender.execute(message);
+                    } else if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && !flightEntity.isActive()) {
+                        flightService.changeFlightActive(flightEntity, true);
+                        flightService.changeFlightDistance(flightEntity, flight.getDistance());
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setText(String.format(MessageConst.AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT,
+                                flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                        ));
+                        absSender.execute(message);
+                    }
                 }
             }
 

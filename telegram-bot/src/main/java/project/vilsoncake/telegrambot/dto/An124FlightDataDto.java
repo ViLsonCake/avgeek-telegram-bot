@@ -28,5 +28,5 @@ public class An124FlightDataDto {
     private double longitude;
 
     @JsonAlias("distance")
-    private String distance;
+    private int distance;
 }

@@ -21,6 +21,12 @@ public class FlightEntity {
     @Column(name = "flight_id", updatable = false, nullable = false)
     private String flightId;
 
+    @Column(name = "distance")
+    private Integer distance;
+
+    @Column(name = "active")
+    private boolean active = false;
+
     @Column(name = "created_at", updatable = false)
     private Date date = new Date();
 
