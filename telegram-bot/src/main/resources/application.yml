@@ -4,12 +4,16 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
-
+      ddl-auto: validate
 
   datasource:
     url: jdbc:postgresql://localhost:5433/${POSTGRES_DB}
     username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  flyway:
+    url: jdbc:postgresql://localhost:5433/${POSTGRES_DB}
+    user: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 
 
