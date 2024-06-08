@@ -1,5 +1,7 @@
 package project.vilsoncake.telegrambot.constant;
 
+import java.util.List;
+
 public class CommandConst {
     public static final String START_COMMAND_NAME = "/start";
     public static final String START_COMMAND_DESCRIPTION = "Start the bot and select an airport";
@@ -9,4 +11,12 @@ public class CommandConst {
     public static final String CURRENT_AIRPORT_COMMAND_DESCRIPTION = "Get your current airport";
     public static final String PING_COMMAND_NAME = "/ping";
     public static final String PING_COMMAND_DESCRIPTION = "Check bot connection";
+    public static final String CHANGE_MODE_COMMAND_NAME = "/changemode";
+    public static final String CHANGE_MODE_COMMAND_DESCRIPTION = "Change bot mode: only an-124 flights or only wide-body aircraft flights, both by default.";
+    public static final String CURRENT_MODE_COMMAND_NAME = "/currentmode";
+    public static final String CURRENT_MODE_COMMAND_DESCRIPTION = "Get your current bot mode";
+    public static final String MODE_ALL_BUTTON_TEXT = "All";
+    public static final String MODE_WIDE_BODY_BUTTON_TEXT = "Wide-body";
+    public static final String MODE_AN_124_BUTTON_TEXT = "An-124";
+    public static final List<String> MODES = List.of(MODE_ALL_BUTTON_TEXT, MODE_WIDE_BODY_BUTTON_TEXT, MODE_AN_124_BUTTON_TEXT);
 }

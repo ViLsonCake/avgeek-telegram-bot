@@ -52,4 +52,9 @@ public class MessageConst {
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_CODE = "A124";
+    public static final String CHOOSING_MODE_TEXT = "Choose mode please:";
+    public static final String CHOSEN_MODE_ALL_TEXT = "You will receive alerts about An-124 flights and wide-body aircraft flights.";
+    public static final String CHOSEN_MODE_ONLY_AN_124_TEXT = "You will receive alerts ONLY about An-124 flights.";
+    public static final String CHOSEN_MODE_ONLY_WIDE_BODY_TEXT = "You will receive alerts ONLY for wide-body aircraft.";
+    public static final String INCORRECT_MODE_TEXT = "\"%s\" is an incorrect mode. Select mode from the buttons on the keyboard.";
 }

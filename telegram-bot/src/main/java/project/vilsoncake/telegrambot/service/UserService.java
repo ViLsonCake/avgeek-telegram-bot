@@ -1,6 +1,7 @@
 package project.vilsoncake.telegrambot.service;
 
 import project.vilsoncake.telegrambot.entity.UserEntity;
+import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
 import java.util.List;
@@ -11,5 +12,6 @@ public interface UserService {
     List<UserEntity> findAllUsers();
     boolean addNewUser(UserEntity user);
     UserEntity changeUserState(String username, UserState state);
+    UserEntity changeUserBotMode(String username, BotMode botMode);
     UserEntity changeUserAirport(String username, String airportCode);
 }
