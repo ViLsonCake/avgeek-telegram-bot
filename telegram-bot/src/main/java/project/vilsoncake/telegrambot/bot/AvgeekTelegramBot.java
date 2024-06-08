@@ -36,45 +36,29 @@ public class AvgeekTelegramBot extends AbilityBot {
         String username = update.getMessage().getChat().getUserName();
         Long chatId = update.getMessage().getChatId();
 
-        if (update.getMessage().getText().equals("/start")) {
-            try {
+        try {
+            if (update.getMessage().getText().equals("/start")) {
                 execute(botService.startBotCommand(username, chatId));
                 return;
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (update.getMessage().getText().equals("/ping")) {
-            try {
+            } else if (update.getMessage().getText().equals("/ping")) {
                 execute(botService.pingCommand(chatId));
                 return;
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (update.getMessage().getText().equals("/changeairport")) {
-            try {
+            } else if (update.getMessage().getText().equals("/changeairport")) {
                 execute(botService.changeUserAirportCommand(username, chatId));
                 return;
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (update.getMessage().getText().equals("/currentairport")) {
-            try {
+            } else if (update.getMessage().getText().equals("/currentairport")) {
                 execute(botService.getUserAirportCommand(username, chatId));
                 return;
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
             }
-        }
 
-        if (botService.isUserRegistered(username)) {
-            if (botService.getUserState(username).equals(UserState.CHOOSING_AIRPORT)) {
-                String airportCode = update.getMessage().getText().trim().toLowerCase();
-                try {
+            if (botService.isUserRegistered(username)) {
+                if (botService.getUserState(username).equals(UserState.CHOOSING_AIRPORT)) {
+                    String airportCode = update.getMessage().getText().trim().toLowerCase();
                     execute(botService.changeUserAirport(username, airportCode, chatId));
-                } catch (TelegramApiException e) {
-                    throw new RuntimeException(e);
                 }
             }
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
         }
     }
 }
