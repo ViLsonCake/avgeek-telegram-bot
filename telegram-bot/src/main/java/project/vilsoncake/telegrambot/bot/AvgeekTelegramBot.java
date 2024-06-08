@@ -60,16 +60,16 @@ public class AvgeekTelegramBot extends AbilityBot {
         Long chatId = update.getMessage().getChatId();
 
         try {
-            if (update.getMessage().getText().equals("/start")) {
+            if (update.getMessage().getText().equals(START_COMMAND_NAME)) {
                 execute(botService.startBotCommand(username, chatId));
                 return;
-            } else if (update.getMessage().getText().equals("/ping")) {
+            } else if (update.getMessage().getText().equals(PING_COMMAND_NAME)) {
                 execute(botService.pingCommand(chatId));
                 return;
-            } else if (update.getMessage().getText().equals("/changeairport")) {
+            } else if (update.getMessage().getText().equals(CHANGE_AIRPORT_COMMAND_NAME)) {
                 execute(botService.changeUserAirportCommand(username, chatId));
                 return;
-            } else if (update.getMessage().getText().equals("/currentairport")) {
+            } else if (update.getMessage().getText().equals(CURRENT_AIRPORT_COMMAND_NAME)) {
                 execute(botService.getUserAirportCommand(username, chatId));
                 return;
             }
