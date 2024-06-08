@@ -3,6 +3,7 @@ package project.vilsoncake.telegrambot.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
 import java.util.List;
@@ -31,6 +32,10 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private UserState state;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "bot_mode", nullable = false)
+    private BotMode botMode = BotMode.ALL;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<FlightEntity> flights;
