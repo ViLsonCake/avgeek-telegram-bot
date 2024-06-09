@@ -26,6 +26,15 @@ public class UserEntity {
     @Column(name = "chat_id", unique = true)
     private Long chatId;
 
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "email_verified")
+    private boolean emailVerified = false;
+
+    @Column(name = "email_code")
+    private int emailCode = 0;
+
     @Column(name = "airport")
     private String airport;
 
