@@ -14,4 +14,7 @@ public interface UserService {
     UserEntity changeUserState(String username, UserState state);
     UserEntity changeUserBotMode(String username, BotMode botMode);
     UserEntity changeUserAirport(String username, String airportCode);
+    UserEntity changeUserEmail(String username, String email);
+    UserEntity changeUserEmailCode(String username, int code);
+    UserEntity changeUserEmailVerified(String username, boolean verified);
 }

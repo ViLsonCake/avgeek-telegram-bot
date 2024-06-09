@@ -15,6 +15,7 @@ import project.vilsoncake.telegrambot.service.BotService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static project.vilsoncake.telegrambot.constant.BotMessageConst.CANCEL_ADDING_EMAIL_TRIGGER;
 import static project.vilsoncake.telegrambot.constant.CommandConst.*;
 
 @Component
@@ -39,6 +40,9 @@ public class AvgeekTelegramBot extends AbilityBot {
         botCommands.add(new BotCommand(CURRENT_AIRPORT_COMMAND_NAME, CURRENT_AIRPORT_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(CHANGE_MODE_COMMAND_NAME, CHANGE_MODE_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(CURRENT_MODE_COMMAND_NAME, CURRENT_MODE_COMMAND_DESCRIPTION));
+        botCommands.add(new BotCommand(SET_EMAIL_COMMAND_NAME, SET_EMAIL_COMMAND_DESCRIPTION));
+        botCommands.add(new BotCommand(MY_EMAIL_COMMAND_NAME, MY_EMAIL_COMMAND_DESCRIPTION));
+        botCommands.add(new BotCommand(REMOVE_EMAIL_COMMAND_NAME, REMOVE_EMAIL_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(START_COMMAND_NAME, START_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(PING_COMMAND_NAME, PING_COMMAND_DESCRIPTION));
 
@@ -82,6 +86,15 @@ public class AvgeekTelegramBot extends AbilityBot {
                     case CURRENT_MODE_COMMAND_NAME:
                         execute(botService.getBotMode(username, chatId));
                         break;
+                    case SET_EMAIL_COMMAND_NAME:
+                        execute(botService.setEmailCommand(username, chatId));
+                        break;
+                    case MY_EMAIL_COMMAND_NAME:
+                        execute(botService.myEmailCommand(username, chatId));
+                        break;
+                    case REMOVE_EMAIL_COMMAND_NAME:
+                        execute(botService.removeEmail(username, chatId));
+                        break;
                 }
                 return;
             }
@@ -104,6 +117,18 @@ public class AvgeekTelegramBot extends AbilityBot {
                             }
                         }
                         execute(botService.changeBotMode(username, botMode, chatId));
+                        break;
+                    case WAIT_FOR_EMAIL:
+                        String email = update.getMessage().getText().trim();
+                        execute(botService.setEmail(username, email, chatId));
+                        break;
+                    case WAIT_FOR_EMAIL_CODE:
+                        if (update.getMessage().getText().equals(CANCEL_ADDING_EMAIL_TRIGGER)) {
+                            execute(botService.cancelEmail(username, chatId));
+                        } else {
+                            String code = update.getMessage().getText().trim();
+                            execute(botService.verifyEmail(username, code, chatId));
+                        }
                         break;
                 }
             }

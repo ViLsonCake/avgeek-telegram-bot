@@ -64,4 +64,25 @@ public class UserServiceImpl implements UserService {
         user.setAirport(airportCode);
         return userRepository.save(user);
     }
+
+    @Override
+    public UserEntity changeUserEmail(String username, String email) {
+        UserEntity user = getUserByUsername(username);
+        user.setEmail(email);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity changeUserEmailCode(String username, int code) {
+        UserEntity user = getUserByUsername(username);
+        user.setEmailCode(code);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity changeUserEmailVerified(String username, boolean verified) {
+        UserEntity user = getUserByUsername(username);
+        user.setEmailVerified(verified);
+        return userRepository.save(user);
+    }
 }

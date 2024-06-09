@@ -13,12 +13,16 @@ import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.service.BotService;
+import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
+import project.vilsoncake.telegrambot.utils.VerifyUtils;
 
 import java.util.List;
 
+import static project.vilsoncake.telegrambot.constant.BotMessageConst.*;
 import static project.vilsoncake.telegrambot.constant.CommandConst.MODES;
-import static project.vilsoncake.telegrambot.constant.MessageConst.*;
+import static project.vilsoncake.telegrambot.constant.MailMessageConst.CODE_MESSAGE_SUBJECT;
+import static project.vilsoncake.telegrambot.constant.MailMessageConst.CODE_MESSAGE_TEXT;
 import static project.vilsoncake.telegrambot.entity.enumerated.UserState.*;
 
 @Service
@@ -26,6 +30,8 @@ import static project.vilsoncake.telegrambot.entity.enumerated.UserState.*;
 public class BotServiceImpl implements BotService {
 
     private final UserService userService;
+    private final MailService mailService;
+    private final VerifyUtils verifyUtils;
     private final WebClient webClient;
 
     @Override
@@ -116,6 +122,111 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(String.format(CHOOSE_AIRPORT_TEXT, airportNameDto.getName()));
+
+        return message;
+    }
+
+    @Override
+    public SendMessage setEmailCommand(String username, Long chatId) {
+        userService.changeUserState(username, WAIT_FOR_EMAIL);
+        userService.changeUserEmailVerified(username, false);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(WAIT_FOR_EMAIL_TEXT);
+
+        return message;
+    }
+
+    @Override
+    public SendMessage myEmailCommand(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+
+        if (user.getEmail() == null) {
+            SendMessage message = new SendMessage();
+            message.setChatId(chatId);
+            message.setText(USER_NOT_ADDED_EMAIL_TEXT);
+            return message;
+        }
+        if (!user.isEmailVerified()) {
+            SendMessage message = new SendMessage();
+            message.setChatId(chatId);
+            message.setText(String.format(EMAIL_NOT_VERIFY_EMAIL, user.getEmail()));
+            return message;
+        }
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(String.format(MY_EMAIL_TEXT, user.getEmail()));
+        return message;
+    }
+
+    @Override
+    public SendMessage setEmail(String username, String email, Long chatId) {
+        if (!verifyUtils.isEmailValid(email)) {
+            SendMessage message = new SendMessage();
+            message.setChatId(chatId);
+            message.setText(INVALID_EMAIL_TEXT);
+
+            return message;
+        }
+
+        userService.changeUserEmail(username, email);
+        userService.changeUserState(username, WAIT_FOR_EMAIL_CODE);
+
+        int code = verifyUtils.generateCode();
+
+        mailService.sendMessage(email, CODE_MESSAGE_SUBJECT, String.format(CODE_MESSAGE_TEXT, code));
+
+        userService.changeUserEmailCode(username, code);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(WAIT_FOR_CODE_TEXT);
+
+        return message;
+    }
+
+    @Override
+    public SendMessage removeEmail(String username, Long chatId) {
+        userService.changeUserEmail(username, null);
+        userService.changeUserEmailVerified(username, false);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(REMOVE_EMAIL_TEXT);
+
+        return message;
+    }
+
+    @Override
+    public SendMessage cancelEmail(String username, Long chatId) {
+        userService.changeUserState(username, CHOSEN_AIRPORT);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(CANCEL_ADDING_EMAIL_TEXT);
+
+        return message;
+    }
+
+    @Override
+    public SendMessage verifyEmail(String username, String code, Long chatId) {
+        int userCode = userService.getUserByUsername(username).getEmailCode();
+
+        if (!String.valueOf(userCode).equals(code)) {
+            SendMessage message = new SendMessage();
+            message.setChatId(chatId);
+            message.setText(INCORRECT_EMAIL_VERIFY_CODE);
+            return message;
+        }
+
+        userService.changeUserState(username, CHOSEN_AIRPORT);
+        userService.changeUserEmailVerified(username, true);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(VERIFY_EMAIL_TEXT);
 
         return message;
     }

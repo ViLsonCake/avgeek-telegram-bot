@@ -1,6 +1,6 @@
 package project.vilsoncake.telegrambot.constant;
 
-public class MessageConst {
+public class BotMessageConst {
     public static final String START_TEXT = """
             Hello, %s. Welcome to avgeek bot!
             I will send you all wide-body aircraft flying into your airport, as well as An-124 alerts.
@@ -57,4 +57,19 @@ public class MessageConst {
     public static final String CHOSEN_MODE_ONLY_AN_124_TEXT = "You will receive alerts ONLY about An-124 flights.";
     public static final String CHOSEN_MODE_ONLY_WIDE_BODY_TEXT = "You will receive alerts ONLY for wide-body aircraft.";
     public static final String INCORRECT_MODE_TEXT = "\"%s\" is an incorrect mode. Select mode from the buttons on the keyboard.";
+    public static final String WAIT_FOR_EMAIL_TEXT = "Enter your email.";
+    public static final String INVALID_EMAIL_TEXT = "The email you entered is invalid.";
+    public static final String INCORRECT_EMAIL_VERIFY_CODE = "The code is incorrect.";
+    public static final String VERIFY_EMAIL_TEXT = "Great! Now your email is verified and you'll receive alerts if An-124 is at your airport.";
+    public static final String USER_NOT_ADDED_EMAIL_TEXT = "You haven't added an email yet.";
+    public static final String EMAIL_NOT_VERIFY_EMAIL = "Your email is %s, but it's not verified.";
+    public static final String MY_EMAIL_TEXT = "Your email is %s.";
+    public static final String REMOVE_EMAIL_TEXT = "Your email has been removed from bot";
+    public static final String CANCEL_ADDING_EMAIL_TRIGGER = "cancel";
+    public static final String CANCEL_ADDING_EMAIL_TEXT = "Adding email has been canceled.";
+    public static final String WAIT_FOR_CODE_TEXT = """
+            A confirmation code has been sent to your email, enter it.
+                        
+            If you have entered the wrong email address or want to cancel adding email, please write "cancel"
+            """;
 }

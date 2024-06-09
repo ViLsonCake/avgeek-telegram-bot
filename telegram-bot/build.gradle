@@ -32,6 +32,7 @@ dependencies {
     implementation 'org.telegram:telegrambots-abilities:6.7.0'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+    implementation 'org.springframework.boot:spring-boot-starter-mail:3.3.0'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'

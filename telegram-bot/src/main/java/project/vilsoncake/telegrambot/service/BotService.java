@@ -10,6 +10,12 @@ public interface BotService {
     SendMessage changeUserAirportCommand(String username, Long chatId);
     SendMessage getUserAirportCommand(String username, Long chatId);
     SendMessage changeUserAirport(String username, String code, Long chatId);
+    SendMessage setEmailCommand(String username, Long chatId);
+    SendMessage myEmailCommand(String username, Long chatId);
+    SendMessage setEmail(String username, String email, Long chatId);
+    SendMessage removeEmail(String username, Long chatId);
+    SendMessage cancelEmail(String username, Long chatId);
+    SendMessage verifyEmail(String username, String code, Long chatId);
     SendMessage changeBotModeCommand(String username, Long chatId);
     SendMessage changeBotMode(String username, BotMode botMode, Long chatId);
     SendMessage getBotMode(String username, Long chatId);
