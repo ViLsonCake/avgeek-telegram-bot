@@ -3,6 +3,7 @@ package project.vilsoncake.telegrambot.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
@@ -45,6 +46,10 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "bot_mode", nullable = false)
     private BotMode botMode = BotMode.ALL;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "bot_language")
+    private BotLanguage botLanguage = BotLanguage.ENG;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<FlightEntity> flights;
