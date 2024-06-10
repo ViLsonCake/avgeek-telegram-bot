@@ -29,7 +29,7 @@ ___
 
 2. Create an .env file:
     ```dotenv
-    API_KEY=YOUR_API_KEY
+    API_KEY=YOUR_RANDOM_API_KEY
     API_URL=http://localhost:8000
     API_DOCKER_URL=http://flightradar-api:8000
 
@@ -41,6 +41,9 @@ ___
     POSTGRES_USER=YOUR_POSTGRES_USER
     POSTGRES_PASSWORD=YOUR_POSTGRES_PASSWORD
     POSTGRES_DB=YOUR_DB_NAME
+
+    MAIL_USERNAME=YOUR_BOT_EMAIL_ADDRESS
+    MAIL_PASSWORD=YOUR_BOT_EMAIL_PASSWORD
     ```
 
 3. Run the application in Docker:
