@@ -30,24 +30,24 @@ public class BotMessageUaConst {
     public static final String AN_124_FLIGHT_TEXT = """
             Ан-124 знаходиться зараз у повітрі.
             Висота: %sм
-            Швидкість: %skm/h
-            Відстань від вашого аеропорту: %skm
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT = """
             Ан-124 БЛИЗЬКО ДО ВАШОГО АЕРОПОРТУ ПРЯМО ЗАРАЗ.
-            Висота: %sm
-            Швидкість: %skm/h
-            Відстань від вашого аеропорту: %skm
+            Висота: %sм
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
             Ан-124 ЗНАХОДИТЬСЯ У ВАШОМУ АЕРОПОРТУ ПРЯМО ЗАРАЗ.
-            Висота: %sm
-            Швидкість: %skm/h
-            Відстань від вашого аеропорту: %skm
+            Висота: %sм
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
