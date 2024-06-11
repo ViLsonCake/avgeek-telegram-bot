@@ -1,6 +1,7 @@
 package project.vilsoncake.telegrambot.service;
 
 import project.vilsoncake.telegrambot.entity.UserEntity;
+import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
@@ -17,4 +18,5 @@ public interface UserService {
     UserEntity changeUserEmail(String username, String email);
     UserEntity changeUserEmailCode(String username, int code);
     UserEntity changeUserEmailVerified(String username, boolean verified);
+    UserEntity changeUserLanguage(String username, BotLanguage botLanguage);
 }

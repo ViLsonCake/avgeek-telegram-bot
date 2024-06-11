@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.property.BotProperties;
 import project.vilsoncake.telegrambot.service.BotService;
@@ -15,8 +16,9 @@ import project.vilsoncake.telegrambot.service.BotService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static project.vilsoncake.telegrambot.constant.BotMessageConst.CANCEL_ADDING_EMAIL_TRIGGER;
+import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.CANCEL_ADDING_EMAIL_TRIGGER;
 import static project.vilsoncake.telegrambot.constant.CommandConst.*;
+import static project.vilsoncake.telegrambot.entity.enumerated.BotLanguage.*;
 
 @Component
 public class AvgeekTelegramBot extends AbilityBot {
@@ -43,6 +45,7 @@ public class AvgeekTelegramBot extends AbilityBot {
         botCommands.add(new BotCommand(SET_EMAIL_COMMAND_NAME, SET_EMAIL_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(MY_EMAIL_COMMAND_NAME, MY_EMAIL_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(REMOVE_EMAIL_COMMAND_NAME, REMOVE_EMAIL_COMMAND_DESCRIPTION));
+        botCommands.add(new BotCommand(CHANGE_LANGUAGE_COMMAND_NAME, CHANGE_LANGUAGE_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(START_COMMAND_NAME, START_COMMAND_DESCRIPTION));
         botCommands.add(new BotCommand(PING_COMMAND_NAME, PING_COMMAND_DESCRIPTION));
 
@@ -95,6 +98,9 @@ public class AvgeekTelegramBot extends AbilityBot {
                     case REMOVE_EMAIL_COMMAND_NAME:
                         execute(botService.removeEmail(username, chatId));
                         break;
+                    case CHANGE_LANGUAGE_COMMAND_NAME:
+                        execute(botService.changeBotLanguageCommand(username, chatId));
+                        break;
                 }
                 return;
             }
@@ -129,6 +135,23 @@ public class AvgeekTelegramBot extends AbilityBot {
                             String code = update.getMessage().getText().trim();
                             execute(botService.verifyEmail(username, code, chatId));
                         }
+                        break;
+                    case CHOOSING_LANG:
+                        String language = update.getMessage().getText().trim();
+                        BotLanguage botLanguage;
+
+                        if (ENG.name().toLowerCase().equals(language)) {
+                            botLanguage = ENG;
+                        } else if (RU.name().toLowerCase().equals(language)) {
+                            botLanguage = RU;
+                        } else if (UA.name().toLowerCase().equals(language)) {
+                            botLanguage = UA;
+                        } else {
+                            execute(botService.incorrectBotLanguage(username, chatId));
+                            return;
+                        }
+
+                        execute(botService.changeBotLanguage(username, botLanguage, chatId));
                         break;
                 }
             }

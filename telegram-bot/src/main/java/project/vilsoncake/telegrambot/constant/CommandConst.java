@@ -2,6 +2,8 @@ package project.vilsoncake.telegrambot.constant;
 
 import java.util.List;
 
+import static project.vilsoncake.telegrambot.entity.enumerated.BotLanguage.*;
+
 public class CommandConst {
     public static final String START_COMMAND_NAME = "/start";
     public static final String START_COMMAND_DESCRIPTION = "Start the bot and select an airport";
@@ -21,8 +23,11 @@ public class CommandConst {
     public static final String MY_EMAIL_COMMAND_DESCRIPTION = "Get your email";
     public static final String REMOVE_EMAIL_COMMAND_NAME = "/removeemail";
     public static final String REMOVE_EMAIL_COMMAND_DESCRIPTION = "Remove your email from the bot";
+    public static final String CHANGE_LANGUAGE_COMMAND_NAME = "/lang";
+    public static final String CHANGE_LANGUAGE_COMMAND_DESCRIPTION = "Change bot language";
     public static final String MODE_ALL_BUTTON_TEXT = "All";
     public static final String MODE_WIDE_BODY_BUTTON_TEXT = "Wide-body";
     public static final String MODE_AN_124_BUTTON_TEXT = "An-124";
     public static final List<String> MODES = List.of(MODE_ALL_BUTTON_TEXT, MODE_WIDE_BODY_BUTTON_TEXT, MODE_AN_124_BUTTON_TEXT);
+    public static final List<String> LANGUAGES = List.of(ENG.name().toLowerCase(), RU.name().toLowerCase(), UA.name().toLowerCase());
 }

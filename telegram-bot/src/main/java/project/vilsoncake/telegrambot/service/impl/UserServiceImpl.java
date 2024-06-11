@@ -3,6 +3,7 @@ package project.vilsoncake.telegrambot.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.vilsoncake.telegrambot.entity.UserEntity;
+import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.UserNotFoundException;
@@ -76,6 +77,13 @@ public class UserServiceImpl implements UserService {
     public UserEntity changeUserEmailCode(String username, int code) {
         UserEntity user = getUserByUsername(username);
         user.setEmailCode(code);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity changeUserLanguage(String username, BotLanguage botLanguage) {
+        UserEntity user = getUserByUsername(username);
+        user.setBotLanguage(botLanguage);
         return userRepository.save(user);
     }
 

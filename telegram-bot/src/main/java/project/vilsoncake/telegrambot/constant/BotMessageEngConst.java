@@ -1,6 +1,6 @@
 package project.vilsoncake.telegrambot.constant;
 
-public class BotMessageConst {
+public class BotMessageEngConst {
     public static final String START_TEXT = """
             Hello, %s. Welcome to avgeek bot!
             I will send you all wide-body aircraft flying into your airport, as well as An-124 alerts.
@@ -10,7 +10,7 @@ public class BotMessageConst {
             """;
     public static final String CHOOSE_AIRPORT_TEXT = "Great! Now your airport is %s.";
     public static final String CHANGE_AIRPORT_TEXT = "Write the icao/iata code of your airport, you can get it on flightradar24.";
-    public static final String CURRENT_AIRPORT_TEXT = "Your current airport is: %s (%s).";
+    public static final String CURRENT_AIRPORT_TEXT = "Your current airport is %s (%s).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "The code \"%s\" is invalid, make sure you didn't make a typo.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "You have not yet selected an airport, please write its iata/icao code.";
     public static final String FLIGHT_TEXT = """
@@ -63,8 +63,8 @@ public class BotMessageConst {
     public static final String VERIFY_EMAIL_TEXT = "Great! Now your email is verified and you'll receive alerts if An-124 is at your airport.";
     public static final String USER_NOT_ADDED_EMAIL_TEXT = "You haven't added an email yet.";
     public static final String EMAIL_NOT_VERIFY_EMAIL = "Your email is %s, but it's not verified.";
-    public static final String MY_EMAIL_TEXT = "Your email is %s.";
-    public static final String REMOVE_EMAIL_TEXT = "Your email has been removed from bot";
+    public static final String MY_EMAIL_TEXT = "Your email is %s";
+    public static final String REMOVE_EMAIL_TEXT = "Your email has been removed from bot.";
     public static final String CANCEL_ADDING_EMAIL_TRIGGER = "cancel";
     public static final String CANCEL_ADDING_EMAIL_TEXT = "Adding email has been canceled.";
     public static final String WAIT_FOR_CODE_TEXT = """
@@ -72,4 +72,7 @@ public class BotMessageConst {
                         
             If you have entered the wrong email address or want to cancel adding email, please write "cancel"
             """;
+    public static final String SELECT_LANGUAGE_TEXT = "Select language:";
+    public static final String LANGUAGE_SELECTED_TEXT = "Your language is %s.";
+    public static final String INCORRECT_LANGUAGE_TEXT = "Selected language is incorrect. Select language from the buttons on the keyboard.";
 }

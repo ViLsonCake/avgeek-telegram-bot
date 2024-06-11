@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import project.vilsoncake.telegrambot.constant.BotMessageConst;
+import project.vilsoncake.telegrambot.constant.BotMessageEngConst;
 import project.vilsoncake.telegrambot.constant.NumberConst;
 import project.vilsoncake.telegrambot.dto.An124FlightDataDto;
 import project.vilsoncake.telegrambot.dto.An124FlightsDto;
@@ -20,12 +20,15 @@ import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.service.FlightService;
 import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
+import project.vilsoncake.telegrambot.utils.BotMessageUtils;
+import project.vilsoncake.telegrambot.utils.MailMessageUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static project.vilsoncake.telegrambot.constant.MailMessageConst.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
-import static project.vilsoncake.telegrambot.constant.MailMessageConst.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
+import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
+import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
+import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
 import static project.vilsoncake.telegrambot.constant.NumberConst.*;
 
 @Component
@@ -36,6 +39,8 @@ public class ScheduleSender {
     private final AbsSender absSender;
     private final FlightService flightService;
     private final MailService mailService;
+    private final BotMessageUtils botMessageUtils;
+    private final MailMessageUtils mailMessageUtils;
     private final WebClient webClient;
 
     @Transactional
@@ -48,7 +53,7 @@ public class ScheduleSender {
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
                 // An-124 check
                 An124FlightsDto an124FlightsDto = webClient.get()
-                        .uri(String.format("/aircraft/%s/%s", BotMessageConst.AN_124_CODE, user.getAirport()))
+                        .uri(String.format("/aircraft/%s/%s", BotMessageEngConst.AN_124_CODE, user.getAirport()))
                         .retrieve()
                         .bodyToMono(An124FlightsDto.class)
                         .block();
@@ -62,21 +67,21 @@ public class ScheduleSender {
                         if (flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_IN_AIRPORT_ALTITUDE_IN_M) {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(BotMessageConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT,
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_IN_YOUR_AIRPORT_NOW_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
                         } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM) {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(BotMessageConst.AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT,
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
                         } else {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(BotMessageConst.AN_124_FLIGHT_TEXT,
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
@@ -88,7 +93,7 @@ public class ScheduleSender {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(BotMessageConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT,
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_IN_YOUR_AIRPORT_NOW_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
@@ -96,8 +101,8 @@ public class ScheduleSender {
                             if (user.isEmailVerified()) {
                                 mailService.sendMessage(
                                         user.getEmail(),
-                                        AN_124_IN_AIRPORT_MESSAGE_SUBJECT,
-                                        String.format(AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT, flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId())
+                                        mailMessageUtils.getMessageByLanguage(AN_124_IN_AIRPORT_MESSAGE_SUBJECT, user.getBotLanguage()),
+                                        String.format(mailMessageUtils.getMessageByLanguage(AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT, user.getBotLanguage()), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId())
                                 );
                             }
 
@@ -105,7 +110,7 @@ public class ScheduleSender {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(BotMessageConst.AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT,
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
@@ -114,7 +119,7 @@ public class ScheduleSender {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(BotMessageConst.AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT,
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
@@ -138,7 +143,7 @@ public class ScheduleSender {
 
                         SendMessage message = new SendMessage();
                         message.setChatId(user.getChatId());
-                        message.setText(String.format(BotMessageConst.FLIGHT_TEXT,
+                        message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_TEXT, user.getBotLanguage()),
                                 flight.getAirport(), flight.getCode(), flight.getAirlineName(), user.getAirport()
                         ));
 
@@ -147,7 +152,7 @@ public class ScheduleSender {
                         flightService.changeFlightActive(flightService.findByUserAndFlightId(user, flight.getId()), true);
                         SendMessage message = new SendMessage();
                         message.setChatId(user.getChatId());
-                        message.setText(String.format(BotMessageConst.LIVE_FLIGHT_TEXT, flight.getAirport(), flight.getCode(), flight.getAirlineName(), flight.getCallsign(), flight.getId()));
+                        message.setText(String.format(botMessageUtils.getMessageByLanguage(LIVE_FLIGHT_TEXT, user.getBotLanguage()), flight.getAirport(), flight.getCode(), flight.getAirlineName(), flight.getCallsign(), flight.getId()));
 
                         absSender.execute(message);
                     }
