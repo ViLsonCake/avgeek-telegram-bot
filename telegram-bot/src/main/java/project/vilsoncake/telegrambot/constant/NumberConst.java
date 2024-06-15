@@ -6,4 +6,5 @@ public class NumberConst {
     public static final int NOTIFY_AGAIN_DISTANCE_IN_KM = 50;
     public static final int FLIGHT_IN_AIRPORT_DISTANCE_IN_KM = 15;
     public static final int FLIGHT_IN_AIRPORT_ALTITUDE_IN_M = 2000;
+    public static final int MAX_SAVED_FLIGHT_COUNT = 50;
 }

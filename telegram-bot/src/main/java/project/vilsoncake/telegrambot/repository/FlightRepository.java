@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface FlightRepository extends CrudRepository<FlightEntity, UUID> {
-    List<FlightEntity> findByUser(UserEntity user);
+    List<FlightEntity> findByUserOrderByDate(UserEntity user);
     Optional<FlightEntity> findByUserAndFlightId(UserEntity user, String flightId);
     boolean existsByUserAndFlightId(UserEntity user, String flightId);
 }
