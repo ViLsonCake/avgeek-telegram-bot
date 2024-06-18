@@ -58,9 +58,7 @@ public class AvgeekTelegramBot extends AbilityBot {
     }
 
     @Override
-    public void onUpdatesReceived(List<Update> updates) {
-        Update update = updates.get(0);
-
+    public void onUpdateReceived(Update update) {
         if (!update.getMessage().hasText()) {
             return;
         }
