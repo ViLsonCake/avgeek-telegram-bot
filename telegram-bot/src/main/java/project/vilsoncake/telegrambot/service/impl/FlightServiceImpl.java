@@ -23,7 +23,7 @@ public class FlightServiceImpl implements FlightService {
         List<FlightEntity> flights = findByUserOrderByDate(flightEntity.getUser());
 
         if (flights.size() > MAX_SAVED_FLIGHT_COUNT) {
-            List<FlightEntity> flightsToDelete = flights.subList(0, flights.size() - MAX_SAVED_FLIGHT_COUNT);
+            List<FlightEntity> flightsToDelete = flights.subList(0, flights.size() - MAX_SAVED_FLIGHT_COUNT + 1);
             flightRepository.deleteAll(flightsToDelete);
         }
 
