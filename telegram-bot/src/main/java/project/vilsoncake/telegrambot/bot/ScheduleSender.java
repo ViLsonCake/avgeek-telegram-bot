@@ -144,7 +144,7 @@ public class ScheduleSender {
                         SendMessage message = new SendMessage();
                         message.setChatId(user.getChatId());
                         message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_TEXT, user.getBotLanguage()),
-                                flight.getAirport(), flight.getCode(), flight.getAirlineName(), user.getAirport()
+                                flight.getAirport(), flight.getAircraft(), flight.getAirlineName(), user.getAirport()
                         ));
 
                         absSender.execute(message);
@@ -152,7 +152,7 @@ public class ScheduleSender {
                         flightService.changeFlightActive(flightService.findByUserAndFlightId(user, flight.getId()), true);
                         SendMessage message = new SendMessage();
                         message.setChatId(user.getChatId());
-                        message.setText(String.format(botMessageUtils.getMessageByLanguage(LIVE_FLIGHT_TEXT, user.getBotLanguage()), flight.getAirport(), flight.getCode(), flight.getAirlineName(), flight.getCallsign(), flight.getId()));
+                        message.setText(String.format(botMessageUtils.getMessageByLanguage(LIVE_FLIGHT_TEXT, user.getBotLanguage()), flight.getAirport(), flight.getAircraft(), flight.getAirlineName(), flight.getCallsign(), flight.getId()));
 
                         absSender.execute(message);
                     }

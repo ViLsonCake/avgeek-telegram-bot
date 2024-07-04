@@ -2,7 +2,7 @@ from FlightRadar24.errors import AirportNotFoundError
 from fastapi import FastAPI, Depends, HTTPException, status
 from security.api_key_security import api_key_auth
 from FlightRadar24 import FlightRadar24API
-from utils.flight_utils import get_white_list_plane_codes, convert_feet_to_meters, convert_knots_to_kmh
+from utils.flight_utils import get_white_list_plane_codes, get_aircraft_name_by_code, convert_feet_to_meters, convert_knots_to_kmh
 
 app = FastAPI()
 flightradar_api: FlightRadar24API = FlightRadar24API()
@@ -62,9 +62,10 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)):
         )
 
     arrivals: list = details['airport']['pluginData']['schedule']['arrivals']['data']
-    formatted_arrivals: list = []
+    row_white_list_arrivals: list = get_white_list_plane_codes(arrivals)
+    formatted_white_list_arrivals: list = []
 
-    for arrival in arrivals:
+    for arrival in row_white_list_arrivals:
         id: str = arrival['flight']['identification']['id']
 
         if id is None:
@@ -85,9 +86,10 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)):
         except TypeError:
             airline_name = 'Unknown'
 
-        formatted_arrivals.append({
+        formatted_white_list_arrivals.append({
             'id': id,
             'code': code,
+            'aircraft': get_aircraft_name_by_code(code),
             'airline_name': airline_name,
             'airport': airport,
             'callsign': callsign,
@@ -95,4 +97,4 @@ async def get_white_list_planes(icao: str, api_key=Depends(api_key_auth)):
             'text': text
         })
 
-    return {'flights': get_white_list_plane_codes(formatted_arrivals)}
+    return {'flights': formatted_white_list_arrivals}

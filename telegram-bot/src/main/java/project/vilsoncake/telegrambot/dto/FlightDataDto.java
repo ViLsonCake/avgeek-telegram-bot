@@ -12,6 +12,9 @@ public class FlightDataDto {
     @JsonAlias("code")
     private String code;
 
+    @JsonAlias("aircraft")
+    private String aircraft;
+
     @JsonAlias("airline_name")
     private String airlineName;
 
