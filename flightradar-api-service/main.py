@@ -14,7 +14,7 @@ async def pong(api_key=Depends(api_key_auth)) -> str:
 
 
 @app.get('/aircraft/{aircraft_code}/{airport_code}')
-async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=Depends(api_key_auth)) -> dict:
+async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=Depends(api_key_auth)):
     flights: list = flightradar_api.get_flights(aircraft_type=aircraft_code)
     airport = flightradar_api.get_airport(airport_code)
     flights = [{
@@ -23,27 +23,12 @@ async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=De
         'callsign': flight.callsign,
         'altitude': convert_feet_to_meters(flight.altitude),
         'ground_speed': convert_knots_to_kmh(flight.ground_speed),
+        'vertical_speed': flight.vertical_speed,
         'latitude': flight.latitude,
         'longitude': flight.longitude,
         'distance': int(flight.get_distance_from(airport))
     } for flight in flights]
     return {'flights': flights}
-
-
-@app.get('/airport/name/{code}')
-async def get_airport_by_code(code: str, api_key=Depends(api_key_auth)) -> dict:
-    try:
-        return {'name': flightradar_api.get_airport(code).name}
-    except AirportNotFoundError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f'Airport with code "{code}" not found'
-        )
-    except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f'The code "{code}" is not valid. It must be the IATA or ICAO of the airport'
-        )
 
 
 @app.get('/airport/flights/{code}')
@@ -52,7 +37,7 @@ async def get_white_list_planes(code: str, api_key=Depends(api_key_auth)):
         details = flightradar_api.get_airport_details(code)
     except AirportNotFoundError:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=f'Airport with code "{code}" not found'
         )
     except ValueError:
