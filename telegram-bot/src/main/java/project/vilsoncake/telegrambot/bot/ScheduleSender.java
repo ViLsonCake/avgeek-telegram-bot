@@ -41,7 +41,7 @@ public class ScheduleSender {
     private final MailService mailService;
     private final BotMessageUtils botMessageUtils;
     private final MailMessageUtils mailMessageUtils;
-    private final WebClient webClient;
+    private final WebClient apiWebClient;
 
     @Transactional
     @Scheduled(fixedDelay = NumberConst.FLIGHT_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
@@ -52,7 +52,7 @@ public class ScheduleSender {
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
                 // An-124 check
-                An124FlightsDto an124FlightsDto = webClient.get()
+                An124FlightsDto an124FlightsDto = apiWebClient.get()
                         .uri(String.format("/aircraft/%s/%s", BotMessageEngConst.AN_124_CODE, user.getAirport()))
                         .retrieve()
                         .bodyToMono(An124FlightsDto.class)
@@ -130,7 +130,7 @@ public class ScheduleSender {
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
 
                 // Wide-body aircraft check
-                FlightsDto flightsDto = webClient.get()
+                FlightsDto flightsDto = apiWebClient.get()
                         .uri("/airport/flights/" + user.getAirport())
                         .retrieve()
                         .bodyToMono(FlightsDto.class)

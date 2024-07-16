@@ -28,7 +28,6 @@ spring:
           starttls:
             enable: true
 
-
 bot:
   name: ${BOT_MAME}
   token: ${BOT_TOKEN}
@@ -36,3 +35,7 @@ bot:
 flightradar-api:
   api-key: ${API_KEY}
   url: ${API_URL}
+
+geonames:
+  url: ${GEONAMES_URL}
+  username: ${GEONAMES_USERNAME}

@@ -14,7 +14,7 @@ public class BotMessageUtils {
         return switch (language) {
             case ENG -> getEngConstant(template);
             case RU -> getRuConstant(template);
-            case UA -> getUaConstant(template);
+            case UK -> getUaConstant(template);
         };
     }
 

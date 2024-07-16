@@ -142,8 +142,8 @@ public class AvgeekTelegramBot extends AbilityBot {
                             botLanguage = ENG;
                         } else if (RU.name().toLowerCase().equals(language)) {
                             botLanguage = RU;
-                        } else if (UA.name().toLowerCase().equals(language)) {
-                            botLanguage = UA;
+                        } else if (UK.name().toLowerCase().equals(language)) {
+                            botLanguage = UK;
                         } else {
                             execute(botService.incorrectBotLanguage(username, chatId));
                             return;
