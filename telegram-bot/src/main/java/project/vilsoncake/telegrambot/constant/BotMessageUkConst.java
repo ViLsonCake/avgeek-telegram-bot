@@ -1,6 +1,6 @@
 package project.vilsoncake.telegrambot.constant;
 
-public class BotMessageUaConst {
+public class BotMessageUkConst {
     public static final String START_TEXT = """
             Вітаю, %s. Ласкаво просимо до боту avgeek!
             Я буду відсилати вам всі широкофюзеляжні літаки, що прилітають у ваш аеропорт, а також сповіщення про Ан-124 які знаходяться зараз у небі.
@@ -35,8 +35,40 @@ public class BotMessageUaConst {
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
-    public static final String AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT = """
-            Ан-124 БЛИЗЬКО ДО ВАШОГО АЕРОПОРТУ ПРЯМО ЗАРАЗ.
+    public static final String AN_124_ON_GROUND_TEXT = """
+            Ан-124 зараз знаходиться в %s, %s, %s.
+            Висота: %sм
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
+            Дивіться тут:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_LANDING_TEXT = """
+            Ан-124 заходить на посадку в %s, %s, %s.
+            Висота: %sм
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
+            Дивіться тут:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_TAKEOFF_MESSAGE = """
+            Ан-124 набирає висоту після зльоту з %s, %s, %s.
+            Висота: %sм
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
+            Дивіться тут:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
+            Ан-124 СКОРІШ ЗА ВСЕ СІДАЄ В ВАШ АЕРОПОРТ!
+            Висота: %sм
+            Швидкість: %sкм/г
+            Відстань від вашого аеропорту: %sкм
+            Дивіться тут:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
+            Ан-124 пролітає біля вашого аеропорту.
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
@@ -44,7 +76,7 @@ public class BotMessageUaConst {
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            Ан-124 ЗНАХОДИТЬСЯ У ВАШОМУ АЕРОПОРТУ ПРЯМО ЗАРАЗ.
+            Ан-124 ЗНАХОДИТЬСЯ У ВАШОМУ АЕРОПОРТУ ПРЯМО ЗАРАЗ!
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм

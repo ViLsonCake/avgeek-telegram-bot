@@ -10,16 +10,16 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.constant.BotMessageEngConst;
 import project.vilsoncake.telegrambot.constant.NumberConst;
-import project.vilsoncake.telegrambot.dto.An124FlightDataDto;
-import project.vilsoncake.telegrambot.dto.An124FlightsDto;
-import project.vilsoncake.telegrambot.dto.FlightDataDto;
-import project.vilsoncake.telegrambot.dto.FlightsDto;
+import project.vilsoncake.telegrambot.dto.*;
 import project.vilsoncake.telegrambot.entity.FlightEntity;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
 import project.vilsoncake.telegrambot.service.FlightService;
+import project.vilsoncake.telegrambot.service.GeonameService;
 import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
+import project.vilsoncake.telegrambot.utils.AirportsUtils;
 import project.vilsoncake.telegrambot.utils.BotMessageUtils;
 import project.vilsoncake.telegrambot.utils.MailMessageUtils;
 
@@ -36,12 +36,14 @@ import static project.vilsoncake.telegrambot.constant.NumberConst.*;
 public class ScheduleSender {
 
     private final UserService userService;
-    private final AbsSender absSender;
     private final FlightService flightService;
     private final MailService mailService;
+    private final GeonameService geonameService;
     private final BotMessageUtils botMessageUtils;
     private final MailMessageUtils mailMessageUtils;
+    private final AirportsUtils airportsUtils;
     private final WebClient apiWebClient;
+    private final AbsSender absSender;
 
     @Transactional
     @Scheduled(fixedDelay = NumberConst.FLIGHT_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
@@ -71,13 +73,68 @@ public class ScheduleSender {
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
-                        } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM) {
+                        } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LIKELY_TO_LAND_AIRPORT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
+                        } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
+                            SendMessage message = new SendMessage();
+                            message.setChatId(user.getChatId());
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
+                                    flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                            ));
+                            absSender.execute(message);
+                        } else if (flight.getAltitude() == ON_GROUND_ALTITUDE) {
+                            try {
+                                AirportDto airportDto = airportsUtils.findClosestAirportByCoordinates(flight.getLatitude(), flight.getLongitude(), ON_GROUND_RADIUS);
+                                GeonameDto geonameAirportDto = geonameService.getObject(airportDto.getIcao(), user.getBotLanguage().name());
+                                GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), user.getBotLanguage().name());
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_ON_GROUND_TEXT, user.getBotLanguage()),
+                                        geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                            } catch (AirportNotFoundException e) {
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                                absSender.execute(message);
+                            }
+                        } else if (flight.getAltitude() < LOW_ALTITUDE_IN_M) {
+                            try {
+                                AirportDto airportDto = airportsUtils.findClosestAirportByCoordinates(flight.getLatitude(), flight.getLongitude(), CLOSE_TO_AIRPORT_RANGE_IN_KM);
+                                GeonameDto geonameAirportDto = geonameService.getObject(airportDto.getIcao(), user.getBotLanguage().name());
+                                GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), user.getBotLanguage().name());
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+
+                                if (flight.getVerticalSpeed() > 0) {
+                                    message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_TAKEOFF_MESSAGE, user.getBotLanguage()),
+                                            geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
+                                            flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                    ));
+                                } else if (flight.getVerticalSpeed() < 0) {
+                                    message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LANDING_TEXT, user.getBotLanguage()),
+                                            geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
+                                            flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                    ));
+                                }
+
+                                absSender.execute(message);
+                            } catch (AirportNotFoundException e) {
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                                absSender.execute(message);
+                            }
                         } else {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
@@ -110,7 +167,7 @@ public class ScheduleSender {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LIKELY_TO_LAND_AIRPORT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
@@ -119,7 +176,7 @@ public class ScheduleSender {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
-                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT, user.getBotLanguage()),
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LIKELY_TO_LAND_AIRPORT_TEXT, user.getBotLanguage()),
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);

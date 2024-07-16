@@ -35,8 +35,40 @@ public class BotMessageRuConst {
             Смотрите здесь:
             https://www.flightradar24.com/%s/%s
             """;
-    public static final String AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT = """
-            Ан-124 БЛИЗКО К ВАШЕМУ АЭРОПОРТУ прямо сейчас.
+    public static final String AN_124_ON_GROUND_TEXT = """
+            Ан-124 сейчас находится в %s, %s, %s.
+            Высота: %sм
+            Скорость: %sкм/ч
+            Расстояние от вашего аэропорта: %sкм
+            Смотрите здесь:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_LANDING_TEXT = """
+            Ан-124 заходит на посадку в %s, %s, %s.
+            Высота: %sм
+            Скорость: %sкм/ч
+            Расстояние от вашего аэропорта: %sкм
+            Смотрите здесь:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_TAKEOFF_MESSAGE = """
+            Ан-124 набирает высоту после взлета из %s, %s, %s.
+            Высота: %sм
+            Скорость: %sкм/ч
+            Расстояние от вашего аэропорта: %sкм
+            Смотрите здесь:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
+            Ан-124 ВЕРОЯТНО САДИТСЯ В ВАШ АЭРОПОРТ!
+            Высота: %sм
+            Скорость: %sкм/ч
+            Расстояние от вашего аэропорта: %sкм
+            Смотрите здесь:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
+            Ан-124 пролетает возле вашего аэропорта.
             Высота: %sм
             Скорость: %sкм/ч
             Расстояние от вашего аэропорта: %sкм
@@ -44,7 +76,7 @@ public class BotMessageRuConst {
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            Ан-124 В ВАШЕМ АЭРОПОРТУ ПРЯМО СЕЙЧАС.
+            Ан-124 В ВАШЕМ АЭРОПОРТУ ПРЯМО СЕЙЧАС!
             Высота: %sм
             Скорость: %sкм/ч
             Расстояние от вашего аэропорта: %sкм

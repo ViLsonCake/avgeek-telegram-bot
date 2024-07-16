@@ -2,21 +2,19 @@ package project.vilsoncake.telegrambot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import project.vilsoncake.telegrambot.dto.AirportCodesDto;
 import project.vilsoncake.telegrambot.dto.GeonameDto;
-import project.vilsoncake.telegrambot.dto.GeonamesDto;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
-import project.vilsoncake.telegrambot.property.GeonamesProperties;
 import project.vilsoncake.telegrambot.service.BotService;
+import project.vilsoncake.telegrambot.service.GeonameService;
 import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
 import project.vilsoncake.telegrambot.utils.AirportsUtils;
@@ -39,12 +37,11 @@ public class BotServiceImpl implements BotService {
 
     private final UserService userService;
     private final MailService mailService;
+    private final GeonameService geonameService;
     private final VerifyUtils verifyUtils;
     private final AirportsUtils airportsUtils;
     private final BotMessageUtils botMessageUtils;
     private final MailMessageUtils mailMessageUtils;
-    private final WebClient geoNamesWebClient;
-    private final GeonamesProperties geonamesProperties;
 
     @Override
     public SendMessage pingCommand(Long chatId) {
@@ -100,17 +97,7 @@ public class BotServiceImpl implements BotService {
 
         AirportCodesDto airportCodesDto = airportsUtils.validateAirportCode(airportCode);
 
-        GeonameDto geonameDto = geoNamesWebClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("q", airportCodesDto.getIcao())
-                        .queryParam("lang", user.getBotLanguage().name())
-                        .queryParam("maxRows", 1)
-                        .queryParam("username", geonamesProperties.getUsername())
-                        .build()
-                )
-                .retrieve()
-                .bodyToMono(GeonamesDto.class)
-                .block().getGeonames().get(0);
+        GeonameDto geonameDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name());
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
@@ -133,17 +120,7 @@ public class BotServiceImpl implements BotService {
             return message;
         }
 
-        GeonameDto geonameDto = geoNamesWebClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("q", airportCodesDto.getIcao())
-                        .queryParam("lang", user.getBotLanguage().name())
-                        .queryParam("maxRows", 1)
-                        .queryParam("username", geonamesProperties.getUsername())
-                        .build()
-                )
-                .retrieve()
-                .bodyToMono(GeonamesDto.class)
-                .block().getGeonames().get(0);
+        GeonameDto geonameDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name());
 
         userService.changeUserAirport(username, airportCodesDto.getIata());
         userService.changeUserState(username, CHOSEN_AIRPORT);

@@ -35,8 +35,40 @@ public class BotMessageEngConst {
             View here:
             https://www.flightradar24.com/%s/%s
             """;
-    public static final String AN_124_NEARLY_CLOSE_TO_YOUR_AIRPORT_TEXT = """
-            An-124 NEARLY CLOSE TO YOUR AIRPORT right now.
+    public static final String AN_124_ON_GROUND_TEXT = """
+            An-124 is now at %s, %s, %s.
+            Altitude: %sm:
+            Ground speed: %skm/h
+            Distance from your airport: %skm
+            View here:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_LANDING_TEXT = """
+            An-124 approaches %s, %s, %s.
+            Altitude: %sm:
+            Ground speed: %skm/h
+            Distance from your airport: %skm
+            View here:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_TAKEOFF_MESSAGE = """
+            An-124 gaining altitude after takeoff from %s, %s, %s.
+            Altitude: %sm:
+            Ground speed: %skm/h
+            Distance from your airport: %skm
+            View here:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
+            An-124 WILL MOST LIKELY TO LAND AT YOUR AIRPORT!
+            Altitude: %sm:
+            Ground speed: %skm/h
+            Distance from your airport: %skm
+            View here:
+            https://www.flightradar24.com/%s/%s
+            """;
+    public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
+            An-124 flying near your airport.
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
@@ -44,7 +76,7 @@ public class BotMessageEngConst {
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            An-124 IN YOUR AIRPORT RIGHT NOW.
+            An-124 IN YOUR AIRPORT RIGHT NOW!
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
