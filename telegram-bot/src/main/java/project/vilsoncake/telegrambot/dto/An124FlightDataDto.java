@@ -21,6 +21,9 @@ public class An124FlightDataDto {
     @JsonAlias("ground_speed")
     private int groundSpeed;
 
+    @JsonAlias("vertical_speed")
+    private int verticalSpeed;
+
     @JsonAlias("latitude")
     private double latitude;
 
