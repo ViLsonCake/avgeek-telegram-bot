@@ -98,6 +98,7 @@ public class ScheduleSender {
                                         geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
                                         flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                 ));
+                                absSender.execute(message);
                             } catch (AirportNotFoundException e) {
                                 SendMessage message = new SendMessage();
                                 message.setChatId(user.getChatId());
