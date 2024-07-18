@@ -28,6 +28,10 @@ spring:
           starttls:
             enable: true
 
+logging:
+  pattern:
+    dateformat: 'HH:mm:ss-dd.MM.yyyy'
+
 bot:
   name: ${BOT_MAME}
   token: ${BOT_TOKEN}
