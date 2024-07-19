@@ -35,7 +35,7 @@ public class AirportsUtils {
 
             double x = (lon2Rad - lon1Rad) * Math.cos((lat1Rad + lat2Rad) / 2);
             double y = (lat2Rad - lat1Rad);
-            int distance = (int) Math.sqrt(x * x + y * y) * EARTH_RADIUS;
+            int distance = (int) (Math.sqrt(x * x + y * y) * EARTH_RADIUS);
 
             if (distance <= radius) {
                 return airport;
