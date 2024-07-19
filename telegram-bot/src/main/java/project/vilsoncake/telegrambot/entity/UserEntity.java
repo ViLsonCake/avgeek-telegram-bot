@@ -1,8 +1,9 @@
 package project.vilsoncake.telegrambot.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
@@ -12,7 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "user_")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class UserEntity {
 
