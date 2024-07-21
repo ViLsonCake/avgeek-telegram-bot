@@ -10,6 +10,9 @@ public interface FlightService {
     List<FlightEntity> findByUserOrderByDate(UserEntity user);
     FlightEntity findByUserAndFlightId(UserEntity user, String flightId);
     boolean changeFlightActive(FlightEntity flight, boolean active);
+    boolean changeFlightTookOff(FlightEntity flight, boolean tookOff);
+    boolean changeFlightLanding(FlightEntity flight, boolean landing);
+    boolean changeFlightOnGround(FlightEntity flight, boolean onGround);
     boolean changeFlightDistance(FlightEntity flight, Integer distance);
     boolean existsByUserAndFlightId(UserEntity user, String flightId);
 }

@@ -51,6 +51,30 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public boolean changeFlightTookOff(FlightEntity flight, boolean tookOff) {
+        flight.setTookOff(tookOff);
+        flightRepository.save(flight);
+
+        return true;
+    }
+
+    @Override
+    public boolean changeFlightLanding(FlightEntity flight, boolean landing) {
+        flight.setLanding(landing);
+        flightRepository.save(flight);
+
+        return true;
+    }
+
+    @Override
+    public boolean changeFlightOnGround(FlightEntity flight, boolean onGround) {
+        flight.setOnGround(onGround);
+        flightRepository.save(flight);
+
+        return true;
+    }
+
+    @Override
     public boolean changeFlightDistance(FlightEntity flight, Integer distance) {
         flight.setDistance(distance);
         flightRepository.save(flight);

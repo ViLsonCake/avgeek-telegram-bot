@@ -181,6 +181,71 @@ public class ScheduleSender {
                                     flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
+                        } else if (flight.getAltitude() == ON_GROUND_ALTITUDE && flightEntity.isTookOff() && !flightEntity.isOnGround()) {
+                            try {
+                                flightService.changeFlightOnGround(flightEntity, true);
+                                AirportDto airportDto = airportsUtils.findClosestAirportByCoordinates(flight.getLatitude(), flight.getLongitude(), ON_GROUND_RADIUS);
+                                GeonameDto geonameAirportDto = geonameService.getObject(airportDto.getIcao(), user.getBotLanguage().name());
+                                GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), user.getBotLanguage().name());
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_ON_GROUND_TEXT, user.getBotLanguage()),
+                                        geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                                absSender.execute(message);
+                            } catch (AirportNotFoundException e) {
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                                absSender.execute(message);
+                            }
+                        } else if (flight.getAltitude() < LOW_ALTITUDE_IN_M && flight.getVerticalSpeed() > 0 && !flightEntity.isTookOff()) {
+                            try {
+                                flightService.changeFlightTookOff(flightEntity, true);
+                                AirportDto airportDto = airportsUtils.findClosestAirportByCoordinates(flight.getLatitude(), flight.getLongitude(), CLOSE_TO_AIRPORT_RANGE_IN_KM);
+                                GeonameDto geonameAirportDto = geonameService.getObject(airportDto.getIcao(), user.getBotLanguage().name());
+                                GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), user.getBotLanguage().name());
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_TAKEOFF_MESSAGE, user.getBotLanguage()),
+                                        geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+
+                                absSender.execute(message);
+                            } catch (AirportNotFoundException e) {
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                                absSender.execute(message);
+                            }
+                        } else if (flight.getAltitude() < LOW_ALTITUDE_IN_M && flight.getVerticalSpeed() < 0 && flightEntity.isTookOff() && !flightEntity.isLanding()) {
+                            try {
+                                flightService.changeFlightLanding(flightEntity, true);
+                                AirportDto airportDto = airportsUtils.findClosestAirportByCoordinates(flight.getLatitude(), flight.getLongitude(), CLOSE_TO_AIRPORT_RANGE_IN_KM);
+                                GeonameDto geonameAirportDto = geonameService.getObject(airportDto.getIcao(), user.getBotLanguage().name());
+                                GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), user.getBotLanguage().name());
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LANDING_TEXT, user.getBotLanguage()),
+                                        geonameAirportDto.getName(), geonameCityDto.getName(), geonameCityDto.getCountryName(),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+
+                                absSender.execute(message);
+                            } catch (AirportNotFoundException e) {
+                                SendMessage message = new SendMessage();
+                                message.setChatId(user.getChatId());
+                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
+                                        flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                ));
+                                absSender.execute(message);
+                            }
                         }
                     }
                 }

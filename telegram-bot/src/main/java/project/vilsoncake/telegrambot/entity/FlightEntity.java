@@ -1,6 +1,7 @@
 package project.vilsoncake.telegrambot.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class FlightEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Setter(AccessLevel.NONE)
     @Column(name = "id", updatable = false)
     private UUID id;
 
@@ -29,6 +31,16 @@ public class FlightEntity {
     @Column(name = "active")
     private boolean active = false;
 
+    @Column(name = "took_off")
+    private boolean tookOff = false;
+
+    @Column(name = "landing")
+    private boolean landing = false;
+
+    @Column(name = "on_ground")
+    private boolean onGround = false;
+
+    @Setter(AccessLevel.NONE)
     @Column(name = "created_at", updatable = false)
     private Date date = new Date();
 
