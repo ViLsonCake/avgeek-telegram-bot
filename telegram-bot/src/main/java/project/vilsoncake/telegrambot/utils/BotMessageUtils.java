@@ -27,6 +27,7 @@ public class BotMessageUtils {
             case INVALID_AIRPORT_CODE_TEXT -> BotMessageEngConst.INVALID_AIRPORT_CODE_TEXT;
             case USER_CANNOT_CHOOSE_AIRPORT_TEXT -> BotMessageEngConst.USER_CANNOT_CHOOSE_AIRPORT_TEXT;
             case FLIGHT_TEXT -> BotMessageEngConst.FLIGHT_TEXT;
+            case FLIGHT_WITHOUT_REGISTRATION_TEXT -> BotMessageEngConst.FLIGHT_WITHOUT_REGISTRATION_TEXT;
             case LIVE_FLIGHT_TEXT -> BotMessageEngConst.LIVE_FLIGHT_TEXT;
             case AN_124_FLIGHT_TEXT -> BotMessageEngConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_TEXT -> BotMessageEngConst.AN_124_ON_GROUND_TEXT;
@@ -66,6 +67,7 @@ public class BotMessageUtils {
             case INVALID_AIRPORT_CODE_TEXT -> BotMessageRuConst.INVALID_AIRPORT_CODE_TEXT;
             case USER_CANNOT_CHOOSE_AIRPORT_TEXT -> BotMessageRuConst.USER_CANNOT_CHOOSE_AIRPORT_TEXT;
             case FLIGHT_TEXT -> BotMessageRuConst.FLIGHT_TEXT;
+            case FLIGHT_WITHOUT_REGISTRATION_TEXT -> BotMessageRuConst.FLIGHT_WITHOUT_REGISTRATION_TEXT;
             case LIVE_FLIGHT_TEXT -> BotMessageRuConst.LIVE_FLIGHT_TEXT;
             case AN_124_FLIGHT_TEXT -> BotMessageRuConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_TEXT -> BotMessageRuConst.AN_124_ON_GROUND_TEXT;
@@ -105,6 +107,7 @@ public class BotMessageUtils {
             case INVALID_AIRPORT_CODE_TEXT -> BotMessageUkConst.INVALID_AIRPORT_CODE_TEXT;
             case USER_CANNOT_CHOOSE_AIRPORT_TEXT -> BotMessageUkConst.USER_CANNOT_CHOOSE_AIRPORT_TEXT;
             case FLIGHT_TEXT -> BotMessageUkConst.FLIGHT_TEXT;
+            case FLIGHT_WITHOUT_REGISTRATION_TEXT -> BotMessageUkConst.FLIGHT_WITHOUT_REGISTRATION_TEXT;
             case LIVE_FLIGHT_TEXT -> BotMessageUkConst.LIVE_FLIGHT_TEXT;
             case AN_124_FLIGHT_TEXT -> BotMessageUkConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_TEXT -> BotMessageUkConst.AN_124_ON_GROUND_TEXT;

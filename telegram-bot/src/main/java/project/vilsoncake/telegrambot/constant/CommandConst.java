@@ -28,6 +28,7 @@ public class CommandConst {
     public static final String MODE_ALL_BUTTON_TEXT = "All";
     public static final String MODE_WIDE_BODY_BUTTON_TEXT = "Wide-body";
     public static final String MODE_AN_124_BUTTON_TEXT = "An-124";
+    public static final String MARKDOWN_PARSE_MODE = "Markdown";
     public static final List<String> MODES = List.of(MODE_ALL_BUTTON_TEXT, MODE_WIDE_BODY_BUTTON_TEXT, MODE_AN_124_BUTTON_TEXT);
     public static final List<String> LANGUAGES = List.of(ENG.name().toLowerCase(), RU.name().toLowerCase(), UK.name().toLowerCase());
 }

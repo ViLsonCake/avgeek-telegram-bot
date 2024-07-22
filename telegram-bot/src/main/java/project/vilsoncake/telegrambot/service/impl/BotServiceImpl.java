@@ -24,8 +24,7 @@ import project.vilsoncake.telegrambot.utils.VerifyUtils;
 
 import java.util.List;
 
-import static project.vilsoncake.telegrambot.constant.CommandConst.LANGUAGES;
-import static project.vilsoncake.telegrambot.constant.CommandConst.MODES;
+import static project.vilsoncake.telegrambot.constant.CommandConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_SUBJECT;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_TEXT;
@@ -66,6 +65,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(String.format(botMessageUtils.getMessageByLanguage(START_TEXT, user.getBotLanguage()), username));
 
         return message;
@@ -77,6 +77,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(CHANGE_AIRPORT_TEXT, user.getBotLanguage()));
 
         return message;
@@ -88,6 +89,7 @@ public class BotServiceImpl implements BotService {
         if (user.getState().equals(CHOOSING_AIRPORT)) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
+            message.setParseMode(MARKDOWN_PARSE_MODE);
             message.setText(botMessageUtils.getMessageByLanguage(USER_CANNOT_CHOOSE_AIRPORT_TEXT, user.getBotLanguage()));
 
             return message;
@@ -101,6 +103,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), geonameDto.getName(), airportCode));
 
         return message;
@@ -115,6 +118,7 @@ public class BotServiceImpl implements BotService {
         } catch (AirportNotFoundException e) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
+            message.setParseMode(MARKDOWN_PARSE_MODE);
             message.setText(String.format(botMessageUtils.getMessageByLanguage(INVALID_AIRPORT_CODE_TEXT, user.getBotLanguage()), code));
 
             return message;
@@ -127,6 +131,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOOSE_AIRPORT_TEXT, user.getBotLanguage()), geonameDto.getName()));
 
         return message;
@@ -139,6 +144,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(WAIT_FOR_EMAIL_TEXT, user.getBotLanguage()));
 
         return message;
@@ -151,18 +157,21 @@ public class BotServiceImpl implements BotService {
         if (user.getEmail() == null) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
+            message.setParseMode(MARKDOWN_PARSE_MODE);
             message.setText(botMessageUtils.getMessageByLanguage(USER_NOT_ADDED_EMAIL_TEXT, user.getBotLanguage()));
             return message;
         }
         if (!user.isEmailVerified()) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
+            message.setParseMode(MARKDOWN_PARSE_MODE);
             message.setText(String.format(botMessageUtils.getMessageByLanguage(EMAIL_NOT_VERIFY_EMAIL, user.getBotLanguage()), user.getEmail()));
             return message;
         }
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(String.format(botMessageUtils.getMessageByLanguage(MY_EMAIL_TEXT, user.getBotLanguage()), user.getEmail()));
         return message;
     }
@@ -173,6 +182,7 @@ public class BotServiceImpl implements BotService {
         if (!verifyUtils.isEmailValid(email)) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
+            message.setParseMode(MARKDOWN_PARSE_MODE);
             message.setText(botMessageUtils.getMessageByLanguage(INVALID_EMAIL_TEXT, user.getBotLanguage()));
 
             return message;
@@ -189,6 +199,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(WAIT_FOR_CODE_TEXT, user.getBotLanguage()));
 
         return message;
@@ -201,6 +212,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(REMOVE_EMAIL_TEXT, user.getBotLanguage()));
 
         return message;
@@ -212,6 +224,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(CANCEL_ADDING_EMAIL_TEXT, user.getBotLanguage()));
 
         return message;
@@ -224,6 +237,7 @@ public class BotServiceImpl implements BotService {
         if (!String.valueOf(user.getEmailCode()).equals(code)) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
+            message.setParseMode(MARKDOWN_PARSE_MODE);
             message.setText(botMessageUtils.getMessageByLanguage(INCORRECT_EMAIL_VERIFY_CODE, user.getBotLanguage()));
             return message;
         }
@@ -233,6 +247,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(VERIFY_EMAIL_TEXT, user.getBotLanguage()));
 
         return message;
@@ -251,6 +266,7 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setReplyMarkup(keyboardMarkup);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(CHOOSING_MODE_TEXT, user.getBotLanguage()));
 
         return message;
@@ -263,6 +279,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setReplyMarkup(new ReplyKeyboardRemove(true));
 
         switch (botMode) {
@@ -280,6 +297,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
 
         switch (user.getBotMode()) {
             case ALL -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ALL_TEXT, user.getBotLanguage()));
@@ -303,6 +321,7 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setReplyMarkup(keyboardMarkup);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(SELECT_LANGUAGE_TEXT, user.getBotLanguage()));
 
         return message;
@@ -315,6 +334,7 @@ public class BotServiceImpl implements BotService {
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setReplyMarkup(new ReplyKeyboardRemove(true));
         message.setText(String.format(botMessageUtils.getMessageByLanguage(LANGUAGE_SELECTED_TEXT, user.getBotLanguage()), botLanguage));
 
@@ -326,6 +346,7 @@ public class BotServiceImpl implements BotService {
         UserEntity user = userService.getUserByUsername(username);
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(botMessageUtils.getMessageByLanguage(INCORRECT_LANGUAGE_TEXT, user.getBotLanguage()));
 
         return message;
@@ -336,6 +357,7 @@ public class BotServiceImpl implements BotService {
         UserEntity user = userService.getUserByUsername(username);
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(String.format(botMessageUtils.getMessageByLanguage(INCORRECT_MODE_TEXT, user.getBotLanguage()), mode));
         return message;
     }
