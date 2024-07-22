@@ -290,7 +290,7 @@ public class ScheduleSender {
                         message.setChatId(user.getChatId());
                         message.setParseMode(MARKDOWN_PARSE_MODE);
 
-                        if (flight.getRegistration() == null) {
+                        if (flight.getRegistration() == null || flight.getRegistration().isBlank()) {
                             message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_WITHOUT_REGISTRATION_TEXT, user.getBotLanguage()),
                                     geonameAirportDto.getName(), flight.getIata(), geonameAirportDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), user.getAirport()
                                     ));
