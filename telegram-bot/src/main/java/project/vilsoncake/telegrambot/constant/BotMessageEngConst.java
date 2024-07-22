@@ -14,72 +14,96 @@ public class BotMessageEngConst {
     public static final String INVALID_AIRPORT_CODE_TEXT = "The code \"%s\" is invalid, make sure you didn't make a typo.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "You have not yet selected an airport, please write its iata/icao code.";
     public static final String FLIGHT_TEXT = """
-            Flight to your airport from %s.
+            Scheduled flight (%s) to your airport from %s (%s), %s.
+            
             Aircraft: %s
             Airline: %s
-            View here:
+            
+            Aircraft info:
+            https://www.flightradar24.com/data/aircraft/%s
+            
+            Arrivals to your airport:
             https://www.flightradar24.com/airport/%s/arrivals
             """;
     public static final String LIVE_FLIGHT_TEXT = """
-            Flight now to your airport from %s.
+            Flight (%s) departed for your airport from %s (%s), %s.
+            
             Aircraft: %s
             Airline: %s
+            
+            Aircraft info:
+            https://www.flightradar24.com/data/aircraft/%s
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_FLIGHT_TEXT = """
-            An-124 in the air right now.
+            An-124 (%s) in the air right now.
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_ON_GROUND_TEXT = """
-            An-124 is now at %s, %s, %s.
+            An-124 (%s) is now at %s, %s, %s.
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_LANDING_TEXT = """
-            An-124 approaches %s, %s, %s.
+            An-124 (%s) approaches %s, %s, %s.
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_TAKEOFF_MESSAGE = """
-            An-124 gaining altitude after takeoff from %s, %s, %s.
+            An-124 (%s) gaining altitude after takeoff from %s, %s, %s.
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
-            An-124 WILL MOST LIKELY TO LAND AT YOUR AIRPORT!
+            An-124 (%s) WILL MOST LIKELY TO LAND AT YOUR AIRPORT!
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
-            An-124 flying near your airport.
+            An-124 (%s) flying near your airport.
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            An-124 IN YOUR AIRPORT RIGHT NOW!
+            An-124 (%s) IN YOUR AIRPORT RIGHT NOW!
+            
             Altitude: %sm:
             Ground speed: %skm/h
             Distance from your airport: %skm
+            
             View here:
             https://www.flightradar24.com/%s/%s
             """;

@@ -14,72 +14,96 @@ public class BotMessageUkConst {
     public static final String INVALID_AIRPORT_CODE_TEXT = "Код \"%s\" некоректний, будь ласка перевірте чи не допустили ви помилку.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "Ви ще не обрали аеропорт, будь ласка введіть iata/icao код.";
     public static final String FLIGHT_TEXT = """
-            Політ до вашого аеропорту з %s.
+            Запланований рейс (%s) до вашого аеропорту з %s (%s), %s.
+            
             Повітряне судно: %s
             Авіакомпанія: %s
-            Дивіться тут:
+            
+            Інформація про повітряне судно:
+            https://www.flightradar24.com/data/aircraft/%s
+            
+            Прибуття до вашого аеропорту:
             https://www.flightradar24.com/airport/%s/arrivals
             """;
     public static final String LIVE_FLIGHT_TEXT = """
-            Активний політ до вашого аеропорту з %s.
+            Рейс (%s) вилетів до вашого аеропорту з %s (%s), %s.
+            
             Повітряне судно: %s
             Авіакомпанія: %s
+            
+            Інформація про повітряне судно:
+            https://www.flightradar24.com/data/aircraft/%s
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_FLIGHT_TEXT = """
-            Ан-124 знаходиться зараз у повітрі.
+            Ан-124 (%s) знаходиться зараз у повітрі.
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_ON_GROUND_TEXT = """
-            Ан-124 зараз знаходиться в %s, %s, %s.
+            Ан-124 (%s) зараз знаходиться в %s, %s, %s.
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_LANDING_TEXT = """
-            Ан-124 заходить на посадку в %s, %s, %s.
+            Ан-124 (%s) заходить на посадку в %s, %s, %s.
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_TAKEOFF_MESSAGE = """
-            Ан-124 набирає висоту після зльоту з %s, %s, %s.
+            Ан-124 (%s) набирає висоту після зльоту з %s, %s, %s.
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
-            Ан-124 СКОРІШ ЗА ВСЕ СІДАЄ В ВАШ АЕРОПОРТ!
+            Ан-124 (%s) СКОРІШ ЗА ВСЕ СІДАЄ В ВАШ АЕРОПОРТ!
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
-            Ан-124 пролітає біля вашого аеропорту.
+            Ан-124 (%s) пролітає біля вашого аеропорту.
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            Ан-124 ЗНАХОДИТЬСЯ У ВАШОМУ АЕРОПОРТУ ПРЯМО ЗАРАЗ!
+            Ан-124 (%s) ЗНАХОДИТЬСЯ У ВАШОМУ АЕРОПОРТУ ПРЯМО ЗАРАЗ!
+            
             Висота: %sм
             Швидкість: %sкм/г
             Відстань від вашого аеропорту: %sкм
+            
             Дивіться тут:
             https://www.flightradar24.com/%s/%s
             """;

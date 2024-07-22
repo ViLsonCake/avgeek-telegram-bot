@@ -25,6 +25,9 @@ public class FlightEntity {
     @Column(name = "flight_id", updatable = false, nullable = false)
     private String flightId;
 
+    @Column(name = "registration")
+    private String registration;
+
     @Column(name = "distance")
     private Integer distance;
 

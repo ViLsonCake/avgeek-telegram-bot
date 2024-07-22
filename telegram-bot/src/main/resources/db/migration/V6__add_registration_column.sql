@@ -1,0 +1,1 @@
+ALTER TABLE flight ADD registration varchar(10);

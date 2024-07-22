@@ -57,7 +57,10 @@ async def get_white_list_planes(code: str, api_key=Depends(api_key_auth)):
             id = str(arrival['flight']['identification']['row'])
 
         airport: str = arrival['flight']['airport']['origin']['name']
+        iata: str = arrival['flight']['airport']['origin']['code']['iata']
+        icao: str = arrival['flight']['airport']['origin']['code']['icao']
         callsign: str = arrival['flight']['identification']['callsign']
+        registration: str = arrival['flight']['aircraft']['registration']
         live: bool = arrival['flight']['status']['live']
         text: str = arrival['flight']['status']['text']
 
@@ -77,7 +80,10 @@ async def get_white_list_planes(code: str, api_key=Depends(api_key_auth)):
             'aircraft': get_aircraft_name_by_code(code),
             'airline_name': airline_name,
             'airport': airport,
+            'iata': iata,
+            'icao': icao,
             'callsign': callsign,
+            'registration': registration,
             'live': live,
             'text': text
         })
