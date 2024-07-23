@@ -51,7 +51,7 @@ public class BotMessageUkConst {
             [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_TEXT = """
-            *Ан-124* (*%s*) зараз знаходиться в *%s*, *%s*, *%s*.
+            *Ан-124* (*%s*) зараз знаходиться в *%s* (*%s*), *%s*, *%s*.
             
             Висота: *%sм*
             Швидкість: *%sкм/г*
@@ -60,7 +60,7 @@ public class BotMessageUkConst {
             [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_TEXT = """
-            *Ан-124* (*%s*) _заходить на посадку_ в *%s*, *%s*, *%s*.
+            *Ан-124* (*%s*) _заходить на посадку_ в *%s* (*%s*), *%s*, *%s*.
             
             Висота: *%sм*
             Швидкість: *%sкм/г*
@@ -68,8 +68,8 @@ public class BotMessageUkConst {
             
             [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_TAKEOFF_MESSAGE = """
-            *Ан-124* (*%s*) _набирає висоту_ після зльоту з *%s*, *%s*, *%s*.
+    public static final String AN_124_TAKEOFF_TEXT = """
+            *Ан-124* (*%s*) _набирає висоту_ після зльоту з *%s* (*%s*), *%s*, *%s*.
             
             Висота: *%sм*
             Швидкість: *%sкм/г*

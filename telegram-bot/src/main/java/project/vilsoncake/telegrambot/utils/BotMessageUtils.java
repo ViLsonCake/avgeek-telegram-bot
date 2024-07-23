@@ -32,7 +32,7 @@ public class BotMessageUtils {
             case AN_124_FLIGHT_TEXT -> BotMessageEngConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_TEXT -> BotMessageEngConst.AN_124_ON_GROUND_TEXT;
             case AN_124_LANDING_TEXT -> BotMessageEngConst.AN_124_LANDING_TEXT;
-            case AN_124_TAKEOFF_MESSAGE -> BotMessageEngConst.AN_124_TAKEOFF_MESSAGE;
+            case AN_124_TAKEOFF_TEXT -> BotMessageEngConst.AN_124_TAKEOFF_TEXT;
             case AN_124_LIKELY_TO_LAND_AIRPORT_TEXT -> BotMessageEngConst.AN_124_LIKELY_TO_LAND_AIRPORT_TEXT;
             case AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT -> BotMessageEngConst.AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT;
             case AN_124_IN_YOUR_AIRPORT_NOW_TEXT -> BotMessageEngConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT;
@@ -72,7 +72,7 @@ public class BotMessageUtils {
             case AN_124_FLIGHT_TEXT -> BotMessageRuConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_TEXT -> BotMessageRuConst.AN_124_ON_GROUND_TEXT;
             case AN_124_LANDING_TEXT -> BotMessageRuConst.AN_124_LANDING_TEXT;
-            case AN_124_TAKEOFF_MESSAGE -> BotMessageRuConst.AN_124_TAKEOFF_MESSAGE;
+            case AN_124_TAKEOFF_TEXT -> BotMessageRuConst.AN_124_TAKEOFF_TEXT;
             case AN_124_LIKELY_TO_LAND_AIRPORT_TEXT -> BotMessageRuConst.AN_124_LIKELY_TO_LAND_AIRPORT_TEXT;
             case AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT -> BotMessageRuConst.AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT;
             case AN_124_IN_YOUR_AIRPORT_NOW_TEXT -> BotMessageRuConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT;
@@ -112,7 +112,7 @@ public class BotMessageUtils {
             case AN_124_FLIGHT_TEXT -> BotMessageUkConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_TEXT -> BotMessageUkConst.AN_124_ON_GROUND_TEXT;
             case AN_124_LANDING_TEXT -> BotMessageUkConst.AN_124_LANDING_TEXT;
-            case AN_124_TAKEOFF_MESSAGE -> BotMessageUkConst.AN_124_TAKEOFF_MESSAGE;
+            case AN_124_TAKEOFF_TEXT -> BotMessageUkConst.AN_124_TAKEOFF_TEXT;
             case AN_124_LIKELY_TO_LAND_AIRPORT_TEXT -> BotMessageUkConst.AN_124_LIKELY_TO_LAND_AIRPORT_TEXT;
             case AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT -> BotMessageUkConst.AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT;
             case AN_124_IN_YOUR_AIRPORT_NOW_TEXT -> BotMessageUkConst.AN_124_IN_YOUR_AIRPORT_NOW_TEXT;
