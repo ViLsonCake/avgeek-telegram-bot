@@ -111,6 +111,7 @@
     "M1M": "McDonnell Douglas MD-11",
     "C17": "Boeing C-17 Globemaster III",
     "C130": "Lockheed C-130 Hercules",
-    "C30J": "Lockheed Martin C-130J Super Hercules"
+    "C30J": "Lockheed Martin C-130J Super Hercules",
+    "IL76": "Ilyushin Il-76"
   }
 }
