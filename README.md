@@ -1,5 +1,6 @@
 # Avgeek Telegram Bot
 
+## Introduction
 ___
 
 Since I am an avgeek and plane spotter, I use Flightradar24 like everyone else, but I am missing some features.
@@ -12,11 +13,10 @@ ___
 Of course, there may be simpler solutions to these problems, but I decided to create my own in the form of a Telegram bot.
 The bot is able to notify about all flying An-124s, as well as about all wide-body airplanes (and Boeing 757) that will make a scheduled flight to the airport of your choice.
 
-You can try it out for yourself [here](https://t.me/Avgeek_ViLsonCake_Bot).
-
+### You can try it out for yourself [here](https://t.me/Avgeek_ViLsonCake_Bot).
 ___
 
-### Stack
+## Stack
 
 - Fastapi (Python)
 - Spring boot (Java)
@@ -26,12 +26,13 @@ ___
 - Docker
 - Geonames
 
-### Installation
+## Installation
 
-1. Create a Telegram bot using [BotFather](https://t.me/BotFather).
-2. Create Geonames account [here](https://www.geonames.org/export/web-services.html). 
+1. Install Docker [here](https://docs.docker.com/engine/install/).
+2. Create a Telegram bot using [BotFather](https://t.me/BotFather).
+3. Create Geonames account [here](https://www.geonames.org/export/web-services.html). 
 
-3. Create an .env file:
+4. Create an .env file:
     ```dotenv
     API_KEY=YOUR_RANDOM_API_KEY
     API_URL=http://localhost:8000
@@ -53,7 +54,7 @@ ___
     MAIL_PASSWORD=YOUR_BOT_EMAIL_PASSWORD
     ```
 
-4. Run the application in Docker:
+5. Run the application in Docker:
     ```
     docker-compose up --build -d
     ```
