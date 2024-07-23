@@ -20,18 +20,25 @@ ___
 
 - Fastapi (Python)
 - Spring boot (Java)
+- Gradle
 - Postgresql
+- Flyway
 - Docker
+- Geonames
 
 ### Installation
 
 1. Create a Telegram bot using [BotFather](https://t.me/BotFather).
+2. Create Geonames account [here](https://www.geonames.org/export/web-services.html). 
 
-2. Create an .env file:
+3. Create an .env file:
     ```dotenv
     API_KEY=YOUR_RANDOM_API_KEY
     API_URL=http://localhost:8000
     API_DOCKER_URL=http://flightradar-api:8000
+
+    GEONAMES_URL=http://api.geonames.org/searchJSON
+    GEONAMES_USERNAME=YOUR_GEONAMES_USERNAME
 
     BOT_NAME=YOUR_BOT_NAME
     BOT_TOKEN=YOUR_TOKEN
@@ -46,7 +53,7 @@ ___
     MAIL_PASSWORD=YOUR_BOT_EMAIL_PASSWORD
     ```
 
-3. Run the application in Docker:
+4. Run the application in Docker:
     ```
     docker-compose up --build -d
     ```
