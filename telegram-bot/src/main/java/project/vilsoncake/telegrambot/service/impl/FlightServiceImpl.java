@@ -10,7 +10,7 @@ import project.vilsoncake.telegrambot.service.FlightService;
 
 import java.util.List;
 
-import static project.vilsoncake.telegrambot.constant.NumberConst.MAX_SAVED_FLIGHT_COUNT;
+import static project.vilsoncake.telegrambot.constant.NumberConst.MAX_SAVED_FLIGHTS_COUNT;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +22,8 @@ public class FlightServiceImpl implements FlightService {
     public boolean addFlightToUser(FlightEntity flightEntity) {
         List<FlightEntity> flights = findByUserOrderByDate(flightEntity.getUser());
 
-        if (flights.size() > MAX_SAVED_FLIGHT_COUNT) {
-            List<FlightEntity> flightsToDelete = flights.subList(0, flights.size() - MAX_SAVED_FLIGHT_COUNT + 1);
+        if (flights.size() > MAX_SAVED_FLIGHTS_COUNT) {
+            List<FlightEntity> flightsToDelete = flights.subList(0, flights.size() - MAX_SAVED_FLIGHTS_COUNT + 1);
             flightRepository.deleteAll(flightsToDelete);
         }
 

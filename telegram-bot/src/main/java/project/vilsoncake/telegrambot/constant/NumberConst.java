@@ -10,7 +10,7 @@ public class NumberConst {
     public static final int FLIGHT_IN_AIRPORT_ALTITUDE_IN_M = 2000;
     public static final int LOW_ALTITUDE_IN_M = 5500;
     public static final int CLOSE_TO_AIRPORT_RANGE_IN_KM = 65;
-    public static final int MAX_SAVED_FLIGHT_COUNT = 50;
+    public static final int MAX_SAVED_FLIGHTS_COUNT = 100;
     public static final int EARTH_RADIUS = 6371;
     public static final int ON_GROUND_RADIUS = 7;
 }
