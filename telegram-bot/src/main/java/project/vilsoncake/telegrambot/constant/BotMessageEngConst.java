@@ -66,8 +66,7 @@ public class BotMessageEngConst {
             Ground speed: %skm/h
             Distance from your airport: %skm
             
-            View here:
-            https://www.flightradar24.com/%s/%s
+            [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_TEXT = """
             *An-124* (*%s*) _gaining altitude_ after takeoff from *%s* (*%s*), *%s*, *%s*.

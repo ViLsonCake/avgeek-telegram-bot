@@ -37,7 +37,7 @@ public class BotMessageRuConst {
             Воздушное судно: *%s*
             Авиакомпания: *%s*
             
-            [Информация о воздушном судне:](https://www.flightradar24.com/data/aircraft/%s)
+            [Информация о воздушном судне](https://www.flightradar24.com/data/aircraft/%s)
             
             [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
@@ -57,8 +57,7 @@ public class BotMessageRuConst {
             Скорость: %sкм/ч
             Расстояние от вашего аэропорта: %sкм
             
-            Смотрите здесь:
-            https://www.flightradar24.com/%s/%s
+            [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_TEXT = """
             *Ан-124* (*%s*) _заходит на посадку_ в *%s* (*%s*), *%s*, *%s*.
