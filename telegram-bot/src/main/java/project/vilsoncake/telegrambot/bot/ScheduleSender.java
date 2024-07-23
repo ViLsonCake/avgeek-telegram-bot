@@ -100,7 +100,7 @@ public class ScheduleSender {
                                 message.setChatId(user.getChatId());
                                 message.setParseMode(MARKDOWN_PARSE_MODE);
                                 message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_ON_GROUND_TEXT, user.getBotLanguage()),
-                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), user.getAirport(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), airportDto.getIata(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                 ));
                                 absSender.execute(message);
                             } catch (AirportNotFoundException e) {
@@ -124,13 +124,13 @@ public class ScheduleSender {
                                     flightService.changeFlightTookOff(flightEntity, true);
                                     message.setParseMode(MARKDOWN_PARSE_MODE);
                                     message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_TAKEOFF_TEXT, user.getBotLanguage()),
-                                            flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), user.getAirport(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                            flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), airportDto.getIata(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                     ));
                                 } else if (flight.getVerticalSpeed() < 0) {
                                     flightService.changeFlightLanding(flightEntity, true);
                                     message.setParseMode(MARKDOWN_PARSE_MODE);
                                     message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LANDING_TEXT, user.getBotLanguage()),
-                                            flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), user.getAirport(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                            flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), airportDto.getIata(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                     ));
                                 }
 
@@ -203,7 +203,7 @@ public class ScheduleSender {
                                 message.setChatId(user.getChatId());
                                 message.setParseMode(MARKDOWN_PARSE_MODE);
                                 message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_ON_GROUND_TEXT, user.getBotLanguage()),
-                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), user.getAirport(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), airportDto.getIata(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                 ));
                                 absSender.execute(message);
                             } catch (AirportNotFoundException e) {
@@ -225,7 +225,7 @@ public class ScheduleSender {
                                 message.setChatId(user.getChatId());
                                 message.setParseMode(MARKDOWN_PARSE_MODE);
                                 message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_TAKEOFF_TEXT, user.getBotLanguage()),
-                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), user.getAirport(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), airportDto.getIata(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                 ));
 
                                 absSender.execute(message);
@@ -248,7 +248,7 @@ public class ScheduleSender {
                                 message.setChatId(user.getChatId());
                                 message.setParseMode(MARKDOWN_PARSE_MODE);
                                 message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LANDING_TEXT, user.getBotLanguage()),
-                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), user.getAirport(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                        flight.getId().substring(flight.getId().length() - 4), geonameAirportDto.getName(), airportDto.getIata(), geonameCityDto.getName(), geonameCityDto.getCountryName(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                                 ));
 
                                 absSender.execute(message);
