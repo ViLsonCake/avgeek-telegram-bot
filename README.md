@@ -16,6 +16,12 @@ The bot is able to notify about all flying An-124s, as well as about all wide-bo
 ### You can try it out for yourself [here](https://t.me/Avgeek_ViLsonCake_Bot).
 ___
 
+#### An-124 and Wide-body flight notification example
+<div style="display: flex; justify-content: space-between;">
+    <img src="telegram-bot/src/main/resources/images/An-124-notification-example.jpg" alt="An-124 notification example" style="height: 320px">
+    <img src="telegram-bot/src/main/resources/images/Wide-body-flight-notification-example.jpg" alt="Wide-body flight notification example" style="height: 320px">
+</div>
+
 ## Stack
 
 - Fastapi (Python)
@@ -30,7 +36,7 @@ ___
 
 1. Install Docker [here](https://docs.docker.com/engine/install/).
 2. Create a Telegram bot using [BotFather](https://t.me/BotFather).
-3. Create Geonames account [here](https://www.geonames.org/export/web-services.html). 
+3. Create Geonames account [here](https://www.geonames.org/export/web-services.html).
 
 4. Create an .env file:
     ```dotenv
