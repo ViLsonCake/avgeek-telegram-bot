@@ -60,16 +60,16 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_TEXT = """
-            *An-124* (*%s*) _approaches_ *%s* (*%s*), *%s*, *%s*.
+            *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: %sm:
-            Ground speed: %skm/h
-            Distance from your airport: %skm
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_TEXT = """
-            *An-124* (*%s*) _gaining altitude_ after takeoff from *%s* (*%s*), *%s*, *%s*.
+            *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
