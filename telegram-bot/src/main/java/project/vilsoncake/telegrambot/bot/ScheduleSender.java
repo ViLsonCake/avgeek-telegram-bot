@@ -184,7 +184,8 @@ public class ScheduleSender {
                                     flight.getId().substring(flight.getId().length() - 4), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
                             ));
                             absSender.execute(message);
-                        } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
+                        } else if (flight.getDistance() < flightEntity.getDistance() || flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
+                            flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
                             message.setParseMode(MARKDOWN_PARSE_MODE);
