@@ -10,7 +10,7 @@ public class BotMessageRuConst {
             """;
     public static final String CHOOSE_AIRPORT_TEXT = "Отлично! теперь ваш аэропорт это *%s*.";
     public static final String CHANGE_AIRPORT_TEXT = "Напишите _icao_/_iata_ код вашего аэропорта, вы можете получить его на [flightradar24](https://www.flightradar24.com).";
-    public static final String CURRENT_AIRPORT_TEXT = "Ваш текущий аэропорт это *%s* (*%s*).";
+    public static final String CURRENT_AIRPORT_TEXT = "Ваш текущий аэропорт это *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "Код __%s__ *некорректен*, пожалуйста убедитесь что вы не допустили ошибку.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "Вы еще не выбрали аэропорт, пожалуйста напишите _iata_/_icao_ код.";
     public static final String FLIGHT_TEXT = """

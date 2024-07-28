@@ -10,7 +10,7 @@ public class BotMessageUkConst {
             """;
     public static final String CHOOSE_AIRPORT_TEXT = "Добре! Тепер ваш аеропорт це *%s*.";
     public static final String CHANGE_AIRPORT_TEXT = "Напишіть _icao_/_iata_ код вашого аеропорту, ви можете знайти його на [flightradar24](https://www.flightradar24.com).";
-    public static final String CURRENT_AIRPORT_TEXT = "Ваш поточний аеропорт це *%s* (*%s*).";
+    public static final String CURRENT_AIRPORT_TEXT = "Ваш поточний аеропорт це *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "Код __%s__ *некоректний*, будь ласка перевірте чи не допустили ви помилку.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "Ви ще не обрали аеропорт, будь ласка введіть _iata_/_icao_ код.";
     public static final String FLIGHT_TEXT = """

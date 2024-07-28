@@ -104,7 +104,7 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
-        message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), geonameAirportDto.getName(), airportCode));
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), geonameAirportDto.getName(), airportCode, airportCode));
 
         return message;
     }
