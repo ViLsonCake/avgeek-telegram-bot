@@ -99,12 +99,12 @@ public class BotServiceImpl implements BotService {
 
         AirportCodesDto airportCodesDto = airportsUtils.validateAirportCode(airportCode);
 
-        GeonameDto geonameDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name());
+        GeonameDto geonameAirportDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name(), true);
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
-        message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), geonameDto.getName(), airportCode));
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), geonameAirportDto.getName(), airportCode));
 
         return message;
     }
@@ -124,7 +124,7 @@ public class BotServiceImpl implements BotService {
             return message;
         }
 
-        GeonameDto geonameDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name());
+        GeonameDto geonameAirportDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name(), true);
 
         userService.changeUserAirport(username, airportCodesDto.getIata());
         userService.changeUserState(username, CHOSEN_AIRPORT);
@@ -132,7 +132,7 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
-        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOOSE_AIRPORT_TEXT, user.getBotLanguage()), geonameDto.getName()));
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOOSE_AIRPORT_TEXT, user.getBotLanguage()), geonameAirportDto.getName()));
 
         return message;
     }
