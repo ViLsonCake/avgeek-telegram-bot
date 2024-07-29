@@ -18,16 +18,12 @@ public class GeonameServiceImpl implements GeonameService {
     private final GeonamesProperties geonamesProperties;
 
     @Override
-    public GeonameDto getObject(String q, String language, boolean isAirport) {
+    public GeonameDto getObject(String q, String language) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("q", q);
         queryParams.add("lang", language);
         queryParams.add("maxRows", "1");
         queryParams.add("username", geonamesProperties.getUsername());
-
-        if (isAirport) {
-            queryParams.add("featureCode", "AIRP");
-        }
 
         return geoNamesWebClient.get()
                 .uri(uriBuilder -> uriBuilder

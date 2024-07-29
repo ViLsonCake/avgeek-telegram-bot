@@ -44,4 +44,14 @@ public class AirportsUtils {
 
         throw new AirportNotFoundException(String.format("No airport within %s km radius found", radius));
     }
+
+    public AirportDto getCityByAirport(String iataCode) {
+        for (AirportDto airport : airports) {
+            if (airport.getIata().equals(iataCode)) {
+                return airport;
+            }
+        }
+
+        throw new AirportNotFoundException(String.format("Airport with iata code %s not found", iataCode));
+    }
 }

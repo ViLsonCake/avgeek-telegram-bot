@@ -7,14 +7,13 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import project.vilsoncake.telegrambot.dto.AirportCodesDto;
-import project.vilsoncake.telegrambot.dto.GeonameDto;
+import project.vilsoncake.telegrambot.dto.AirportDto;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
 import project.vilsoncake.telegrambot.service.BotService;
-import project.vilsoncake.telegrambot.service.GeonameService;
 import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
 import project.vilsoncake.telegrambot.utils.AirportsUtils;
@@ -36,7 +35,6 @@ public class BotServiceImpl implements BotService {
 
     private final UserService userService;
     private final MailService mailService;
-    private final GeonameService geonameService;
     private final VerifyUtils verifyUtils;
     private final AirportsUtils airportsUtils;
     private final BotMessageUtils botMessageUtils;
@@ -97,14 +95,12 @@ public class BotServiceImpl implements BotService {
 
         String airportCode = userService.getUserByUsername(username).getAirport();
 
-        AirportCodesDto airportCodesDto = airportsUtils.validateAirportCode(airportCode);
-
-        GeonameDto geonameAirportDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name(), true);
+        AirportDto airportDto = airportsUtils.getCityByAirport(airportCode);
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
-        message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), geonameAirportDto.getName(), airportCode, airportCode));
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CURRENT_AIRPORT_TEXT, user.getBotLanguage()), airportDto.getName(), airportCode, airportCode));
 
         return message;
     }
@@ -124,7 +120,7 @@ public class BotServiceImpl implements BotService {
             return message;
         }
 
-        GeonameDto geonameAirportDto = geonameService.getObject(airportCodesDto.getIcao(), user.getBotLanguage().name(), true);
+        AirportDto airportDto = airportsUtils.getCityByAirport(airportCodesDto.getIata());
 
         userService.changeUserAirport(username, airportCodesDto.getIata());
         userService.changeUserState(username, CHOSEN_AIRPORT);
@@ -132,7 +128,7 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
-        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOOSE_AIRPORT_TEXT, user.getBotLanguage()), geonameAirportDto.getName()));
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOOSE_AIRPORT_TEXT, user.getBotLanguage()), airportDto.getName()));
 
         return message;
     }
