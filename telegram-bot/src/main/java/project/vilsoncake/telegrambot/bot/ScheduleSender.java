@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.constant.BotMessageEngConst;
 import project.vilsoncake.telegrambot.constant.NumberConst;
 import project.vilsoncake.telegrambot.dto.*;
