@@ -18,10 +18,12 @@ public class GeonameServiceImpl implements GeonameService {
     private final GeonamesProperties geonamesProperties;
 
     @Override
-    public GeonameDto getObject(String q, String language) {
+    public GeonameDto getObject(String q, String country, String language) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("q", q);
+        queryParams.add("country", country);
         queryParams.add("lang", language);
+        queryParams.add("featureClass", "P");
         queryParams.add("maxRows", "1");
         queryParams.add("username", geonamesProperties.getUsername());
 
