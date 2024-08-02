@@ -282,6 +282,7 @@ public class BotServiceImpl implements BotService {
             case ALL -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ALL_TEXT, user.getBotLanguage()));
             case ONLY_AN_124_FLIGHTS -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ONLY_AN_124_TEXT, user.getBotLanguage()));
             case ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ONLY_WIDE_BODY_TEXT, user.getBotLanguage()));
+            case MUTE -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_MUTE_TEXT, user.getBotLanguage()));
         }
 
         return message;
@@ -299,6 +300,7 @@ public class BotServiceImpl implements BotService {
             case ALL -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ALL_TEXT, user.getBotLanguage()));
             case ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ONLY_WIDE_BODY_TEXT, user.getBotLanguage()));
             case ONLY_AN_124_FLIGHTS -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ONLY_AN_124_TEXT, user.getBotLanguage()));
+            case MUTE -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_MUTE_TEXT, user.getBotLanguage()));
         }
 
         return message;

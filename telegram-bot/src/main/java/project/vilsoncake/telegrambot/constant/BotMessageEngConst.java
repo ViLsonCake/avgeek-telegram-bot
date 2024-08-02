@@ -109,6 +109,7 @@ public class BotMessageEngConst {
     public static final String CHOSEN_MODE_ALL_TEXT = "You will receive alerts about An-124 flights *and* wide-body aircraft flights.";
     public static final String CHOSEN_MODE_ONLY_AN_124_TEXT = "You will receive alerts *only* about An-124 flights.";
     public static final String CHOSEN_MODE_ONLY_WIDE_BODY_TEXT = "You will receive alerts *only* for wide-body aircraft.";
+    public static final String CHOSEN_MODE_MUTE_TEXT = "You will not receive *any* notifications.";
     public static final String INCORRECT_MODE_TEXT = "__%s__ is an incorrect mode. Select mode from the buttons on the keyboard.";
     public static final String WAIT_FOR_EMAIL_TEXT = "Enter your _email_.";
     public static final String INVALID_EMAIL_TEXT = "The _email_ you entered is *invalid*.";

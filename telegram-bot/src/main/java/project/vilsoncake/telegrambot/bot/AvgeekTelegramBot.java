@@ -115,6 +115,7 @@ public class AvgeekTelegramBot extends AbilityBot {
                             case MODE_ALL_BUTTON_TEXT -> botMode = BotMode.ALL;
                             case MODE_WIDE_BODY_BUTTON_TEXT -> botMode = BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS;
                             case MODE_AN_124_BUTTON_TEXT -> botMode = BotMode.ONLY_AN_124_FLIGHTS;
+                            case MODE_MUTE_TEXT -> botMode = BotMode.MUTE;
                             default -> {
                                 execute(botService.incorrectModeMessage(username, update.getMessage().getText(), chatId));
                                 return;

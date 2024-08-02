@@ -105,9 +105,10 @@ public class BotMessageUkConst {
             [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String CHOOSING_MODE_TEXT = "Виберіть _режим_";
-    public static final String CHOSEN_MODE_ALL_TEXT = "Ви будете отримувати сповіщення про польоти Ан-124 _а також_ про польоти широкофюзеляжних літаках летящих у ваш аеропорт.";
+    public static final String CHOSEN_MODE_ALL_TEXT = "Ви будете отримувати сповіщення про польоти Ан-124 *а також* про польоти широкофюзеляжних літаках летящих у ваш аеропорт.";
     public static final String CHOSEN_MODE_ONLY_AN_124_TEXT = "Ви будете отримувати сповіщення *тільки* про польоти Ан-124.";
     public static final String CHOSEN_MODE_ONLY_WIDE_BODY_TEXT = "Ви будете отримувати сповіщення *тільки* про польоти широкофюзеляжних літаків у ваш аеропорт.";
+    public static final String CHOSEN_MODE_MUTE_TEXT = "Ви не будете отримувати *ніяких* сповіщень.";
     public static final String INCORRECT_MODE_TEXT = "__%s__ це некоректний режим. Будь ласка виберіть з варіантів на клавіатурі.";
     public static final String WAIT_FOR_EMAIL_TEXT = "Введіть адресу _email_";
     public static final String INVALID_EMAIL_TEXT = "_Email_ який ви ввели *некоректний*.";

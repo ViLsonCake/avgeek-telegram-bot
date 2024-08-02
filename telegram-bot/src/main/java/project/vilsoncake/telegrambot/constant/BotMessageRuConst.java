@@ -108,6 +108,7 @@ public class BotMessageRuConst {
     public static final String CHOSEN_MODE_ALL_TEXT = "Вы будете получать оповещения о полетах Ан-124, *а также* о полетах широкофюзеляжных самолетов в ваш аэропорт.";
     public static final String CHOSEN_MODE_ONLY_AN_124_TEXT = "Вы будете получать оповещения *только* о полетах Ан-124.";
     public static final String CHOSEN_MODE_ONLY_WIDE_BODY_TEXT = "Вы будете получать оповещения *только* о полетах широкофюзеляжных самолетов в ваш аэропорт.";
+    public static final String CHOSEN_MODE_MUTE_TEXT = "Вы не будете получать *никаких* уведомлений.";
     public static final String INCORRECT_MODE_TEXT = "__%s__ это некорректный _режим_. Пожалуйста выберите из вариантов на клавиатуре.";
     public static final String WAIT_FOR_EMAIL_TEXT = "*Введите* адрес _email_";
     public static final String INVALID_EMAIL_TEXT = "_Email_ который вы ввели *некорректен*.";
