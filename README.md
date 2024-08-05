@@ -1,20 +1,16 @@
 # Avgeek Telegram Bot
 
+[![Stack](https://skillicons.dev/icons?i=java,spring,maven,gradle,postgres,python,fastapi,docker&perline=8&theme=dark)](https://skillicons.dev)
+
 ## Introduction
-___
 
 Since I am an avgeek and plane spotter, I use Flightradar24 like everyone else, but I am missing some features.
 
 - First of all, even though flightradar has an alert system, it does not track flights with flight number N/A. This is a problem for me since almost all An-124s have little to no flight information.
 - Secondly it doesn't notify about scheduled flights I am interested in.
 
-___
-
 Of course, there may be simpler solutions to these problems, but I decided to create my own in the form of a Telegram bot.
-The bot is able to notify about all flying An-124s, as well as about all wide-body airplanes (and Boeing 757) that will make a scheduled flight to the airport of your choice.
-
-### You can try it out for yourself [here](https://t.me/Avgeek_ViLsonCake_Bot).
-___
+The bot is able to **notify** about all flying **An-124s**, as well as about **all wide-body aircraft** (**and Boeing 757**) that will make a scheduled flight to the airport of your choice.
 
 #### An-124 and Wide-body flight notification example
 <div style="display: flex; justify-content: space-between;">
@@ -22,15 +18,24 @@ ___
     <img src="telegram-bot/src/main/resources/images/Wide-body-flight-notification-example.jpg" alt="Wide-body flight notification example" style="height: 320px">
 </div>
 
-## Stack
+### Main Bot Commands
+- **/changeairport** - Change your airport by Iata or Icao code.
+- **/currentairport** - Get your current airport name and Iata code. 
+- **/changemode** - Change bot mode.
+    + **All** - You will receive notifications about An-124 flights **and** wide-body aircraft flights.
+    + **Wide-body** - You will receive notifications **only** for wide-body aircraft.
+    + **An-124** - You will receive notifications **only** about An-124 flights.
+    + **Mute** - You will not receive **any** notifications.
+- **/currentmode** - Get current bot mode.
+- **/lang** - Change bot language.
+    + English
+    + Ukrainian
+    + Russian
+- **/setemail** - Add email to send you mail if An-124 in your airport.
+- **/myemail** - Get your email.
+- **/removeemail** - Remove your email from the bot.
 
-- Fastapi (Python)
-- Spring boot (Java)
-- Gradle
-- Postgresql
-- Flyway
-- Docker
-- Geonames
+Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCake_Bot).
 
 ## Installation
 
@@ -38,7 +43,7 @@ ___
 2. Create a Telegram bot using [BotFather](https://t.me/BotFather).
 3. Create Geonames account [here](https://www.geonames.org/export/web-services.html).
 
-4. Create an .env file:
+4. Create an **.env** file
     ```dotenv
     API_KEY=YOUR_RANDOM_API_KEY
     API_URL=http://localhost:8000
@@ -60,7 +65,7 @@ ___
     MAIL_PASSWORD=YOUR_BOT_EMAIL_PASSWORD
     ```
 
-5. Run the application in Docker:
+5. Run the application in **Docker**:
     ```
     docker-compose up --build -d
     ```
