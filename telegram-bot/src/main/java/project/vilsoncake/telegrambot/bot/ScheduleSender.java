@@ -24,7 +24,7 @@ import project.vilsoncake.telegrambot.utils.MailMessageUtils;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static project.vilsoncake.telegrambot.constant.CommandConst.MARKDOWN_PARSE_MODE;
+import static project.vilsoncake.telegrambot.constant.CommandNamesConst.MARKDOWN_PARSE_MODE;
 import static project.vilsoncake.telegrambot.constant.NumberConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;

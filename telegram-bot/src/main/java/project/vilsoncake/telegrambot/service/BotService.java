@@ -7,7 +7,7 @@ import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
 public interface BotService {
     SendMessage pingCommand(Long chatId);
-    SendMessage startBotCommand(String username, Long chatId);
+    SendMessage startBotCommand(String username, String languageCode, Long chatId);
     SendMessage changeUserAirportCommand(String username, Long chatId);
     SendMessage getUserAirportCommand(String username, Long chatId);
     SendMessage changeUserAirport(String username, String code, Long chatId);

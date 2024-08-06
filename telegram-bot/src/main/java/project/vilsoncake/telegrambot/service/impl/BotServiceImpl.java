@@ -23,7 +23,7 @@ import project.vilsoncake.telegrambot.utils.VerifyUtils;
 
 import java.util.List;
 
-import static project.vilsoncake.telegrambot.constant.CommandConst.*;
+import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_SUBJECT;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_TEXT;
@@ -50,12 +50,14 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public SendMessage startBotCommand(String username, Long chatId) {
-        UserEntity user = new UserEntity(
-                username,
-                chatId,
-                CHOOSING_AIRPORT
-        );
+    public SendMessage startBotCommand(String username, String languageCode, Long chatId) {
+        UserEntity user = new UserEntity(username, chatId, CHOOSING_AIRPORT);
+
+        switch (languageCode) {
+            case RU_LANGUAGE_CODE -> user.setBotLanguage(BotLanguage.RU);
+            case UK_LANGUAGE_CODE -> user.setBotLanguage(BotLanguage.UK);
+            default -> user.setBotLanguage(BotLanguage.ENG);
+        }
 
         if (!userService.addNewUser(user)) {
             userService.changeUserState(username, CHOOSING_AIRPORT);
