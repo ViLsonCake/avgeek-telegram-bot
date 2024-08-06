@@ -2,14 +2,30 @@ package project.vilsoncake.telegrambot.constant;
 
 public class BotMessageUkConst {
     public static final String START_TEXT = """
-            Вітаю, *%s*. Ласкаво просимо до боту avgeek!
-            Я буду відсилати вам всі широкофюзеляжні літаки, що прилітають у ваш аеропорт, а також сповіщення про Ан-124 які знаходяться зараз у небі.
-
-            Для цього напишіть _icao_/_iata_ код вашого аеропорту, наприклад (*waw*) - Warsaw Chopin Airport.
-            Ви можете знайти його на [flightradar24](https://www.flightradar24.com).
+            Вітаю, %s. Ласкаво просимо до бота *Avgeek*!
+                        
+            *Що вміє цей бот?*
+            
+            ✅ Відправляти заплановані рейси *широкофюзеляжних авіалайнерів* до вибраного вами аеропорту для того щоб ви могли як слід їх сфотографувати.
+            
+            ✅ Сповіщати вас про політ *Ан-124*, що саме по собі досить рідкісне явище, але також бот окремо повідомить вас у тому разі, якщо Ан-124 вирішить зазирнути до вас в аеропорт. А щоб точно це не пропустити ви можете додати свій email.
+            
+            ✅ Ви можете змінити режим роботи бота, наприклад вибрати тільки сповіщення щодо запланованих рейсів широкофюзеляжних авіалайнерів, або тільки оповіщення про Ан-124.
+            
+            ✅ Бот підтримує 3 мови на вибір: англійську, українську та російську.
+            
+            Відкрийте *меню команд* для більш детального ознайомлення.
+            
+            
+            *Тепер оберіть аеропорт, який вас цікавить*.
+            
+            Для цього напишіть *iata/icao* код вашого аеропорту.
+            Наприклад: *(FRA) - Frankfurt Airport*.
+            
+            Ви можете дізнатися його на [Flightradar24](https://www.flightradar24.com).
             """;
-    public static final String CHOOSE_AIRPORT_TEXT = "Добре! Тепер ваш аеропорт це *%s*.";
-    public static final String CHANGE_AIRPORT_TEXT = "Напишіть _icao_/_iata_ код вашого аеропорту, ви можете знайти його на [flightradar24](https://www.flightradar24.com).";
+    public static final String CHOOSE_AIRPORT_TEXT = "Чудово! Тепер ваш аеропорт це *%s*.";
+    public static final String CHANGE_AIRPORT_TEXT = "Напишіть *iata/icao* код вашого аеропорту, ви можете знайти його на [flightradar24](https://www.flightradar24.com).";
     public static final String CURRENT_AIRPORT_TEXT = "Ваш поточний аеропорт це *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "Код __%s__ *некоректний*, будь ласка перевірте чи не допустили ви помилку.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "Ви ще не обрали аеропорт, будь ласка введіть _iata_/_icao_ код.";

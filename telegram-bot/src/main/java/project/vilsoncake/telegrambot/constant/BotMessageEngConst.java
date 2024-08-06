@@ -2,14 +2,30 @@ package project.vilsoncake.telegrambot.constant;
 
 public class BotMessageEngConst {
     public static final String START_TEXT = """
-            Hello, *%s*. Welcome to avgeek bot!
-            I will send you all wide-body aircraft flying into your airport, as well as An-124 alerts.
+            Hello, %s. Welcome to *Avgeek bot*!
                         
-            For this, write the _icao_/_iata_ code of your airport, for example (*waw*) - Warsaw Chopin Airport.
-            You can get it on [flightradar24](https://www.flightradar24.com).
+            *What can this bot do?*
+            
+            ✅ Send scheduled flights of *wide-body aircraft* to the airport of your choice so you can photograph them properly.
+            
+            ✅ Notify you about the flight of *An-124*, which in itself is quite rare, but also the bot will notify you separately if the An-124 decides to stop by your airport. And to make sure you don't miss it, you can add your email.
+            
+            ✅ You can change the mode of the bot, for example, to select notifications only about scheduled flights of wide-body airliners, or only about An-124s.
+            
+            ✅ The bot supports 3 languages: English, Ukrainian and Russian.
+            
+            Open the *command menu* for more details.
+            
+            
+            *Now select the airport you're interested in*
+            
+            For this, write the *icao/iata* code of your airport.
+            For example: *(FRA) - Frankfurt Airport*.
+            
+            You can get it on [Flightradar24](https://www.flightradar24.com).
             """;
     public static final String CHOOSE_AIRPORT_TEXT = "Great! Now your airport is *%s*.";
-    public static final String CHANGE_AIRPORT_TEXT = "Write the _icao_/_iata_ code of your airport, you can get it on [flightradar24](https://www.flightradar24.com).";
+    public static final String CHANGE_AIRPORT_TEXT = "Write the *iata/icao* code of your airport, you can get it on [flightradar24](https://www.flightradar24.com).";
     public static final String CURRENT_AIRPORT_TEXT = "Your current airport is *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "The code __%s__ is *invalid*, make sure you didn't make a typo.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "You have not yet selected an airport, please write its _iata_/_icao_ code.";
