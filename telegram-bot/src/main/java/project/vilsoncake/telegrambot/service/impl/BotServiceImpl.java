@@ -51,16 +51,19 @@ public class BotServiceImpl implements BotService {
 
     @Override
     public SendMessage startBotCommand(String username, String languageCode, Long chatId) {
-        UserEntity user = new UserEntity(username, chatId, CHOOSING_AIRPORT);
+        UserEntity user;
+        if (userService.isUserExistsByUsername(username)) {
+            user = userService.changeUserState(username, CHOOSING_AIRPORT);
+        } else {
+            user = new UserEntity(username, chatId, CHOOSING_AIRPORT);
 
-        switch (languageCode) {
-            case RU_LANGUAGE_CODE -> user.setBotLanguage(BotLanguage.RU);
-            case UK_LANGUAGE_CODE -> user.setBotLanguage(BotLanguage.UK);
-            default -> user.setBotLanguage(BotLanguage.ENG);
-        }
+            switch (languageCode) {
+                case RU_LANGUAGE_CODE -> user.setBotLanguage(BotLanguage.RU);
+                case UK_LANGUAGE_CODE -> user.setBotLanguage(BotLanguage.UK);
+                default -> user.setBotLanguage(BotLanguage.ENG);
+            }
 
-        if (!userService.addNewUser(user)) {
-            userService.changeUserState(username, CHOOSING_AIRPORT);
+            userService.addNewUser(user);
         }
 
         SendMessage message = new SendMessage();
