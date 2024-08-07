@@ -14,7 +14,7 @@ public class BotMessageUtils {
         return switch (language) {
             case ENG -> getEngConstant(template);
             case RU -> getRuConstant(template);
-            case UK -> getUaConstant(template);
+            case UK -> getUkConstant(template);
         };
     }
 
@@ -100,7 +100,7 @@ public class BotMessageUtils {
         };
     }
 
-    private String getUaConstant(BotMessageTemplate template) {
+    private String getUkConstant(BotMessageTemplate template) {
         return switch (template) {
             case START_TEXT -> BotMessageUkConst.START_TEXT;
             case CHOOSE_AIRPORT_TEXT -> BotMessageUkConst.CHOOSE_AIRPORT_TEXT;
