@@ -30,7 +30,7 @@ public class BotMessageEngConst {
     public static final String INVALID_AIRPORT_CODE_TEXT = "The code __%s__ is *invalid*, make sure you didn't make a typo.";
     public static final String USER_CANNOT_CHOOSE_AIRPORT_TEXT = "You have not yet selected an airport, please write its _iata_/_icao_ code.";
     public static final String FLIGHT_TEXT = """
-            _Scheduled_ flight (*%s*) to your airport from *%s* (*%s*), *%s*.
+            ⌛️ _Scheduled_ flight (*%s*) to your airport from *%s* (*%s*), *%s*.
             
             Aircraft: *%s*
             Airline: *%s*
@@ -40,15 +40,15 @@ public class BotMessageEngConst {
             [Arrivals to your airport](https://www.flightradar24.com/airport/%s/arrivals)
             """;
     public static final String FLIGHT_WITHOUT_REGISTRATION_TEXT = """
-            _Scheduled_ flight to your airport from *%s* (*%s*), *%s*.
+            ⌛️ _Scheduled_ flight to your airport from *%s* (*%s*), *%s*.
             
             Aircraft: *%s*
             Airline: *%s*
             
             [Arrivals to your airport](https://www.flightradar24.com/airport/%s/arrivals)
             """;
-    public static final String LIVE_FLIGHT_TEXT = """
-            Flight (*%s*) _departed_ for your airport from *%s* (*%s*), *%s*.
+    public static final String DEPARTED_FLIGHT_TEXT = """
+            🛫 Flight (*%s*) _departed_ for your airport from *%s* (*%s*), *%s*.
             
             Aircraft: *%s*
             Airline: *%s*
@@ -58,7 +58,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLIGHT_TEXT = """
-            *An-124* (*%s*) in the air right now.
+            ✈️ *An-124* (*%s*) in the air right now.
             
             Altitude: *%sm*:
             Ground speed: *%skm/h*
@@ -67,7 +67,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_TEXT = """
-            *An-124* (*%s*) is now at *%s* (*%s*), *%s*, *%s*.
+            ✈️ *An-124* (*%s*) is now at *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -76,7 +76,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_TEXT = """
-            *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
+            🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -85,7 +85,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_TEXT = """
-            *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
+            🛫 *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -94,7 +94,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
-            *An-124 (%s) WILL MOST LIKELY TO LAND AT YOUR AIRPORT!*
+            ‼️ *An-124 (%s) WILL MOST LIKELY TO LAND AT YOUR AIRPORT* ‼️
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -103,7 +103,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
-            *An-124* (*%s*) _flying near_ your airport.
+            ✈️ *An-124* (*%s*) _flying near_ your airport.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -112,7 +112,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            *An-124 (%s) IN YOUR AIRPORT RIGHT NOW!*
+            ‼️ *An-124 (%s) IN YOUR AIRPORT RIGHT NOW* ‼️
             
             Altitude: *%sm*
             Ground speed: *%skm/h*

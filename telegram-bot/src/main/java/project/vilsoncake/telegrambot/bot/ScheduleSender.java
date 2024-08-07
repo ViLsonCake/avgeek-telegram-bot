@@ -300,7 +300,7 @@ public class ScheduleSender {
                         SendMessage message = new SendMessage();
                         message.setChatId(user.getChatId());
                         message.setParseMode(MARKDOWN_PARSE_MODE);
-                        message.setText(String.format(botMessageUtils.getMessageByLanguage(LIVE_FLIGHT_TEXT, user.getBotLanguage()),
+                        message.setText(String.format(botMessageUtils.getMessageByLanguage(DEPARTED_FLIGHT_TEXT, user.getBotLanguage()),
                                 flight.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), flight.getRegistration(), flight.getCallsign(), flight.getId()
                         ));
 
