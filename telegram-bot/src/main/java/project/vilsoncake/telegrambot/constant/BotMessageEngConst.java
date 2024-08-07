@@ -94,7 +94,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
-            ‼️ *An-124 (%s) WILL MOST LIKELY TO LAND AT YOUR AIRPORT* ‼️
+            ‼️ *An-124 (*%s*) WILL MOST LIKELY TO LAND AT YOUR AIRPORT* ‼️
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -112,7 +112,7 @@ public class BotMessageEngConst {
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            ‼️ *An-124 (%s) IN YOUR AIRPORT RIGHT NOW* ‼️
+            ‼️ *An-124 (*%s*) IN YOUR AIRPORT RIGHT NOW* ‼️
             
             Altitude: *%sm*
             Ground speed: *%skm/h*

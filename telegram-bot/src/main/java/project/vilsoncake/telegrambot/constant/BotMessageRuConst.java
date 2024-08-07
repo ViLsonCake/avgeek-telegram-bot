@@ -94,7 +94,7 @@ public class BotMessageRuConst {
             [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
-            ‼️ *Ан-124 (%s) ВЕРОЯТНО САДИТСЯ В ВАШ АЭРОПОРТ* ‼️
+            ‼️ *Ан-124 (*%s*) ВЕРОЯТНО САДИТСЯ В ВАШ АЭРОПОРТ* ‼️
             
             Высота: *%sм*
             Скорость: *%sкм/ч*
@@ -112,7 +112,7 @@ public class BotMessageRuConst {
             [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
-            ‼️ *Ан-124 (%s) В ВАШЕМ АЭРОПОРТУ ПРЯМО СЕЙЧАС* ‼️
+            ‼️ *Ан-124 (*%s*) В ВАШЕМ АЭРОПОРТУ ПРЯМО СЕЙЧАС* ‼️
             
             Высота: *%sм*
             Скорость: *%sкм/ч*
