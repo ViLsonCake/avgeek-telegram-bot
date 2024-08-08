@@ -14,8 +14,8 @@ The bot is able to **notify** about all flying **An-124s**, as well as about **a
 
 #### An-124 and Wide-body flight notification example
 <div style="display: flex; justify-content: space-between;">
-    <img src="telegram-bot/src/main/resources/images/An-124-notification-example.jpg" alt="An-124 notification example" style="height: 320px">
-    <img src="telegram-bot/src/main/resources/images/Wide-body-flight-notification-example.jpg" alt="Wide-body flight notification example" style="height: 320px">
+    <img src="telegram-bot/src/main/resources/images/An-124-flight-notification-example.jpg" alt="An-124 notification example" style="height: 320px">
+    <img src="telegram-bot/src/main/resources/images/Scheduled-flight-notification-example.jpg" alt="Wide-body flight notification example" style="height: 320px">
 </div>
 
 ### Main Bot Commands
