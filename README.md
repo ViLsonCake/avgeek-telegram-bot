@@ -67,5 +67,5 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
 
 5. Run the application in **Docker**:
     ```
-    docker-compose up --build -d
+    docker compose up --build -d
     ```
