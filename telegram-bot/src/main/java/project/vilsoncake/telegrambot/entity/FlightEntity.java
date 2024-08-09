@@ -45,7 +45,7 @@ public class FlightEntity {
 
     @Setter(AccessLevel.NONE)
     @Column(name = "created_at", updatable = false)
-    private Date date = new Date();
+    private Date createdAt = new Date();
 
     @ManyToOne
     @JoinColumn(name = "user_id")

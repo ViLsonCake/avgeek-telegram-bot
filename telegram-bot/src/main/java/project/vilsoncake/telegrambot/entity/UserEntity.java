@@ -9,6 +9,7 @@ import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,6 +55,9 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "bot_language")
     private BotLanguage botLanguage = BotLanguage.ENG;
+
+    @Column(name = "created_at", updatable = false)
+    private Date createdAt = new Date();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<FlightEntity> flights;
