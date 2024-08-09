@@ -20,7 +20,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public boolean addFlightToUser(FlightEntity flightEntity) {
-        List<FlightEntity> flights = findByUserOrderByDate(flightEntity.getUser());
+        List<FlightEntity> flights = findByUserOrderByCreatedAt(flightEntity.getUser());
 
         if (flights.size() > MAX_SAVED_FLIGHTS_COUNT) {
             List<FlightEntity> flightsToDelete = flights.subList(0, flights.size() - MAX_SAVED_FLIGHTS_COUNT + 1);
@@ -32,8 +32,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<FlightEntity> findByUserOrderByDate(UserEntity user) {
-        return flightRepository.findByUserOrderByDate(user);
+    public List<FlightEntity> findByUserOrderByCreatedAt(UserEntity user) {
+        return flightRepository.findByUserOrderByCreatedAt(user);
     }
 
     @Override
