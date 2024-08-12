@@ -66,8 +66,8 @@ public class BotMessageEngConst {
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_ON_GROUND_TEXT = """
-            ✈️ *An-124* (*%s*) is now at *%s* (*%s*), *%s*, *%s*.
+    public static final String AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT = """
+            ✈️ *An-124* (*%s*) preparing for takeoff from *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*
@@ -75,7 +75,26 @@ public class BotMessageEngConst {
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_LANDING_TEXT = """
+    public static final String AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT = """
+            ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
+            
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_ON_GROUND_AFTER_FLIGHT_KNOWN_AIRPORT_TEXT = """
+            ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
+            
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            Departure airport: *%s* (*%s*), *%s*, *%s*
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_LANDING_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
@@ -84,8 +103,27 @@ public class BotMessageEngConst {
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_TAKEOFF_TEXT = """
+    public static final String AN_124_LANDING_KNOWN_AIRPORT_TEXT = """
+            🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
+            
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            Departure airport: *%s* (*%s*), *%s*, *%s*
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
+            
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_TAKEOFF_FROM_TEXT = """
+            🛫 *An-124* (*%s*) _gaining altitude_ after takeoff from *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
             Ground speed: *%skm/h*

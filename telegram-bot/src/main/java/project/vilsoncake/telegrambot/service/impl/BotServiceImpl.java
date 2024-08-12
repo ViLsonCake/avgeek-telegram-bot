@@ -100,7 +100,7 @@ public class BotServiceImpl implements BotService {
 
         String airportCode = userService.getUserByUsername(username).getAirport();
 
-        AirportDto airportDto = airportsUtils.getCityByAirport(airportCode);
+        AirportDto airportDto = airportsUtils.getAirportByIataCode(airportCode);
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
@@ -125,7 +125,7 @@ public class BotServiceImpl implements BotService {
             return message;
         }
 
-        AirportDto airportDto = airportsUtils.getCityByAirport(airportCodesDto.getIata());
+        AirportDto airportDto = airportsUtils.getAirportByIataCode(airportCodesDto.getIata());
 
         userService.changeUserAirport(username, airportCodesDto.getIata());
         userService.changeUserState(username, CHOSEN_AIRPORT);

@@ -31,6 +31,9 @@ public class FlightEntity {
     @Column(name = "distance")
     private Integer distance;
 
+    @Column(name = "departure_airport")
+    private String departureAirport;
+
     @Column(name = "active")
     private boolean active = false;
 

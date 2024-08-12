@@ -66,8 +66,8 @@ public class BotMessageRuConst {
             
             [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_ON_GROUND_TEXT = """
-            ✈️ *Ан-124* (*%s*) сейчас находится в *%s* (*%s*), *%s*, *%s*.
+    public static final String AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT = """
+            ✈️ *Ан-124* (*%s*) готовится ко взлету из *%s* (*%s*), *%s*, *%s*.
             
             Высота: *%sм*
             Скорость: *%sкм/ч*
@@ -75,7 +75,26 @@ public class BotMessageRuConst {
             
             [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_LANDING_TEXT = """
+    public static final String AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT = """
+            ✈️ *Ан-124* (*%s*) приземлился в *%s* (*%s*), *%s*, *%s*.
+            
+            Высота: *%sм*
+            Скорость: *%sкм/ч*
+            Расстояние от вашего аэропорта: *%sкм*
+            
+            [Смотрите здесь](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_ON_GROUND_AFTER_FLIGHT_KNOWN_AIRPORT_TEXT = """
+            ✈️ *Ан-124* (*%s*) приземлился в *%s* (*%s*), *%s*, *%s*.
+            
+            Высота: *%sм*
+            Скорость: *%sкм/ч*
+            Расстояние от вашего аэропорта: *%sкм*
+            Аэропорт вылета: *%s* (*%s*), *%s*, *%s*
+            
+            [Смотрите здесь](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_LANDING_UNKNOWN_AIRPORT_TEXT = """
             🛬 *Ан-124* (*%s*) _заходит на посадку_ вблизи *%s* (*%s*), *%s*, *%s*.
             
             Высота: *%sм*
@@ -84,8 +103,27 @@ public class BotMessageRuConst {
             
             [Смотрите здесь](https://www.flightradar24.com/%s/%s)
             """;
-    public static final String AN_124_TAKEOFF_TEXT = """
+    public static final String AN_124_LANDING_KNOWN_AIRPORT_TEXT = """
+            🛬 *Ан-124* (*%s*) _заходит на посадку_ вблизи *%s* (*%s*), *%s*, *%s*.
+            
+            Высота: *%sм*
+            Скорость: *%sкм/ч*
+            Расстояние от вашего аэропорта: *%sкм*
+            Аэропорт вылета: *%s* (*%s*), *%s*, *%s*
+            
+            [Смотрите здесь](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *Ан-124* (*%s*) _набирает высоту_ после взлета вблизи *%s* (*%s*), *%s*, *%s*.
+            
+            Высота: *%sм*
+            Скорость: *%sкм/ч*
+            Расстояние от вашего аэропорта: *%sкм*
+            
+            [Смотрите здесь](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_TAKEOFF_FROM_TEXT = """
+            🛫 *Ан-124* (*%s*) _набирает высоту_ после взлета из *%s* (*%s*), *%s*, *%s*.
             
             Высота: *%sм*
             Скорость: *%sкм/ч*
