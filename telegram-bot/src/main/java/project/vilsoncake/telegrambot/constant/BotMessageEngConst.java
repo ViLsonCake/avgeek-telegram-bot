@@ -52,6 +52,22 @@ public class BotMessageEngConst {
             
             Aircraft: *%s*
             Airline: *%s*
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            
+            [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String LANDING_FLIGHT_TEXT = """
+            🛬 Flight (*%s*) _approaches_ your airport from *%s* (*%s*), *%s*.
+            
+            Aircraft: *%s*
+            Airline: *%s*
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
             
             [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
             

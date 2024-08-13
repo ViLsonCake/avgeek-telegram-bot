@@ -5,9 +5,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import project.vilsoncake.telegrambot.constant.BotMessageEngConst;
-import project.vilsoncake.telegrambot.constant.NumberConst;
 import project.vilsoncake.telegrambot.dto.*;
 import project.vilsoncake.telegrambot.entity.FlightEntity;
 import project.vilsoncake.telegrambot.entity.UserEntity;
@@ -45,21 +45,136 @@ public class ScheduleSender {
     private final BotSender botSender;
 
     @Transactional
-    @Scheduled(fixedDelay = NumberConst.FLIGHT_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
-    public void checkNewFlightAndSendsThem() {
+    @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    public void sendNewScheduledAndLiveWideBodyFlights() {
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
+            if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
 
+                FlightsDto flightsDto = apiWebClient.get()
+                        .uri("/airport/flights/" + user.getAirport())
+                        .retrieve()
+                        .bodyToMono(FlightsDto.class)
+                        .block();
+
+                for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
+                    if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
+                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
+                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
+
+                        FlightEntity flightEntity = new FlightEntity(flight.getId(), user);
+                        flightEntity.setRegistration(flight.getRegistration());
+                        flightService.addFlightToUser(flightEntity);
+
+                        SendMessage message = new SendMessage();
+                        message.setChatId(user.getChatId());
+                        message.setParseMode(MARKDOWN_PARSE_MODE);
+
+                        if (flight.getRegistration() == null || flight.getRegistration().isBlank()) {
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_WITHOUT_REGISTRATION_TEXT, user.getBotLanguage()),
+                                    airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), user.getAirport()
+                            ));
+                        } else {
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_TEXT, user.getBotLanguage()),
+                                    flight.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), flight.getRegistration(), user.getAirport()
+                            ));
+                        }
+
+                        botSender.sendMessage(message);
+                    } else if (flightService.existsByUserAndFlightId(user, flight.getId()) && flight.isLive() && !flightService.findByUserAndFlightId(user, flight.getId()).isActive()) {
+                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
+                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
+
+                        flightService.changeFlightActive(flightService.findByUserAndFlightId(user, flight.getId()), true);
+
+                        FlightDataDto flightDataDto;
+
+                        try {
+                            flightDataDto = apiWebClient.get()
+                                    .uri("/registration/" + flight.getRegistration() + "/" + user.getAirport())
+                                    .retrieve()
+                                    .bodyToMono(FlightDataDto.class)
+                                    .block();
+
+                            SendMessage message = new SendMessage();
+                            message.setChatId(user.getChatId());
+                            message.setParseMode(MARKDOWN_PARSE_MODE);
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(DEPARTED_FLIGHT_TEXT, user.getBotLanguage()),
+                                    flight.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), flightDataDto.getAltitude(), flightDataDto.getGroundSpeed(), flightDataDto.getDistance(), flight.getRegistration(), flight.getCallsign(), flight.getId()
+                            ));
+
+                            botSender.sendMessage(message);
+                        } catch (WebClientResponseException ignored) {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    public void sendLandingWideBodyFlights() {
+        List<UserEntity> users = userService.findAllUsers();
+
+        for (UserEntity user : users) {
+            if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
+                List<FlightEntity> flights = flightService.findAllByUser(user);
+
+                for (FlightEntity flightEntity : flights) {
+                    if (flightEntity.isActive() && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
+
+                        FlightDataDto flight;
+                        try {
+                            flight = apiWebClient.get()
+                                    .uri("/registration/" + flightEntity.getRegistration() + "/" + user.getAirport())
+                                    .retrieve()
+                                    .bodyToMono(FlightDataDto.class)
+                                    .block();
+                        } catch (WebClientResponseException e) {
+                            continue;
+                        }
+
+                        if (flight.getIata() == null || flight.getIata().isBlank()) {
+                            continue;
+                        }
+
+                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
+                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
+
+                        if (flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
+                            flightService.changeFlightLanding(flightEntity, true);
+
+                            SendMessage message = new SendMessage();
+                            message.setChatId(user.getChatId());
+                            message.setParseMode(MARKDOWN_PARSE_MODE);
+                            message.setText(String.format(botMessageUtils.getMessageByLanguage(LANDING_FLIGHT_TEXT, user.getBotLanguage()),
+                                    flightEntity.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirline(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flightEntity.getRegistration(), flight.getCallsign(), flight.getId()
+                            ));
+
+                            botSender.sendMessage(message);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    public void sendNewAn124Flights() {
+        List<UserEntity> users = userService.findAllUsers();
+
+        for (UserEntity user : users) {
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
-                // An-124 check
+
                 An124FlightsDto an124FlightsDto = apiWebClient.get()
                         .uri(String.format("/aircraft/%s/%s", BotMessageEngConst.AN_124_CODE, user.getAirport()))
                         .retrieve()
                         .bodyToMono(An124FlightsDto.class)
                         .block();
 
-                for (An124FlightDataDto flight : an124FlightsDto.getFlights()) {
+                for (FlightDataDto flight : an124FlightsDto.getFlights()) {
                     if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
                         FlightEntity flightEntity = new FlightEntity(flight.getId(), user);
                         flightEntity.setDistance(flight.getDistance());
@@ -289,57 +404,6 @@ public class ScheduleSender {
                     }
                 }
             }
-            if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
-
-                // Wide-body aircraft check
-                FlightsDto flightsDto = apiWebClient.get()
-                        .uri("/airport/flights/" + user.getAirport())
-                        .retrieve()
-                        .bodyToMono(FlightsDto.class)
-                        .block();
-
-                for (FlightDataDto flight : flightsDto.getFlights()) {
-                    if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
-                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
-                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
-
-                        FlightEntity flightEntity = new FlightEntity(flight.getId(), user);
-                        flightEntity.setRegistration(flight.getRegistration());
-                        flightService.addFlightToUser(flightEntity);
-
-                        SendMessage message = new SendMessage();
-                        message.setChatId(user.getChatId());
-                        message.setParseMode(MARKDOWN_PARSE_MODE);
-
-                        if (flight.getRegistration() == null || flight.getRegistration().isBlank()) {
-                            message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_WITHOUT_REGISTRATION_TEXT, user.getBotLanguage()),
-                                    airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), user.getAirport()
-                            ));
-                        } else {
-                            message.setText(String.format(botMessageUtils.getMessageByLanguage(FLIGHT_TEXT, user.getBotLanguage()),
-                                    flight.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), flight.getRegistration(), user.getAirport()
-                            ));
-                        }
-
-                        botSender.sendMessage(message);
-                    } else if (flightService.existsByUserAndFlightId(user, flight.getId()) && flight.isLive() && !flightService.findByUserAndFlightId(user, flight.getId()).isActive()) {
-                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
-                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
-
-                        flightService.changeFlightActive(flightService.findByUserAndFlightId(user, flight.getId()), true);
-
-                        SendMessage message = new SendMessage();
-                        message.setChatId(user.getChatId());
-                        message.setParseMode(MARKDOWN_PARSE_MODE);
-                        message.setText(String.format(botMessageUtils.getMessageByLanguage(DEPARTED_FLIGHT_TEXT, user.getBotLanguage()),
-                                flight.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirlineName(), flight.getRegistration(), flight.getCallsign(), flight.getId()
-                        ));
-
-                        botSender.sendMessage(message);
-                    }
-                }
-            }
         }
     }
-
 }

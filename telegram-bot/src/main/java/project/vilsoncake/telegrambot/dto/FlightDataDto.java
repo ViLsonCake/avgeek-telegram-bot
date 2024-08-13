@@ -12,30 +12,33 @@ public class FlightDataDto {
     @JsonAlias("code")
     private String code;
 
+    @JsonAlias("callsign")
+    private String callsign;
+
     @JsonAlias("aircraft")
     private String aircraft;
 
-    @JsonAlias("airline_name")
-    private String airlineName;
-
-    @JsonAlias("airport")
-    private String airport;
+    @JsonAlias("airline")
+    private String airline;
 
     @JsonAlias("iata")
     private String iata;
 
-    @JsonAlias("icao")
-    private String icao;
+    @JsonAlias("altitude")
+    private int altitude;
 
-    @JsonAlias("callsign")
-    private String callsign;
+    @JsonAlias("ground_speed")
+    private int groundSpeed;
 
-    @JsonAlias("registration")
-    private String registration;
+    @JsonAlias("vertical_speed")
+    private int verticalSpeed;
 
-    @JsonAlias("live")
-    private boolean live;
+    @JsonAlias("latitude")
+    private double latitude;
 
-    @JsonAlias("text")
-    private String text;
+    @JsonAlias("longitude")
+    private double longitude;
+
+    @JsonAlias("distance")
+    private int distance;
 }

@@ -7,6 +7,9 @@ class Flight:
     id: str
     code: str
     callsign: str
+    aircraft: str
+    iata: str
+    airline: str
     altitude: int
     ground_speed: int
     vertical_speed: int
@@ -14,16 +17,20 @@ class Flight:
     longitude: float
     distance: int
 
-    def __init__(self, flight: FlightRadar24.Flight, airport: FlightRadar24.Airport):
+    def __init__(self, flight: FlightRadar24.Flight, airport: FlightRadar24.Airport, airline='Unknown'):
         self.id = flight.id
         self.code = flight.aircraft_code
         self.callsign = flight.callsign
+        self.aircraft = get_aircraft_name_by_code(self.code)
+        self.iata = flight.origin_airport_iata
         self.altitude = convert_feet_to_meters(flight.altitude)
         self.ground_speed = convert_knots_to_kmh(flight.ground_speed)
         self.vertical_speed = flight.vertical_speed
         self.latitude = flight.latitude
         self.longitude = flight.longitude
         self.distance = int(flight.get_distance_from(airport))
+        self.airline = airline
+
 
 
 class ScheduledFlight:

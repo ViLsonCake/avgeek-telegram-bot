@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public interface FlightRepository extends CrudRepository<FlightEntity, UUID> {
     List<FlightEntity> findByUserOrderByCreatedAt(UserEntity user);
+    List<FlightEntity> findAllByUser(UserEntity user);
     Optional<FlightEntity> findByUserAndFlightId(UserEntity user, String flightId);
     boolean existsByUserAndFlightId(UserEntity user, String flightId);
 }

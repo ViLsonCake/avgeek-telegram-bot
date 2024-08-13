@@ -29,6 +29,7 @@ public class BotMessageUtils {
             case FLIGHT_TEXT -> BotMessageEngConst.FLIGHT_TEXT;
             case FLIGHT_WITHOUT_REGISTRATION_TEXT -> BotMessageEngConst.FLIGHT_WITHOUT_REGISTRATION_TEXT;
             case DEPARTED_FLIGHT_TEXT -> BotMessageEngConst.DEPARTED_FLIGHT_TEXT;
+            case LANDING_FLIGHT_TEXT -> BotMessageEngConst.LANDING_FLIGHT_TEXT;
             case AN_124_FLIGHT_TEXT -> BotMessageEngConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT -> BotMessageEngConst.AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT;
             case AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT -> BotMessageEngConst.AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT;
@@ -74,6 +75,7 @@ public class BotMessageUtils {
             case FLIGHT_TEXT -> BotMessageRuConst.FLIGHT_TEXT;
             case FLIGHT_WITHOUT_REGISTRATION_TEXT -> BotMessageRuConst.FLIGHT_WITHOUT_REGISTRATION_TEXT;
             case DEPARTED_FLIGHT_TEXT -> BotMessageRuConst.DEPARTED_FLIGHT_TEXT;
+            case LANDING_FLIGHT_TEXT -> BotMessageRuConst.LANDING_FLIGHT_TEXT;
             case AN_124_FLIGHT_TEXT -> BotMessageRuConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT -> BotMessageRuConst.AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT;
             case AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT -> BotMessageRuConst.AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT;
@@ -119,6 +121,7 @@ public class BotMessageUtils {
             case FLIGHT_TEXT -> BotMessageUkConst.FLIGHT_TEXT;
             case FLIGHT_WITHOUT_REGISTRATION_TEXT -> BotMessageUkConst.FLIGHT_WITHOUT_REGISTRATION_TEXT;
             case DEPARTED_FLIGHT_TEXT -> BotMessageUkConst.DEPARTED_FLIGHT_TEXT;
+            case LANDING_FLIGHT_TEXT -> BotMessageUkConst.LANDING_FLIGHT_TEXT;
             case AN_124_FLIGHT_TEXT -> BotMessageUkConst.AN_124_FLIGHT_TEXT;
             case AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT -> BotMessageUkConst.AN_124_ON_GROUND_BEFORE_TEXT;
             case AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT -> BotMessageUkConst.AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT;

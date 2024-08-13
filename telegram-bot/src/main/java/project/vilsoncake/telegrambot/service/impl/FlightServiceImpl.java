@@ -37,6 +37,11 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public List<FlightEntity> findAllByUser(UserEntity user) {
+        return flightRepository.findAllByUser(user);
+    }
+
+    @Override
     public FlightEntity findByUserAndFlightId(UserEntity user, String flightId) {
         return flightRepository.findByUserAndFlightId(user, flightId).orElseThrow(() ->
                 new FlightNotFoundException(String.format("Flight with id %s not found", flightId)));

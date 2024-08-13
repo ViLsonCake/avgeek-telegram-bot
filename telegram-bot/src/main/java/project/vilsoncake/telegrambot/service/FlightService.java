@@ -8,6 +8,7 @@ import java.util.List;
 public interface FlightService {
     boolean addFlightToUser(FlightEntity flightEntity);
     List<FlightEntity> findByUserOrderByCreatedAt(UserEntity user);
+    List<FlightEntity> findAllByUser(UserEntity user);
     FlightEntity findByUserAndFlightId(UserEntity user, String flightId);
     boolean changeFlightActive(FlightEntity flight, boolean active);
     boolean changeFlightTookOff(FlightEntity flight, boolean tookOff);
