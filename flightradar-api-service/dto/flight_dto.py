@@ -8,7 +8,8 @@ class Flight:
     code: str
     callsign: str
     aircraft: str
-    iata: str
+    origin_airport_iata: str
+    destination_airport_iata: str
     airline: str
     altitude: int
     ground_speed: int
@@ -21,16 +22,16 @@ class Flight:
         self.id = flight.id
         self.code = flight.aircraft_code
         self.callsign = flight.callsign
+        self.airline = airline
         self.aircraft = get_aircraft_name_by_code(self.code)
-        self.iata = flight.origin_airport_iata
+        self.origin_airport_iata = flight.origin_airport_iata
+        self.destination_airport_iata = flight.destination_airport_iata
         self.altitude = convert_feet_to_meters(flight.altitude)
         self.ground_speed = convert_knots_to_kmh(flight.ground_speed)
         self.vertical_speed = flight.vertical_speed
         self.latitude = flight.latitude
         self.longitude = flight.longitude
         self.distance = int(flight.get_distance_from(airport))
-        self.airline = airline
-
 
 
 class ScheduledFlight:

@@ -21,8 +21,11 @@ public class FlightDataDto {
     @JsonAlias("airline")
     private String airline;
 
-    @JsonAlias("iata")
-    private String iata;
+    @JsonAlias("origin_airport_iata")
+    private String originAirportIata;
+
+    @JsonAlias("destination_airport_iata")
+    private String destinationAirportIata;
 
     @JsonAlias("altitude")
     private int altitude;

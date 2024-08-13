@@ -136,11 +136,11 @@ public class ScheduleSender {
                             continue;
                         }
 
-                        if (flight.getIata() == null || flight.getIata().isBlank()) {
+                        if (flight.getOriginAirportIata() == null || flight.getOriginAirportIata().isBlank() || !flight.getDestinationAirportIata().equalsIgnoreCase(user.getAirport())) {
                             continue;
                         }
 
-                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
+                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getOriginAirportIata());
                         GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
 
                         if (flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
@@ -150,7 +150,7 @@ public class ScheduleSender {
                             message.setChatId(user.getChatId());
                             message.setParseMode(MARKDOWN_PARSE_MODE);
                             message.setText(String.format(botMessageUtils.getMessageByLanguage(LANDING_FLIGHT_TEXT, user.getBotLanguage()),
-                                    flightEntity.getRegistration(), airportDto.getName(), flight.getIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirline(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flightEntity.getRegistration(), flight.getCallsign(), flight.getId()
+                                    flightEntity.getRegistration(), airportDto.getName(), flight.getOriginAirportIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirline(), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flightEntity.getRegistration(), flight.getCallsign(), flight.getId()
                             ));
 
                             botSender.sendMessage(message);
