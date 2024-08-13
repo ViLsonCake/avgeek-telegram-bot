@@ -123,7 +123,7 @@ public class ScheduleSender {
                 List<FlightEntity> flights = flightService.findAllByUser(user);
 
                 for (FlightEntity flightEntity : flights) {
-                    if (flightEntity.isActive() && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
+                    if (flightEntity.isActive() && flightEntity.getRegistration() != null && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
 
                         FlightDataDto flight;
                         try {
