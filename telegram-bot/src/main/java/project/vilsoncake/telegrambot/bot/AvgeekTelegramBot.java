@@ -22,15 +22,17 @@ import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
 public class AvgeekTelegramBot extends AbilityBot {
 
     private final BotMessageHandler botMessageHandler;
+    private final BotProperties botProperties;
 
     protected AvgeekTelegramBot(BotProperties botProperties, BotMessageHandler botMessageHandler) {
         super(botProperties.getToken(), botProperties.getName());
         this.botMessageHandler = botMessageHandler;
+        this.botProperties = botProperties;
     }
 
     @Override
     public long creatorId() {
-        return 1L;
+        return botProperties.getCreatorId();
     }
 
     @Override

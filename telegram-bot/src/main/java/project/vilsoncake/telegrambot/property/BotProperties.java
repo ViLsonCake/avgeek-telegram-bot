@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 public class BotProperties {
     private String name;
     private String token;
+    private long creatorId;
 }

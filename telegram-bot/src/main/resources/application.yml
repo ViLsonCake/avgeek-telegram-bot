@@ -35,6 +35,7 @@ logging:
 bot:
   name: ${BOT_MAME}
   token: ${BOT_TOKEN}
+  creator-id: ${BOT_CREATOR_ID}
 
 flightradar-api:
   api-key: ${API_KEY}
