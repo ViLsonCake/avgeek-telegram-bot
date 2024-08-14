@@ -1,4 +1,4 @@
-# Avgeek Telegram Bot
+# Plane Spotting Telegram Bot
 
 [![Stack](https://skillicons.dev/icons?i=java,spring,maven,gradle,postgres,python,fastapi,docker&perline=8&theme=dark)](https://skillicons.dev)
 
