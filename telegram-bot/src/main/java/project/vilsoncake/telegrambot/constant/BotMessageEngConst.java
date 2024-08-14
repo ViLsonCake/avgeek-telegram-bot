@@ -199,4 +199,5 @@ public class BotMessageEngConst {
     public static final String SELECT_LANGUAGE_TEXT = "Select _language_";
     public static final String LANGUAGE_SELECTED_TEXT = "Your _language_ is *%s*.";
     public static final String INCORRECT_LANGUAGE_TEXT = "Selected _language_ is *incorrect*. Select _language_ from the buttons on the keyboard.";
+    public static final String PING_COMMAND_TEXT = "pong";
 }

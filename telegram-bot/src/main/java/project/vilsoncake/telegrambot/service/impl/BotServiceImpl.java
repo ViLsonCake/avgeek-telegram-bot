@@ -23,6 +23,7 @@ import project.vilsoncake.telegrambot.utils.VerifyUtils;
 
 import java.util.List;
 
+import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.PING_COMMAND_TEXT;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_SUBJECT;
@@ -44,7 +45,7 @@ public class BotServiceImpl implements BotService {
     public SendMessage pingCommand(Long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText("pong");
+        message.setText(PING_COMMAND_TEXT);
 
         return message;
     }
