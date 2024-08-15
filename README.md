@@ -54,6 +54,7 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
 
     BOT_NAME=YOUR_BOT_NAME
     BOT_TOKEN=YOUR_TOKEN
+    BOT_CREATOR_ID=YOUR_TELEGRAM_USER_ID
 
     POSTGRES_HOST=avgeek_bot_postgres
     POSTGRES_DOCKER_PORT=YOUR_DOCKER_PORT
