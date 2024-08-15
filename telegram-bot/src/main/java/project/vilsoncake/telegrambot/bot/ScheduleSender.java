@@ -369,7 +369,7 @@ public class ScheduleSender {
                                 ));
                                 botSender.sendMessage(message);
                             }
-                        } else if (flight.getAltitude() < LOW_ALTITUDE_IN_M && flight.getVerticalSpeed() < 0 && flightEntity.isTookOff() && !flightEntity.isLanding()) {
+                        } else if (flight.getAltitude() < LOW_ALTITUDE_IN_M && flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM && flightEntity.isTookOff() && !flightEntity.isLanding()) {
                             try {
                                 flightService.changeFlightLanding(flightEntity, true);
                                 AirportDto destinationAirportDto = airportsUtils.findClosestAirportByCoordinates(flight.getLatitude(), flight.getLongitude(), CLOSE_TO_AIRPORT_RANGE_IN_KM);
