@@ -3,7 +3,7 @@ package project.vilsoncake.telegrambot.utils;
 import org.springframework.stereotype.Component;
 import project.vilsoncake.telegrambot.constant.MailMessageEngConst;
 import project.vilsoncake.telegrambot.constant.MailMessageRuConst;
-import project.vilsoncake.telegrambot.constant.MailMessageUaConst;
+import project.vilsoncake.telegrambot.constant.MailMessageUkConst;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate;
 
@@ -38,10 +38,10 @@ public class MailMessageUtils {
 
     private String getUaConstant(MailMessageTemplate template) {
         return switch (template) {
-            case CODE_MESSAGE_SUBJECT -> MailMessageUaConst.CODE_MESSAGE_SUBJECT;
-            case CODE_MESSAGE_TEXT -> MailMessageUaConst.CODE_MESSAGE_TEXT;
-            case AN_124_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageUaConst.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
-            case AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageUaConst.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
+            case CODE_MESSAGE_SUBJECT -> MailMessageUkConst.CODE_MESSAGE_SUBJECT;
+            case CODE_MESSAGE_TEXT -> MailMessageUkConst.CODE_MESSAGE_TEXT;
+            case AN_124_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageUkConst.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
+            case AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageUkConst.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
         };
     }
 }
