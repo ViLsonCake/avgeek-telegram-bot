@@ -9856,8 +9856,8 @@
   },
   {
     "icao": "EPOK",
-    "iata": "QYD",
-    "name": "Oksywie Military Air Base",
+    "iata": "QPO",
+    "name": "Gdynia Kosakowo Airport",
     "city": "Gdynia",
     "country": "PL",
     "lat": 54.57970047,
@@ -9947,7 +9947,7 @@
   {
     "icao": "EPWR",
     "iata": "WRO",
-    "name": "Copernicus Wroclaw Airport",
+    "name": "Wroclaw-Copernicus Airport",
     "city": "Wroclaw",
     "country": "PL",
     "lat": 51.1026992798,
