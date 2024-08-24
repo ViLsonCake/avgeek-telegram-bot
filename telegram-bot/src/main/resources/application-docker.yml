@@ -28,6 +28,14 @@ spring:
           starttls:
             enable: true
 
+rabbitmq:
+  username: ${RABBITMQ_USERNAME}
+  password: ${RABBITMQ_PASSWORD}
+  connection-host: ${RABBITMQ_DOCKER_HOST}
+  feedback-queue: feedback-queue
+  users-statistic-queue: users-statistic-queue
+  notification-queue: notification-queue
+
 logging:
   pattern:
     dateformat: 'HH:mm:ss-dd.MM.yyyy'

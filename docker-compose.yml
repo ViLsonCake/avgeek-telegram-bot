@@ -22,7 +22,10 @@ services:
     ports:
       - '8080:8080'
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   postgres:
     container_name: avgeek_bot_postgres
@@ -31,10 +34,30 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
     volumes:
       - postgres_storage:/data/postgres
     ports:
       - '5433:5432'
 
+  rabbitmq:
+    container_name: avgeek-rabbitmq
+    image: rabbitmq:latest
+    ports:
+      - '5672:5672'
+      - '15762:15762'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - rabbitmq_storage:/data/rabbitmq
+
 volumes:
   postgres_storage:
+  rabbitmq_storage:
