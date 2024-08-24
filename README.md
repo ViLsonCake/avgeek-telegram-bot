@@ -1,6 +1,6 @@
 # Plane Spotting Telegram Bot
 
-[![Stack](https://skillicons.dev/icons?i=java,spring,maven,gradle,postgres,python,fastapi,docker&perline=8&theme=dark)](https://skillicons.dev)
+[![Stack](https://skillicons.dev/icons?i=java,spring,maven,gradle,postgres,python,fastapi,rabbitmq,docker&perline=10&theme=dark)](https://skillicons.dev)
 
 ## Introduction
 
@@ -61,6 +61,11 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
     POSTGRES_USER=YOUR_POSTGRES_USER
     POSTGRES_PASSWORD=YOUR_POSTGRES_PASSWORD
     POSTGRES_DB=YOUR_DB_NAME
+
+    RABBITMQ_USERNAME=YOUR_RABBITMQ_USERNMAE
+    RABBITMQ_PASSWORD=YOUR_RABBITMQ_PASSWORD
+    RABBITMQ_HOST=localhost
+    RABBITMQ_DOCKER_HOST=avgeek-rabbitmq
 
     MAIL_USERNAME=YOUR_BOT_EMAIL_ADDRESS
     MAIL_PASSWORD=YOUR_BOT_EMAIL_PASSWORD
