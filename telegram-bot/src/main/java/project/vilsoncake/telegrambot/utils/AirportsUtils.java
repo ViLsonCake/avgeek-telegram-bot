@@ -51,7 +51,7 @@ public class AirportsUtils {
 
     public AirportDto getAirportByIataCode(String iataCode) {
         for (AirportDto airport : airports) {
-            if (airport.getIata().equals(iataCode)) {
+            if (airport.getIata().equalsIgnoreCase(iataCode)) {
                 return airport;
             }
         }
