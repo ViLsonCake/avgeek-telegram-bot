@@ -129,6 +129,25 @@ public class BotMessageEngConst {
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
+    public static final String AN_124_LANDING_NO_NEAR_AIRPORT_UNKNOWN_AIRPORT_TEXT = """
+            🛬 *An-124* (*%s*) is _landing_.
+            
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
+    public static final String AN_124_LANDING_NO_NEAR_AIRPORT_KNOWN_AIRPORT_TEXT = """
+            🛬 *An-124* (*%s*) is _landing_.
+            
+            Altitude: *%sm*
+            Ground speed: *%skm/h*
+            Distance from your airport: *%skm*
+            Departure airport: *%s* (*%s*), *%s*, *%s*
+            
+            [View here](https://www.flightradar24.com/%s/%s)
+            """;
     public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
             

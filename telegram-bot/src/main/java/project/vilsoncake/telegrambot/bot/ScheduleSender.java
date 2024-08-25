@@ -396,9 +396,19 @@ public class ScheduleSender {
                                 SendMessage message = new SendMessage();
                                 message.setChatId(user.getChatId());
                                 message.setParseMode(MARKDOWN_PARSE_MODE);
-                                message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_FLIGHT_TEXT, user.getBotLanguage()),
-                                        flight.getId().substring(flight.getId().length() - 4), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
-                                ));
+
+                                if (flightEntity.getDepartureAirport() != null) {
+                                    AirportDto departureAirportDto = airportsUtils.getAirportByIataCode(flightEntity.getDepartureAirport());
+                                    GeonameDto departureGeonameCityDto = geonameService.getObject(departureAirportDto.getCity(), departureAirportDto.getCountry(), user.getBotLanguage().name());
+                                    message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LANDING_NO_NEAR_AIRPORT_KNOWN_AIRPORT_TEXT, user.getBotLanguage()),
+                                            flight.getId().substring(flight.getId().length() - 4), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), departureAirportDto.getName(), departureAirportDto.getIata(), departureGeonameCityDto.getName(), departureGeonameCityDto.getCountryName(), flight.getCallsign(), flight.getId()
+                                    ));
+                                } else {
+                                    message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_LANDING_NO_NEAR_AIRPORT_UNKNOWN_AIRPORT_TEXT, user.getBotLanguage()),
+                                            flight.getId().substring(flight.getId().length() - 4), flight.getAltitude(), flight.getGroundSpeed(), flight.getDistance(), flight.getCallsign(), flight.getId()
+                                    ));
+                                }
+
                                 botSender.sendMessage(message);
                             }
                         }
