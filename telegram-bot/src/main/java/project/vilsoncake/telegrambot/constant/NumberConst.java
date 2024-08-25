@@ -13,6 +13,9 @@ public class NumberConst {
     public static final int LOW_ALTITUDE_IN_M = 5500;
     public static final int CLOSE_TO_AIRPORT_RANGE_IN_KM = 65;
     public static final int MAX_SAVED_FLIGHTS_COUNT = 100;
-    public static final int EARTH_RADIUS = 6371;
+    public static final double SEMI_MAJOR_AXIS_MT = 6378137;
+    public static final double SEMI_MINOR_AXIS_MT = 6356752.314245;
+    public static final double FLATTENING = 1 / 298.257223563;
+    public static final double ERROR_TOLERANCE = 1e-12;
     public static final int ON_GROUND_RADIUS = 7;
 }
