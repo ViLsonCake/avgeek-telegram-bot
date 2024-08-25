@@ -28,14 +28,7 @@ public class AirportsUtils {
 
     public AirportDto findClosestAirportByCoordinates(double latitude, double longitude, int radius) {
         for (AirportDto airport : airports) {
-            double lat1Rad = Math.toRadians(latitude);
-            double lat2Rad = Math.toRadians(airport.getLatitude());
-            double lon1Rad = Math.toRadians(longitude);
-            double lon2Rad = Math.toRadians(airport.getLongitude());
-
-            double x = (lon2Rad - lon1Rad) * Math.cos((lat1Rad + lat2Rad) / 2);
-            double y = (lat2Rad - lat1Rad);
-            int distance = (int) (Math.sqrt(x * x + y * y) * EARTH_RADIUS);
+            int distance = calculateDistanceByCoordinates(latitude, longitude, airport.getLatitude(), airport.getLongitude());
 
             if (distance <= radius) {
                 return airport;
@@ -43,6 +36,17 @@ public class AirportsUtils {
         }
 
         throw new AirportNotFoundException(String.format("No airport within %s km radius found", radius));
+    }
+
+    public int calculateDistanceByCoordinates(double latitude1, double longitude1, double latitude2, double longitude2) {
+        double lat1Rad = Math.toRadians(latitude1);
+        double lat2Rad = Math.toRadians(latitude2);
+        double lon1Rad = Math.toRadians(longitude1);
+        double lon2Rad = Math.toRadians(longitude2);
+
+        double x = (lon2Rad - lon1Rad) * Math.cos((lat1Rad + lat2Rad) / 2);
+        double y = (lat2Rad - lat1Rad);
+        return (int) (Math.sqrt(x * x + y * y) * EARTH_RADIUS);
     }
 
     public AirportDto getAirportByIataCode(String iataCode) {

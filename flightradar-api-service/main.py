@@ -4,7 +4,7 @@ from security.api_key_security import api_key_auth
 from FlightRadar24 import FlightRadar24API
 from utils.flight_utils import get_white_list_plane_codes
 
-from dto.flight_dto import Flight, ScheduledFlight
+from dto.flight_dto import Flight, An124Flight, ScheduledFlight
 
 app = FastAPI()
 flightradar_api: FlightRadar24API = FlightRadar24API()
@@ -15,11 +15,10 @@ async def pong(api_key=Depends(api_key_auth)):
     return 'pong'
 
 
-@app.get('/aircraft/{aircraft_code}/{airport_code}')
-async def get_aircraft_by_code(aircraft_code: str, airport_code: str, api_key=Depends(api_key_auth)):
+@app.get('/aircraft/{aircraft_code}')
+async def get_aircraft_by_code(aircraft_code: str, api_key=Depends(api_key_auth)):
     flights: list = flightradar_api.get_flights(aircraft_type=aircraft_code)
-    airport = flightradar_api.get_airport(airport_code)
-    flights = [Flight(flight, airport) for flight in flights]
+    flights = [An124Flight(flight) for flight in flights]
     return {'flights': flights}
 
 

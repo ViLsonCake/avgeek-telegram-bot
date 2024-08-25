@@ -165,16 +165,17 @@ public class ScheduleSender {
     public void sendNewAn124Flights() {
         List<UserEntity> users = userService.findAllUsers();
 
+        An124FlightsDto an124FlightsDto = apiWebClient.get()
+                .uri("/aircraft/" + BotMessageEngConst.AN_124_CODE)
+                .retrieve()
+                .bodyToMono(An124FlightsDto.class)
+                .block();
+
         for (UserEntity user : users) {
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
-
-                An124FlightsDto an124FlightsDto = apiWebClient.get()
-                        .uri(String.format("/aircraft/%s/%s", BotMessageEngConst.AN_124_CODE, user.getAirport()))
-                        .retrieve()
-                        .bodyToMono(An124FlightsDto.class)
-                        .block();
-
-                for (FlightDataDto flight : an124FlightsDto.getFlights()) {
+                for (An124FlightDto flight : an124FlightsDto.getFlights()) {
+                    AirportDto userAirport = airportsUtils.getAirportByIataCode(user.getAirport());
+                    flight.setDistance(airportsUtils.calculateDistanceByCoordinates(flight.getLatitude(), flight.getLongitude(), userAirport.getLatitude(), userAirport.getLongitude()));
                     if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
                         FlightEntity flightEntity = new FlightEntity(flight.getId(), user);
                         flightEntity.setDistance(flight.getDistance());

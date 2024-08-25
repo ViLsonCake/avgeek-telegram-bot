@@ -34,6 +34,33 @@ class Flight:
         self.distance = int(flight.get_distance_from(airport))
 
 
+class An124Flight:
+    id: str
+    code: str
+    callsign: str
+    aircraft: str
+    origin_airport_iata: str
+    destination_airport_iata: str
+    altitude: int
+    ground_speed: int
+    vertical_speed: int
+    latitude: float
+    longitude: float
+
+    def __init__(self, flight: FlightRadar24.Flight):
+        self.id = flight.id
+        self.code = flight.aircraft_code
+        self.callsign = flight.callsign
+        self.aircraft = get_aircraft_name_by_code(self.code)
+        self.origin_airport_iata = flight.origin_airport_iata
+        self.destination_airport_iata = flight.destination_airport_iata
+        self.altitude = convert_feet_to_meters(flight.altitude)
+        self.ground_speed = convert_knots_to_kmh(flight.ground_speed)
+        self.vertical_speed = flight.vertical_speed
+        self.latitude = flight.latitude
+        self.longitude = flight.longitude
+
+
 class ScheduledFlight:
     id: str
     code: str

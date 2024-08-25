@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class An124FlightsDto {
-    private List<FlightDataDto> flights;
+    private List<An124FlightDto> flights;
 }
