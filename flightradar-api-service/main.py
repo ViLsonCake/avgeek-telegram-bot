@@ -34,7 +34,12 @@ async def get_flight_by_registration(registration: str, airport_code: str, api_k
 
     flight = flights[0]
     airport = flightradar_api.get_airport(airport_code)
-    airline_name = list(filter(lambda airline: airline['ICAO'] == flight.airline_icao, flightradar_api.get_airlines()))[0]['Name']
+    airline_name = list(filter(lambda airline: airline['ICAO'] == flight.airline_icao, flightradar_api.get_airlines()))
+
+    if len(airline_name) == 0:
+        airline_name = 'Unknown'
+    else:
+        airline_name = airline_name[0]['Name']
 
     return Flight(flight, airport, airline_name)
 
