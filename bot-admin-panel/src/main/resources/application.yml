@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: bot-admin-panel
+
+  security:
+    user:
+      name: ${ADMIN_USERNAME}
+      password: ${ADMIN_PASSWORD}
+
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_SERVER_URL}
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+
+  rabbitmq:
+    port: 5672
+    host: localhost
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  port: 8888

@@ -22,10 +22,25 @@ services:
     ports:
       - '8080:8080'
     depends_on:
+      bot-admin-panel:
+        condition: service_started
+
+  bot-admin-panel:
+    container_name: bot-admin-panel
+    build:
+      context: ./bot-admin-panel
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - '8888:8888'
+    depends_on:
       postgres:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+      flightradar-api:
+        condition: service_started
 
   postgres:
     container_name: avgeek_bot_postgres

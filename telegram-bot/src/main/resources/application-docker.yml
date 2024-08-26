@@ -28,6 +28,27 @@ spring:
           starttls:
             enable: true
 
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_SERVER_URL}
+        username: ${ADMIN_USERNAME}
+        password: ${ADMIN_PASSWORD}
+        instance:
+          metadata:
+            user:
+              name: ${CLIENT_USERNAME}
+              password: ${CLIENT_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
 rabbitmq:
   username: ${RABBITMQ_USERNAME}
   password: ${RABBITMQ_PASSWORD}
@@ -39,6 +60,8 @@ rabbitmq:
 logging:
   pattern:
     dateformat: 'HH:mm:ss-dd.MM.yyyy'
+  file:
+    name: telegram-bot.log
 
 bot:
   name: ${BOT_MAME}
