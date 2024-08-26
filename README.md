@@ -69,6 +69,13 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
 
     MAIL_USERNAME=YOUR_BOT_EMAIL_ADDRESS
     MAIL_PASSWORD=YOUR_BOT_EMAIL_PASSWORD
+
+    ADMIN_SERVER_URL=http://bot-admin-panel:8888
+    ADMIN_USERNAME=YOUR_ADMIN_USERNAME
+    ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
+
+    CLIENT_USERNAME=YOUR_AVGEEK_CLIENT_USERNAME
+    CLIENT_PASSWORD=YOUR_AVGEEK_CLIENT_PASSWORD
     ```
 
 5. Run the application in **Docker**:
