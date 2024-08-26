@@ -19,12 +19,6 @@ spring:
               name: ${spring.security.user.name}
               password: ${spring.security.user.password}
 
-  rabbitmq:
-    port: 5672
-    host: localhost
-    username: ${RABBITMQ_USERNAME}
-    password: ${RABBITMQ_PASSWORD}
-
 management:
   endpoints:
     web:
@@ -33,6 +27,20 @@ management:
   endpoint:
     health:
       show-details: always
+
+logging:
+  pattern:
+    dateformat: 'HH:mm:ss-dd.MM.yyyy'
+  file:
+    name: bot-admin-panel.log
+
+rabbitmq:
+  username: ${RABBITMQ_USERNAME}
+  password: ${RABBITMQ_PASSWORD}
+  connection-host: ${RABBITMQ_DOCKER_HOST}
+  feedback-queue: feedback-queue
+  users-statistic-queue: users-statistic-queue
+  notification-queue: notification-queue
 
 server:
   port: 8888
