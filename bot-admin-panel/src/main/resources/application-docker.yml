@@ -19,6 +19,15 @@ spring:
               name: ${spring.security.user.name}
               password: ${spring.security.user.password}
 
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_DOCKER_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
 management:
   endpoints:
     web:
