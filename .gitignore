@@ -38,6 +38,7 @@ out/
 .vscode/
 
 /flightradar-api-service/*.http
+/telegram-bot/*.log
 
 .env
 *.env
