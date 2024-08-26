@@ -39,6 +39,7 @@ out/
 
 /flightradar-api-service/*.http
 /telegram-bot/*.log
+/bot-admin-panel/*.log
 
 .env
 *.env
