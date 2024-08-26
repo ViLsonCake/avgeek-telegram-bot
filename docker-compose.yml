@@ -32,6 +32,8 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
       - '8888:8888'
     depends_on:
