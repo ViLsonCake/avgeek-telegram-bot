@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.3.3'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'de.codecentric:spring-boot-admin-starter-server'
 	implementation 'de.codecentric:spring-boot-admin-server-ui:3.3.3'
