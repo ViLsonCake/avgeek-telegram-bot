@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Avgeek Telegram Bot Users</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Avgeek Telegram Bot Admin</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/users">Users</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#">Statistic</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div>
+        <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>username</th>
+                    <th>chat-id</th>
+                    <th>airport</th>
+                    <th>state</th>
+                    <th>bot-mode</th>
+                    <th>email</th>
+                    <th>email-verified</th>
+                    <th>email-code</th>
+                    <th>bot-language</th>
+                    <th>created-at</th>
+                </tr>
+            </thead>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getUsername()}"></td>
+                <td th:text="${user.getChatId()}"></td>
+                <td th:text="${user.getAirport()}"></td>
+                <td th:text="${user.getState()}"></td>
+                <td th:text="${user.getBotMode()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+                <td th:text="${user.isEmailVerified()}"></td>
+                <td th:text="${user.getEmailCode()}"></td>
+                <td th:text="${user.getBotLanguage()}"></td>
+                <td th:text="${user.getCreatedAt()}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
