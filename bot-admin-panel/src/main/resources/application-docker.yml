@@ -19,6 +19,15 @@ spring:
               name: ${spring.security.user.name}
               password: ${spring.security.user.password}
 
+      ui:
+        brand: "<img src='assets/img/logo.png'><span>Avgeek Telegram Bot Admin</span>"
+        login-icon: 'assets/img/logo.png'
+        favicon: 'assets/img/logo.png'
+        title: Avgeek Bot Admin Panel
+        external-views:
+          - label: Users
+            url: ${APPLICATION_HOST}/users
+
   jpa:
     hibernate:
       ddl-auto: none
