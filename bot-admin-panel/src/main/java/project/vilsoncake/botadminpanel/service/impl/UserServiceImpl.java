@@ -17,8 +17,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getUsersPage(Model model) {
-        List<UserEntity> users = userRepository.findAll();
+        List<UserEntity> users = userRepository.findAllByOrderByCreatedAtDesc();
         model.addAttribute("users", users);
+        model.addAttribute("usersCount", users.size());
+
+        if (!users.isEmpty()) {
+            model.addAttribute("lastAdded", users.get(0));
+        }
 
         return "users.html";
     }

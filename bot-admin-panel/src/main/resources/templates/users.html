@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Avgeek Telegram Bot Users</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -54,5 +55,14 @@
             </tr>
         </table>
     </div>
+    <div>
+        <h2 th:text="'Users count:' + ${usersCount}"></h2>
+        <span th:text="'Last added user: ' + ${lastAdded}"></span>
+    </div>
+    <style>
+        body {
+            font-family: Fira Mono, sans-serif;
+        }
+    </style>
 </body>
 </html>
