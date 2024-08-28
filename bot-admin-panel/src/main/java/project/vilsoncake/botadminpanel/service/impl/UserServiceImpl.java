@@ -3,7 +3,7 @@ package project.vilsoncake.botadminpanel.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import project.vilsoncake.botadminpanel.entity.UserEntity;
+import project.vilsoncake.botadminpanel.dto.UserDto;
 import project.vilsoncake.botadminpanel.repository.UserRepository;
 import project.vilsoncake.botadminpanel.service.UserService;
 
@@ -17,12 +17,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getUsersPage(Model model) {
-        List<UserEntity> users = userRepository.findAllByOrderByCreatedAtDesc();
+        List<UserDto> users = userRepository.findAllByOrderByCreatedAtDesc().stream().map(UserDto::fromEntity).toList();
         model.addAttribute("users", users);
         model.addAttribute("usersCount", users.size());
 
         if (!users.isEmpty()) {
-            model.addAttribute("lastAdded", users.get(0));
+            model.addAttribute("lastAddedUser", users.get(0));
         }
 
         return "users.html";

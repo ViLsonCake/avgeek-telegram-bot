@@ -56,8 +56,8 @@
         </table>
     </div>
     <div>
-        <h2 th:text="'Users count:' + ${usersCount}"></h2>
-        <span th:text="'Last added user: ' + ${lastAdded}"></span>
+        <h2 th:text="'Users count: ' + ${usersCount}"></h2>
+        <span style="padding-bottom: 50px" th:text="'Last added user: ' + ${lastAddedUser.getUsername()}"></span>
     </div>
     <style>
         body {
