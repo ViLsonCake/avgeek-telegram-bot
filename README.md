@@ -78,6 +78,8 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
     CLIENT_PASSWORD=YOUR_AVGEEK_CLIENT_PASSWORD
 
     APPLICATION_HOST=YOUR_ADMIN_APPLICATION_HOST
+
+    GITHUB_REPOSITORY_URL=LINK_TO_YOUR_REPOSITORY
     ```
 
 5. Run the application in **Docker**:
