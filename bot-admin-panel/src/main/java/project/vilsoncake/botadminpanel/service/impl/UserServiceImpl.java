@@ -1,6 +1,7 @@
 package project.vilsoncake.botadminpanel.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import project.vilsoncake.botadminpanel.dto.UserDto;
@@ -15,11 +16,15 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    @Value("${github.repository-link}")
+    private String repositoryLink;
+
     @Override
     public String getUsersPage(Model model) {
         List<UserDto> users = userRepository.findAllByOrderByCreatedAtDesc().stream().map(UserDto::fromEntity).toList();
         model.addAttribute("users", users);
         model.addAttribute("usersCount", users.size());
+        model.addAttribute("repositoryLink", repositoryLink);
 
         if (!users.isEmpty()) {
             model.addAttribute("lastAddedUser", users.get(0));

@@ -27,6 +27,8 @@ spring:
         external-views:
           - label: Users
             url: ${APPLICATION_HOST}/users
+          - label: Github
+            url: ${GITHUB_REPOSITORY_URL}
 
   jpa:
     hibernate:
@@ -59,6 +61,9 @@ rabbitmq:
   feedback-queue: feedback-queue
   users-statistic-queue: users-statistic-queue
   notification-queue: notification-queue
+
+github:
+  repository-link: ${GITHUB_REPOSITORY_URL}
 
 server:
   port: 8888
