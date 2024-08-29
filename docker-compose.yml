@@ -24,6 +24,8 @@ services:
     depends_on:
       bot-admin-panel:
         condition: service_started
+      flightradar-api:
+        condition: service_started
 
   bot-admin-panel:
     container_name: bot-admin-panel
@@ -41,7 +43,7 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
-      flightradar-api:
+      mongodb:
         condition: service_started
 
   postgres:
@@ -75,6 +77,19 @@ services:
     volumes:
       - rabbitmq_storage:/data/rabbitmq
 
+  mongodb:
+    image: mongo:latest
+    container_name: avgeek-admin-mongo
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - mongo_storage:/mongo/data
+
 volumes:
   postgres_storage:
   rabbitmq_storage:
+  mongo_storage:
