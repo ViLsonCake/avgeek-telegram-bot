@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import project.vilsoncake.telegrambot.dto.UserStatisticDto;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.service.BotService;
+import project.vilsoncake.telegrambot.service.RabbitMQService;
 
 import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.CANCEL_ADDING_EMAIL_TRIGGER;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
@@ -17,6 +19,7 @@ import static project.vilsoncake.telegrambot.entity.enumerated.BotLanguage.*;
 public class BotMessageHandler {
 
     private final BotService botService;
+    private final RabbitMQService rabbitMQService;
 
     public void handleMessage(Update update, AvgeekTelegramBot bot) {
         if (!update.getMessage().hasText()) {
@@ -29,6 +32,10 @@ public class BotMessageHandler {
 
         try {
             if (update.getMessage().isCommand()) {
+
+                UserStatisticDto userStatisticDto = new UserStatisticDto(username, update.getMessage().getText());
+                rabbitMQService.sendUserStatistic(userStatisticDto);
+
                 switch (update.getMessage().getText()) {
                     case START_COMMAND_NAME:
                         bot.execute(botService.startBotCommand(username, languageCode, chatId));

@@ -1,7 +1,7 @@
 package project.vilsoncake.botadminpanel.dto;
 
 import lombok.Data;
-import project.vilsoncake.botadminpanel.entity.UserEntity;
+import project.vilsoncake.botadminpanel.entity.jpa.UserEntity;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotLanguage;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotMode;
 import project.vilsoncake.botadminpanel.entity.enumerated.UserState;

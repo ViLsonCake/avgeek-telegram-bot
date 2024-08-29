@@ -1,6 +1,6 @@
 package project.vilsoncake.botadminpanel.repository;
 
-import project.vilsoncake.botadminpanel.entity.UserEntity;
+import project.vilsoncake.botadminpanel.entity.jpa.UserEntity;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package project.vilsoncake.botadminpanel.entity;
+package project.vilsoncake.botadminpanel.entity.jpa;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
