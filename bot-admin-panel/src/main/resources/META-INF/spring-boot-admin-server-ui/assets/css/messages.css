@@ -1,0 +1,15 @@
+.message-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+textarea {
+    resize: none;
+}
+
+.button-container {
+    padding-left: 30px;
+}

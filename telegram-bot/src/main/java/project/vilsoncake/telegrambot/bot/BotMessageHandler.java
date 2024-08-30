@@ -7,8 +7,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.dto.UserStatisticDto;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.rabbitmq.producer.RabbitMQProducer;
 import project.vilsoncake.telegrambot.service.BotService;
-import project.vilsoncake.telegrambot.service.RabbitMQService;
 
 import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.CANCEL_ADDING_EMAIL_TRIGGER;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
@@ -19,7 +19,7 @@ import static project.vilsoncake.telegrambot.entity.enumerated.BotLanguage.*;
 public class BotMessageHandler {
 
     private final BotService botService;
-    private final RabbitMQService rabbitMQService;
+    private final RabbitMQProducer rabbitMQProducer;
 
     public void handleMessage(Update update, AvgeekTelegramBot bot) {
         if (!update.getMessage().hasText()) {
@@ -34,7 +34,7 @@ public class BotMessageHandler {
             if (update.getMessage().isCommand()) {
 
                 UserStatisticDto userStatisticDto = new UserStatisticDto(username, update.getMessage().getText());
-                rabbitMQService.sendUserStatistic(userStatisticDto);
+                rabbitMQProducer.sendUserStatistic(userStatisticDto);
 
                 switch (update.getMessage().getText()) {
                     case START_COMMAND_NAME:

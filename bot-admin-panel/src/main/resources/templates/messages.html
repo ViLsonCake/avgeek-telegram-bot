@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Avgeek Bot Custom Messages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/base-styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/messages.css}">
+    <script type="application/javascript" th:src="@{/assets/js/messages.js}"></script>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/logo.png}">
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Avgeek Telegram Bot Admin</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/users">Users</a></li>
+                    <li class="active"><a href="/custom-messages">Messages</a></li>
+                    <li><a href="/statistics/users">Statistics</a></li>
+                    <li><a th:href="${repositoryLink}">Github</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="message-inputs">
+        <div class="form-group">
+            <h2>English message</h2>
+            <textarea class="form-control" rows="20" id="english"></textarea>
+        </div>
+        <div class="form-group">
+            <h2>Russian message</h2>
+            <textarea class="form-control" rows="20" id="russian"></textarea>
+        </div>
+        <div class="form-group">
+            <h2>Ukrainian message</h2>
+            <textarea class="form-control" rows="20" id="ukrainian"></textarea>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Info!</strong> The message will be sent in <b>Markdown</b> mode. Check the <a href="https://core.telegram.org/bots/api#markdownv2-style">Telegram Markdown Syntax</a>
+    </div>
+
+    <div class="button-container">
+        <button type="button" class="btn btn-primary" id="send">Send Message</button>
+    </div>
+</body>
+</html>

@@ -27,6 +27,8 @@ spring:
         external-views:
           - label: Users
             url: ${APPLICATION_HOST}/users
+          - label: Messages
+            url: ${APPLICATION_HOST}/custom-messages
           - label: Statistics
             url: ${APPLICATION_HOST}/statistics/users
           - label: Github

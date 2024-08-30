@@ -1,9 +1,12 @@
 package project.vilsoncake.telegrambot.service;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import project.vilsoncake.telegrambot.dto.MessageDto;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
+
+import java.util.List;
 
 public interface BotService {
     SendMessage pingCommand(Long chatId);
@@ -26,4 +29,5 @@ public interface BotService {
     SendMessage incorrectModeMessage(String username, String mode, Long chatId);
     UserState getUserState(String username);
     boolean isUserRegistered(String username);
+    List<SendMessage> sendCustomMessage(MessageDto messageDto);
 }

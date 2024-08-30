@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/base-styles.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/logo.png}">
 </head>
 <body>
     <div>
@@ -17,9 +19,9 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/users">Users</a></li>
-                    <li><a th:href="${repositoryLink}">Github</a></li>
-                    <li><a href="#">Messages</a></li>
+                    <li><a href="/custom-messages">Messages</a></li>
                     <li><a href="/statistics/users">Statistics</a></li>
+                    <li><a th:href="${repositoryLink}">Github</a></li>
                 </ul>
             </div>
         </nav>
@@ -60,10 +62,5 @@
         <h2 style="padding-left: 25px" th:text="'Users count: ' + ${usersCount}"></h2>
         <span style="padding-bottom: 50px; padding-left: 25px" th:text="'Last added user: ' + ${lastAddedUser.getUsername()}"></span>
     </div>
-    <style>
-        body {
-            font-family: Fira Mono, sans-serif;
-        }
-    </style>
 </body>
 </html>

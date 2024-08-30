@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRem
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import project.vilsoncake.telegrambot.dto.AirportCodesDto;
 import project.vilsoncake.telegrambot.dto.AirportDto;
+import project.vilsoncake.telegrambot.dto.MessageDto;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
@@ -21,6 +22,7 @@ import project.vilsoncake.telegrambot.utils.BotMessageUtils;
 import project.vilsoncake.telegrambot.utils.MailMessageUtils;
 import project.vilsoncake.telegrambot.utils.VerifyUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.PING_COMMAND_TEXT;
@@ -374,5 +376,27 @@ public class BotServiceImpl implements BotService {
     @Override
     public boolean isUserRegistered(String username) {
         return userService.isUserExistsByUsername(username);
+    }
+
+    @Override
+    public List<SendMessage> sendCustomMessage(MessageDto messageDto) {
+        List<UserEntity> users = userService.findAllUsers();
+        List<SendMessage> messages = new ArrayList<>();
+
+        for (UserEntity user : users) {
+            SendMessage message = new SendMessage();
+            message.setChatId(user.getChatId());
+            message.setParseMode(MARKDOWN_PARSE_MODE);
+
+            switch (user.getBotLanguage()) {
+                case ENG -> message.setText(messageDto.getEnglishText());
+                case RU -> message.setText(messageDto.getRussianText());
+                case UK -> message.setText(messageDto.getUkrainianText());
+            }
+
+            messages.add(message);
+        }
+
+        return messages;
     }
 }
