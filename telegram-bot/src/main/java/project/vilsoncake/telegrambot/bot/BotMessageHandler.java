@@ -27,6 +27,11 @@ public class BotMessageHandler {
         }
 
         String username = update.getMessage().getChat().getUserName();
+
+        if (username == null) {
+            username = update.getMessage().getFrom().getId().toString();
+        }
+
         String languageCode = update.getMessage().getFrom().getLanguageCode();
         Long chatId = update.getMessage().getChatId();
 
