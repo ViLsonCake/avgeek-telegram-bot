@@ -11,5 +11,7 @@ public class CommandDescriptionsEngConst {
     public static final String MY_EMAIL_COMMAND_ENG_DESCRIPTION = "Get your email";
     public static final String REMOVE_EMAIL_COMMAND_ENG_DESCRIPTION = "Remove your email from the bot";
     public static final String CHANGE_LANGUAGE_COMMAND_ENG_DESCRIPTION = "Change bot language";
+    public static final String CHANGE_UNITS_COMMAND_ENG_DESCRIPTION = "Change system of units";
+    public static final String CURRENT_UNITS_COMMAND_ENG_DESCRIPTION = "Get your current system of units";
 
 }

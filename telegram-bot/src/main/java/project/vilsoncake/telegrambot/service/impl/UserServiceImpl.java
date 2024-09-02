@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.UserNotFoundException;
 import project.vilsoncake.telegrambot.repository.UserRepository;
@@ -84,6 +85,13 @@ public class UserServiceImpl implements UserService {
     public UserEntity changeUserLanguage(String username, BotLanguage botLanguage) {
         UserEntity user = getUserByUsername(username);
         user.setBotLanguage(botLanguage);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity changeUserUnitsSystem(String username, UnitsSystem unitsSystem) {
+        UserEntity user = getUserByUsername(username);
+        user.setUnitsSystem(unitsSystem);
         return userRepository.save(user);
     }
 

@@ -11,4 +11,6 @@ public class CommandDescriptionsUkConst {
     public static final String MY_EMAIL_COMMAND_UK_DESCRIPTION = "Отримати вказаний email";
     public static final String REMOVE_EMAIL_COMMAND_UK_DESCRIPTION = "Видалити email з бота";
     public static final String CHANGE_LANGUAGE_COMMAND_UK_DESCRIPTION = "Змінити мову бота";
+    public static final String CHANGE_UNITS_COMMAND_UK_DESCRIPTION = "Змінити систему одиниць виміру";
+    public static final String CURRENT_UNITS_COMMAND_UK_DESCRIPTION = "Отримати поточну систему одиниць виміру";
 }

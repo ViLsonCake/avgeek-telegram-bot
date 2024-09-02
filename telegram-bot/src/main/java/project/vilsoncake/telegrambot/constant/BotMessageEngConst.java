@@ -52,9 +52,9 @@ public class BotMessageEngConst {
             
             Aircraft: *%s*
             Airline: *%s*
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
             
@@ -65,9 +65,9 @@ public class BotMessageEngConst {
             
             Aircraft: *%s*
             Airline: *%s*
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
             
@@ -76,9 +76,9 @@ public class BotMessageEngConst {
     public static final String AN_124_FLIGHT_TEXT = """
             ✈️ *An-124* (*%s*) in the air right now.
             
-            Altitude: *%sm*:
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*:
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
@@ -86,26 +86,26 @@ public class BotMessageEngConst {
             ✈️ *An-124* (*%s*) preparing for takeoff from *%s* (*%s*), *%s*, *%s*.
             
             Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_KNOWN_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
@@ -113,18 +113,18 @@ public class BotMessageEngConst {
     public static final String AN_124_LANDING_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_KNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
@@ -132,18 +132,18 @@ public class BotMessageEngConst {
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) is _landing_.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_KNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) is _landing_.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
@@ -151,45 +151,45 @@ public class BotMessageEngConst {
     public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_FROM_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff from *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
             ‼️ *An-124 (*%s*) WILL MOST LIKELY TO LAND AT YOUR AIRPORT* ‼️
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) _flying near_ your airport.
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
             ‼️ *An-124 (*%s*) IN YOUR AIRPORT RIGHT NOW* ‼️
             
-            Altitude: *%sm*
-            Ground speed: *%skm/h*
-            Distance from your airport: *%skm*
+            Altitude: *%s*
+            Ground speed: *%s*
+            Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
             """;
@@ -218,5 +218,55 @@ public class BotMessageEngConst {
     public static final String SELECT_LANGUAGE_TEXT = "Select _language_";
     public static final String LANGUAGE_SELECTED_TEXT = "Your _language_ is *%s*.";
     public static final String INCORRECT_LANGUAGE_TEXT = "Selected _language_ is *incorrect*. Select _language_ from the buttons on the keyboard.";
+    public static final String CHANGE_UNITS_TEXT = """
+            *Please select a system of units*
+                        
+            *Metric*
+            _Altitude_ - meters
+            _Distance_ - kilometers
+            _Speed_ - kilometers per hour
+                        
+            *Imperial*
+            _Altitude_ - feet
+            _Distance_ - miles
+            _Speed_ - miles per hour
+                        
+            *Aviation*
+            _Altitude_ - feet
+            _Distance_ - nautical miles
+            _Speed_ - knots
+            """;
+    public static final String CHANGED_UNITS_TEXT = "Great! Now your System of Units is *%s*";
+    public static final String CURRENT_METRIC_UNITS_TEXT = """
+            *Your System of Units is Metric*
+            
+            _Altitude_ - meters
+            _Distance_ - kilometers
+            _Speed_ - kilometers per hour
+            """;
+    public static final String CURRENT_IMPERIAL_UNITS_TEXT = """
+            *Your System of Units is Imperial*
+            
+            _Altitude_ - feet
+            _Distance_ - miles
+            _Speed_ - miles per hour
+            """;
+    public static final String CURRENT_AVIATION_UNITS_TEXT = """
+            *Your System of Units is Aviation*
+            
+            _Altitude_ - feet
+            _Distance_ - nautical miles
+            _Speed_ - knots
+            """;
+    public static final String INCORRECT_UNITS_TEXT = "Selected _System of Units_ is *incorrect*. Select _System of Units_ from the buttons on the keyboard.";
     public static final String PING_COMMAND_TEXT = "pong";
+    public static final String METRIC_SPEED_UNIT_ENG = "km/h";
+    public static final String IMPERIAL_SPEED_UNIT_ENG = "mph";
+    public static final String AVIATION_SPEED_UNIT_ENG = "kts";
+    public static final String METRIC_DISTANCE_UNIT_ENG = "km";
+    public static final String IMPERIAL_DISTANCE_UNIT_ENG = "mi";
+    public static final String AVIATION_DISTANCE_UNIT_ENG = "nm";
+    public static final String METRIC_ALTITUDE_UNIT_ENG = "m";
+    public static final String IMPERIAL_ALTITUDE_UNIT_ENG = "ft";
+    public static final String AVIATION_ALTITUDE_UNIT_ENG = "ft";
 }

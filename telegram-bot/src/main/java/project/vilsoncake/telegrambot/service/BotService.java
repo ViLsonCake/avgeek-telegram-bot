@@ -4,6 +4,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import project.vilsoncake.telegrambot.dto.MessageDto;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 
 import java.util.List;
@@ -27,6 +28,10 @@ public interface BotService {
     SendMessage changeBotLanguage(String username, BotLanguage botLanguage, Long chatId);
     SendMessage incorrectBotLanguage(String username, Long chatId);
     SendMessage incorrectModeMessage(String username, String mode, Long chatId);
+    SendMessage changeUnitsCommand(String username, Long chatId);
+    SendMessage changeUnits(String username, UnitsSystem unitsSystem, Long chatId);
+    SendMessage getUserUnitsSystem(String username, Long chatId);
+    SendMessage incorrectUnitsSystem(String username, Long chatId);
     UserState getUserState(String username);
     boolean isUserRegistered(String username);
     List<SendMessage> sendCustomMessage(MessageDto messageDto);

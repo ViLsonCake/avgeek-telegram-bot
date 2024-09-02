@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.dto.UserStatisticDto;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
 import project.vilsoncake.telegrambot.rabbitmq.producer.RabbitMQProducer;
 import project.vilsoncake.telegrambot.service.BotService;
 
@@ -59,6 +60,12 @@ public class BotMessageHandler {
                         break;
                     case CURRENT_MODE_COMMAND_NAME:
                         bot.execute(botService.getBotMode(username, chatId));
+                        break;
+                    case CHANGE_UNITS_COMMAND_NAME:
+                        bot.execute(botService.changeUnitsCommand(username, chatId));
+                        break;
+                    case CURRENT_UNITS_COMMAND_NAME:
+                        bot.execute(botService.getUserUnitsSystem(username, chatId));
                         break;
                     case SET_EMAIL_COMMAND_NAME:
                         bot.execute(botService.setEmailCommand(username, chatId));
@@ -124,6 +131,20 @@ public class BotMessageHandler {
                         }
 
                         bot.execute(botService.changeBotLanguage(username, botLanguage, chatId));
+                        break;
+                    case CHOOSING_UNITS:
+                        UnitsSystem unitsSystem;
+                        switch (update.getMessage().getText().trim()) {
+                            case METRIC_UNITS_BUTTON_TEXT -> unitsSystem = UnitsSystem.METRIC;
+                            case IMPERIAL_UNITS_BUTTON_TEXT -> unitsSystem = UnitsSystem.IMPERIAL;
+                            case AVIATION_UNITS_BUTTON_TEXT -> unitsSystem = UnitsSystem.AVIATION;
+                            default -> {
+                                bot.execute(botService.incorrectUnitsSystem(username, chatId));
+                                return;
+                            }
+                        }
+
+                        bot.execute(botService.changeUnits(username, unitsSystem, chatId));
                         break;
                 }
             }

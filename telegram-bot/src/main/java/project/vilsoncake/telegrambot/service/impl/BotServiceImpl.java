@@ -12,6 +12,7 @@ import project.vilsoncake.telegrambot.dto.MessageDto;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
 import project.vilsoncake.telegrambot.service.BotService;
@@ -365,6 +366,73 @@ public class BotServiceImpl implements BotService {
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
         message.setText(String.format(botMessageUtils.getMessageByLanguage(INCORRECT_MODE_TEXT, user.getBotLanguage()), mode));
+
+        return message;
+    }
+
+    @Override
+    public SendMessage changeUnitsCommand(String username, Long chatId) {
+        UserEntity user = userService.changeUserState(username, CHOOSING_UNITS);
+
+        KeyboardRow keyboardRow = new KeyboardRow();
+        keyboardRow.addAll(UNITS);
+
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(List.of(keyboardRow));
+        keyboardMarkup.setResizeKeyboard(true);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setReplyMarkup(keyboardMarkup);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+        message.setText(botMessageUtils.getMessageByLanguage(CHANGE_UNITS_TEXT, user.getBotLanguage()));
+
+        return message;
+    }
+
+    @Override
+    public SendMessage changeUnits(String username, UnitsSystem unitsSystem, Long chatId) {
+        UserEntity user = userService.changeUserState(username, CHOSEN_AIRPORT);
+        userService.changeUserUnitsSystem(username, unitsSystem);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+        message.setReplyMarkup(new ReplyKeyboardRemove(true));
+
+        switch (unitsSystem) {
+            case METRIC -> message.setText(botMessageUtils.getMessageByLanguage(CURRENT_METRIC_UNITS_TEXT, user.getBotLanguage()));
+            case IMPERIAL -> message.setText(botMessageUtils.getMessageByLanguage(CURRENT_IMPERIAL_UNITS_TEXT, user.getBotLanguage()));
+            case AVIATION -> message.setText(botMessageUtils.getMessageByLanguage(CURRENT_AVIATION_UNITS_TEXT, user.getBotLanguage()));
+        }
+
+        return message;
+    }
+
+    @Override
+    public SendMessage getUserUnitsSystem(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+
+        switch (user.getUnitsSystem()) {
+            case METRIC -> message.setText(botMessageUtils.getMessageByLanguage(CURRENT_METRIC_UNITS_TEXT, user.getBotLanguage()));
+            case IMPERIAL -> message.setText(botMessageUtils.getMessageByLanguage(CURRENT_IMPERIAL_UNITS_TEXT, user.getBotLanguage()));
+            case AVIATION -> message.setText(botMessageUtils.getMessageByLanguage(CURRENT_AVIATION_UNITS_TEXT, user.getBotLanguage()));
+        }
+
+        return message;
+    }
+
+    @Override
+    public SendMessage incorrectUnitsSystem(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+        message.setText(botMessageUtils.getMessageByLanguage(INCORRECT_UNITS_TEXT, user.getBotLanguage()));
+
         return message;
     }
 

@@ -24,4 +24,10 @@ public class CommandNamesConst {
     public static final List<String> LANGUAGES = List.of(ENG.name().toLowerCase(), RU.name().toLowerCase(), UK.name().toLowerCase());
     public static final String RU_LANGUAGE_CODE = "ru";
     public static final String UK_LANGUAGE_CODE = "uk";
+    public static final String CHANGE_UNITS_COMMAND_NAME = "/changeunits";
+    public static final String CURRENT_UNITS_COMMAND_NAME = "/currentunits";
+    public static final String METRIC_UNITS_BUTTON_TEXT = "Metric";
+    public static final String IMPERIAL_UNITS_BUTTON_TEXT = "Imperial";
+    public static final String AVIATION_UNITS_BUTTON_TEXT = "Aviation";
+    public static final List<String> UNITS = List.of(METRIC_UNITS_BUTTON_TEXT, IMPERIAL_UNITS_BUTTON_TEXT, AVIATION_UNITS_BUTTON_TEXT);
 }

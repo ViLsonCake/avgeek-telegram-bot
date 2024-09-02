@@ -11,4 +11,6 @@ public class CommandDescriptionsRuConst {
     public static final String MY_EMAIL_COMMAND_RU_DESCRIPTION = "Получить указанный email";
     public static final String REMOVE_EMAIL_COMMAND_RU_DESCRIPTION = "Удалить email из бота";
     public static final String CHANGE_LANGUAGE_COMMAND_RU_DESCRIPTION = "Изменить язык бота";
+    public static final String CHANGE_UNITS_COMMAND_RU_DESCRIPTION = "Изменить систему единиц измерения";
+    public static final String CURRENT_UNITS_COMMAND_RU_DESCRIPTION = "Получить текущую систему единиц измерения";
 }

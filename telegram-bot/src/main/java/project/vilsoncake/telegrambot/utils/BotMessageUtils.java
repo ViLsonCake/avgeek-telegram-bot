@@ -49,6 +49,12 @@ public class BotMessageUtils {
             case CHOSEN_MODE_ONLY_WIDE_BODY_TEXT -> BotMessageEngConst.CHOSEN_MODE_ONLY_WIDE_BODY_TEXT;
             case CHOSEN_MODE_MUTE_TEXT -> BotMessageEngConst.CHOSEN_MODE_MUTE_TEXT;
             case INCORRECT_MODE_TEXT -> BotMessageEngConst.INCORRECT_MODE_TEXT;
+            case CHANGE_UNITS_TEXT -> BotMessageEngConst.CHANGE_UNITS_TEXT;
+            case CHANGED_UNITS_TEXT -> BotMessageEngConst.CHANGED_UNITS_TEXT;
+            case CURRENT_METRIC_UNITS_TEXT -> BotMessageEngConst.CURRENT_METRIC_UNITS_TEXT;
+            case CURRENT_IMPERIAL_UNITS_TEXT -> BotMessageEngConst.CURRENT_IMPERIAL_UNITS_TEXT;
+            case CURRENT_AVIATION_UNITS_TEXT -> BotMessageEngConst.CURRENT_AVIATION_UNITS_TEXT;
+            case INCORRECT_UNITS_TEXT -> BotMessageEngConst.INCORRECT_UNITS_TEXT;
             case WAIT_FOR_EMAIL_TEXT -> BotMessageEngConst.WAIT_FOR_EMAIL_TEXT;
             case INVALID_EMAIL_TEXT -> BotMessageEngConst.INVALID_EMAIL_TEXT;
             case INCORRECT_EMAIL_VERIFY_CODE -> BotMessageEngConst.INCORRECT_EMAIL_VERIFY_CODE;
@@ -97,6 +103,12 @@ public class BotMessageUtils {
             case CHOSEN_MODE_ONLY_WIDE_BODY_TEXT -> BotMessageRuConst.CHOSEN_MODE_ONLY_WIDE_BODY_TEXT;
             case CHOSEN_MODE_MUTE_TEXT -> BotMessageRuConst.CHOSEN_MODE_MUTE_TEXT;
             case INCORRECT_MODE_TEXT -> BotMessageRuConst.INCORRECT_MODE_TEXT;
+            case CHANGE_UNITS_TEXT -> BotMessageRuConst.CHANGE_UNITS_TEXT;
+            case CHANGED_UNITS_TEXT -> BotMessageRuConst.CHANGED_UNITS_TEXT;
+            case CURRENT_METRIC_UNITS_TEXT -> BotMessageRuConst.CURRENT_METRIC_UNITS_TEXT;
+            case CURRENT_IMPERIAL_UNITS_TEXT -> BotMessageRuConst.CURRENT_IMPERIAL_UNITS_TEXT;
+            case CURRENT_AVIATION_UNITS_TEXT -> BotMessageRuConst.CURRENT_AVIATION_UNITS_TEXT;
+            case INCORRECT_UNITS_TEXT -> BotMessageRuConst.INCORRECT_UNITS_TEXT;
             case WAIT_FOR_EMAIL_TEXT -> BotMessageRuConst.WAIT_FOR_EMAIL_TEXT;
             case INVALID_EMAIL_TEXT -> BotMessageRuConst.INVALID_EMAIL_TEXT;
             case INCORRECT_EMAIL_VERIFY_CODE -> BotMessageRuConst.INCORRECT_EMAIL_VERIFY_CODE;
@@ -145,6 +157,12 @@ public class BotMessageUtils {
             case CHOSEN_MODE_ONLY_WIDE_BODY_TEXT -> BotMessageUkConst.CHOSEN_MODE_ONLY_WIDE_BODY_TEXT;
             case CHOSEN_MODE_MUTE_TEXT -> BotMessageUkConst.CHOSEN_MODE_MUTE_TEXT;
             case INCORRECT_MODE_TEXT -> BotMessageUkConst.INCORRECT_MODE_TEXT;
+            case CHANGE_UNITS_TEXT -> BotMessageUkConst.CHANGE_UNITS_TEXT;
+            case CHANGED_UNITS_TEXT -> BotMessageUkConst.CHANGED_UNITS_TEXT;
+            case CURRENT_METRIC_UNITS_TEXT -> BotMessageUkConst.CURRENT_METRIC_UNITS_TEXT;
+            case CURRENT_IMPERIAL_UNITS_TEXT -> BotMessageUkConst.CURRENT_IMPERIAL_UNITS_TEXT;
+            case CURRENT_AVIATION_UNITS_TEXT -> BotMessageUkConst.CURRENT_AVIATION_UNITS_TEXT;
+            case INCORRECT_UNITS_TEXT -> BotMessageUkConst.INCORRECT_UNITS_TEXT;
             case WAIT_FOR_EMAIL_TEXT -> BotMessageUkConst.WAIT_FOR_EMAIL_TEXT;
             case INVALID_EMAIL_TEXT -> BotMessageUkConst.INVALID_EMAIL_TEXT;
             case INCORRECT_EMAIL_VERIFY_CODE -> BotMessageUkConst.INCORRECT_EMAIL_VERIFY_CODE;
