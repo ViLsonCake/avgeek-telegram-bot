@@ -46,6 +46,7 @@ More notification examples you can find [here](./telegram-bot/src/main/resources
     + English
     + Ukrainian
     + Russian
+- **/feedback** - Send feedback
 - **/setemail** - Add email to send you mail if An-124 in your airport.
 - **/myemail** - Get your email.
 - **/removeemail** - Remove your email from the bot.
