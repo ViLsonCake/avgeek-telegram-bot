@@ -123,15 +123,14 @@ public class BotMessageHandler {
                         String language = update.getMessage().getText().trim();
                         BotLanguage botLanguage;
 
-                        if (ENG.name().toLowerCase().equals(language)) {
-                            botLanguage = ENG;
-                        } else if (RU.name().toLowerCase().equals(language)) {
-                            botLanguage = RU;
-                        } else if (UK.name().toLowerCase().equals(language)) {
-                            botLanguage = UK;
-                        } else {
-                            bot.execute(botService.incorrectBotLanguage(username, chatId));
-                            return;
+                        switch (language) {
+                            case ENG_LANGUAGE -> botLanguage = ENG;
+                            case RU_LANGUAGE -> botLanguage = RU;
+                            case UK_LANGUAGE -> botLanguage = UK;
+                            default -> {
+                                bot.execute(botService.incorrectBotLanguage(username, chatId));
+                                return;
+                            }
                         }
 
                         bot.execute(botService.changeBotLanguage(username, botLanguage, chatId));
