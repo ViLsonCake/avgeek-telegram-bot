@@ -30,23 +30,11 @@ More notification examples you can find [here](./telegram-bot/src/main/resources
     + **Mute** - You will not receive **any** notifications.
 - **/currentmode** - Get current bot mode.
 - **/changeunits** - Change System of Units.
-    + **Metric**
-        + _Altitude_ - meters
-        + _Distance_ - kilometers
-        + _Speed_ - kilometers per hour
-    + **Imperial**
-        + _Altitude_ - feet
-        + _Distance_ - miles
-        + _Speed_ - miles per hour
-    + **Aviation**
-        + _Altitude_ - feet
-        + _Distance_ - nautical miles
-        + _Speed_ - knots
-- **/lang** - Change bot language.
+- **/lang** - Change bot language
     + English
     + Ukrainian
     + Russian
-- **/feedback** - Send feedback
+- **/feedback** - Send feedback.
 - **/setemail** - Add email to send you mail if An-124 in your airport.
 - **/myemail** - Get your email.
 - **/removeemail** - Remove your email from the bot.
