@@ -471,4 +471,40 @@ public class BotServiceImpl implements BotService {
 
         return messages;
     }
+
+    @Override
+    public SendMessage feedbackCommand(String username, Long chatId) {
+        UserEntity user = userService.changeUserState(username, SENDING_FEEDBACK);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(user.getChatId());
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+        message.setText(botMessageUtils.getMessageByLanguage(FEEDBACK_COMMAND_TEXT, user.getBotLanguage()));
+
+        return message;
+    }
+
+    @Override
+    public SendMessage feedbackSent(String username, Long chatId) {
+        UserEntity user = userService.changeUserState(username, CHOSEN_AIRPORT);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(user.getChatId());
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+        message.setText(botMessageUtils.getMessageByLanguage(FEEDBACK_SENT_TEXT, user.getBotLanguage()));
+
+        return message;
+    }
+
+    @Override
+    public SendMessage cancelFeedback(String username, Long chatId) {
+        UserEntity user = userService.changeUserState(username, CHOSEN_AIRPORT);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(user.getChatId());
+        message.setParseMode(MARKDOWN_PARSE_MODE);
+        message.setText(botMessageUtils.getMessageByLanguage(CANCEL_FEEDBACK_SEND_TEXT, user.getBotLanguage()));
+
+        return message;
+    }
 }

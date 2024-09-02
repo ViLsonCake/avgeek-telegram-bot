@@ -13,5 +13,6 @@ public class CommandDescriptionsEngConst {
     public static final String CHANGE_LANGUAGE_COMMAND_ENG_DESCRIPTION = "Change bot language";
     public static final String CHANGE_UNITS_COMMAND_ENG_DESCRIPTION = "Change system of units";
     public static final String CURRENT_UNITS_COMMAND_ENG_DESCRIPTION = "Get your current system of units";
+    public static final String FEEDBACK_COMMAND_ENG_DESCRIPTION = "Send feedback";
 
 }

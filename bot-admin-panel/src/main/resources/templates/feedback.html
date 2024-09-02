@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Avgeek Bot Users Statistic</title>
+    <title>Users Feedback</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -20,22 +20,17 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/users">Users</a></li>
                     <li><a href="/custom-messages">Messages</a></li>
-                    <li class="active"><a href="/statistics/users">Statistics</a></li>
-                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/statistics/users">Statistics</a></li>
+                    <li class="active"><a href="/feedback">Feedback</a></li>
                     <li><a th:href="${repositoryLink}">Github</a></li>
                 </ul>
             </div>
         </nav>
     </div>
     <div style="padding-bottom: 50px">
-        <h1 style="padding-top: 30px; padding-left: 10px">Overall Users Activity</h1>
-        <ul class="list-group" th:each="activity : ${usersActivity}">
-            <li class="list-group-item" th:text="${activity.getUsername()} + ': ' + ${activity.getCount()}"></li>
-        </ul>
-
-        <h2 style="padding-top: 50px; padding-left: 10px">Last Users Activity</h2>
-        <ul class="list-group" th:each="lastActivity : ${usersLastActivity}">
-            <li class="list-group-item" th:text="${lastActivity.getUsername()} + ': ' + ${lastActivity.getCommandName()}"></li>
+        <h1 style="padding-top: 30px; padding-left: 10px">Overall Users Feedback</h1>
+        <ul class="list-group" th:each="feedback : ${usersFeedback}">
+            <li class="list-group-item" th:text="${feedback.getCreatedAt()} + ': ' + ${feedback.getUsername()} + ' - ' + ${feedback.getText()}"></li>
         </ul>
     </div>
 </body>

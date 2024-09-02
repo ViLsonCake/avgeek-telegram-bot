@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import project.vilsoncake.telegrambot.dto.FeedbackDto;
 import project.vilsoncake.telegrambot.dto.UserStatisticDto;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
@@ -11,7 +12,7 @@ import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
 import project.vilsoncake.telegrambot.rabbitmq.producer.RabbitMQProducer;
 import project.vilsoncake.telegrambot.service.BotService;
 
-import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.CANCEL_ADDING_EMAIL_TRIGGER;
+import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.CANCEL_TRIGGER;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotLanguage.*;
 
@@ -67,6 +68,9 @@ public class BotMessageHandler {
                     case CURRENT_UNITS_COMMAND_NAME:
                         bot.execute(botService.getUserUnitsSystem(username, chatId));
                         break;
+                    case FEEDBACK_COMMAND_NAME:
+                        bot.execute(botService.feedbackCommand(username, chatId));
+                        break;
                     case SET_EMAIL_COMMAND_NAME:
                         bot.execute(botService.setEmailCommand(username, chatId));
                         break;
@@ -108,7 +112,7 @@ public class BotMessageHandler {
                         bot.execute(botService.setEmail(username, email, chatId));
                         break;
                     case WAIT_FOR_EMAIL_CODE:
-                        if (update.getMessage().getText().equals(CANCEL_ADDING_EMAIL_TRIGGER)) {
+                        if (update.getMessage().getText().equals(CANCEL_TRIGGER)) {
                             bot.execute(botService.cancelEmail(username, chatId));
                         } else {
                             String code = update.getMessage().getText().trim();
@@ -145,6 +149,19 @@ public class BotMessageHandler {
                         }
 
                         bot.execute(botService.changeUnits(username, unitsSystem, chatId));
+                        break;
+                    case SENDING_FEEDBACK:
+                        String feedback = update.getMessage().getText().trim();
+
+                        if (feedback.equals(CANCEL_TRIGGER)) {
+                            bot.execute(botService.cancelFeedback(username, chatId));
+                            return;
+                        }
+
+                        bot.execute(botService.feedbackSent(username, chatId));
+
+                        FeedbackDto feedbackDto = new FeedbackDto(username, feedback);
+                        rabbitMQProducer.sendFeedback(feedbackDto);
                         break;
                 }
             }

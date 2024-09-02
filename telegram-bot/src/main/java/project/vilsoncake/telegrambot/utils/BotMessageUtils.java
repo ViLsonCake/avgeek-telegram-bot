@@ -55,6 +55,9 @@ public class BotMessageUtils {
             case CURRENT_IMPERIAL_UNITS_TEXT -> BotMessageEngConst.CURRENT_IMPERIAL_UNITS_TEXT;
             case CURRENT_AVIATION_UNITS_TEXT -> BotMessageEngConst.CURRENT_AVIATION_UNITS_TEXT;
             case INCORRECT_UNITS_TEXT -> BotMessageEngConst.INCORRECT_UNITS_TEXT;
+            case FEEDBACK_COMMAND_TEXT -> BotMessageEngConst.FEEDBACK_COMMAND_TEXT;
+            case FEEDBACK_SENT_TEXT -> BotMessageEngConst.FEEDBACK_SENT_TEXT;
+            case CANCEL_FEEDBACK_SEND_TEXT -> BotMessageEngConst.CANCEL_FEEDBACK_SEND_TEXT;
             case WAIT_FOR_EMAIL_TEXT -> BotMessageEngConst.WAIT_FOR_EMAIL_TEXT;
             case INVALID_EMAIL_TEXT -> BotMessageEngConst.INVALID_EMAIL_TEXT;
             case INCORRECT_EMAIL_VERIFY_CODE -> BotMessageEngConst.INCORRECT_EMAIL_VERIFY_CODE;
@@ -63,7 +66,7 @@ public class BotMessageUtils {
             case EMAIL_NOT_VERIFY_EMAIL -> BotMessageEngConst.EMAIL_NOT_VERIFY_EMAIL;
             case MY_EMAIL_TEXT -> BotMessageEngConst.MY_EMAIL_TEXT;
             case REMOVE_EMAIL_TEXT -> BotMessageEngConst.REMOVE_EMAIL_TEXT;
-            case CANCEL_ADDING_EMAIL_TRIGGER -> BotMessageEngConst.CANCEL_ADDING_EMAIL_TRIGGER;
+            case CANCEL_ADDING_EMAIL_TRIGGER -> BotMessageEngConst.CANCEL_TRIGGER;
             case CANCEL_ADDING_EMAIL_TEXT -> BotMessageEngConst.CANCEL_ADDING_EMAIL_TEXT;
             case WAIT_FOR_CODE_TEXT -> BotMessageEngConst.WAIT_FOR_CODE_TEXT;
             case SELECT_LANGUAGE_TEXT -> BotMessageEngConst.SELECT_LANGUAGE_TEXT;
@@ -109,6 +112,9 @@ public class BotMessageUtils {
             case CURRENT_IMPERIAL_UNITS_TEXT -> BotMessageRuConst.CURRENT_IMPERIAL_UNITS_TEXT;
             case CURRENT_AVIATION_UNITS_TEXT -> BotMessageRuConst.CURRENT_AVIATION_UNITS_TEXT;
             case INCORRECT_UNITS_TEXT -> BotMessageRuConst.INCORRECT_UNITS_TEXT;
+            case FEEDBACK_COMMAND_TEXT -> BotMessageRuConst.FEEDBACK_COMMAND_TEXT;
+            case FEEDBACK_SENT_TEXT -> BotMessageRuConst.FEEDBACK_SENT_TEXT;
+            case CANCEL_FEEDBACK_SEND_TEXT -> BotMessageRuConst.CANCEL_FEEDBACK_SEND_TEXT;
             case WAIT_FOR_EMAIL_TEXT -> BotMessageRuConst.WAIT_FOR_EMAIL_TEXT;
             case INVALID_EMAIL_TEXT -> BotMessageRuConst.INVALID_EMAIL_TEXT;
             case INCORRECT_EMAIL_VERIFY_CODE -> BotMessageRuConst.INCORRECT_EMAIL_VERIFY_CODE;
@@ -163,6 +169,9 @@ public class BotMessageUtils {
             case CURRENT_IMPERIAL_UNITS_TEXT -> BotMessageUkConst.CURRENT_IMPERIAL_UNITS_TEXT;
             case CURRENT_AVIATION_UNITS_TEXT -> BotMessageUkConst.CURRENT_AVIATION_UNITS_TEXT;
             case INCORRECT_UNITS_TEXT -> BotMessageUkConst.INCORRECT_UNITS_TEXT;
+            case FEEDBACK_COMMAND_TEXT -> BotMessageUkConst.FEEDBACK_COMMAND_TEXT;
+            case FEEDBACK_SENT_TEXT -> BotMessageUkConst.FEEDBACK_SENT_TEXT;
+            case CANCEL_FEEDBACK_SEND_TEXT -> BotMessageUkConst.CANCEL_FEEDBACK_SEND_TEXT;
             case WAIT_FOR_EMAIL_TEXT -> BotMessageUkConst.WAIT_FOR_EMAIL_TEXT;
             case INVALID_EMAIL_TEXT -> BotMessageUkConst.INVALID_EMAIL_TEXT;
             case INCORRECT_EMAIL_VERIFY_CODE -> BotMessageUkConst.INCORRECT_EMAIL_VERIFY_CODE;

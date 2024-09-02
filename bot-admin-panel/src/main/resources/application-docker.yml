@@ -31,6 +31,8 @@ spring:
             url: ${APPLICATION_HOST}/custom-messages
           - label: Statistics
             url: ${APPLICATION_HOST}/statistics/users
+          - label: Feedback
+            url: ${APPLICATION_HOST}/feedback
           - label: Github
             url: ${GITHUB_REPOSITORY_URL}
         view-settings:

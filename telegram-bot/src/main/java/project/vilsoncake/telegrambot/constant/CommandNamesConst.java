@@ -30,4 +30,5 @@ public class CommandNamesConst {
     public static final String IMPERIAL_UNITS_BUTTON_TEXT = "Imperial";
     public static final String AVIATION_UNITS_BUTTON_TEXT = "Aviation";
     public static final List<String> UNITS = List.of(METRIC_UNITS_BUTTON_TEXT, IMPERIAL_UNITS_BUTTON_TEXT, AVIATION_UNITS_BUTTON_TEXT);
+    public static final String FEEDBACK_COMMAND_NAME = "/feedback";
 }

@@ -35,4 +35,7 @@ public interface BotService {
     UserState getUserState(String username);
     boolean isUserRegistered(String username);
     List<SendMessage> sendCustomMessage(MessageDto messageDto);
+    SendMessage feedbackCommand(String username, Long chatId);
+    SendMessage feedbackSent(String username, Long chatId);
+    SendMessage cancelFeedback(String username, Long chatId);
 }

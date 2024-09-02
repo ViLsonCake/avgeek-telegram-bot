@@ -267,5 +267,11 @@ public class BotMessageUkConst {
     public static final String METRIC_ALTITUDE_UNIT_UK = "м";
     public static final String IMPERIAL_ALTITUDE_UNIT_UK = "фут";
     public static final String AVIATION_ALTITUDE_UNIT_UK = "фут";
-
+    public static final String FEEDBACK_COMMAND_TEXT = """
+            *Напишіть зворотній зв'язок сюди*
+            
+            Якщо ви не хочете надсилати зворотній зв'язок, введіть __"cancel"__
+            """;
+    public static final String FEEDBACK_SENT_TEXT = "Дякую за зворотній зв'язок!";
+    public static final String CANCEL_FEEDBACK_SEND_TEXT = "Надсилання зворотнього зв'язку скасовано";
 }

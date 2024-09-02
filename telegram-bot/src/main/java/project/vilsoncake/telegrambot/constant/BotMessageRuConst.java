@@ -267,4 +267,11 @@ public class BotMessageRuConst {
     public static final String METRIC_ALTITUDE_UNIT_RU = "м";
     public static final String IMPERIAL_ALTITUDE_UNIT_RU = "фут";
     public static final String AVIATION_ALTITUDE_UNIT_RU = "фут";
+    public static final String FEEDBACK_COMMAND_TEXT = """
+            *Напишите обратную связь сюда*
+                        
+            Если вы не хотите отправлять обратную связь, введите __"cancel"__
+            """;
+    public static final String FEEDBACK_SENT_TEXT = "Благодарю за обратную связь!";
+    public static final String CANCEL_FEEDBACK_SEND_TEXT = "Отправление обратной связи отменено";
 }

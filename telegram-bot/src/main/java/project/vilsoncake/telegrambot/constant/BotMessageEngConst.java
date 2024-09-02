@@ -208,7 +208,7 @@ public class BotMessageEngConst {
     public static final String EMAIL_NOT_VERIFY_EMAIL = "Your _email_ is %s, *but it's not verified.*";
     public static final String MY_EMAIL_TEXT = "Your _email_ is %s";
     public static final String REMOVE_EMAIL_TEXT = "Your _email_ has been *removed* from bot.";
-    public static final String CANCEL_ADDING_EMAIL_TRIGGER = "cancel";
+    public static final String CANCEL_TRIGGER = "cancel";
     public static final String CANCEL_ADDING_EMAIL_TEXT = "Adding _email_ has been *canceled*.";
     public static final String WAIT_FOR_CODE_TEXT = """
             A *confirmation code* has been sent to your _email_, *enter it*
@@ -269,4 +269,11 @@ public class BotMessageEngConst {
     public static final String METRIC_ALTITUDE_UNIT_ENG = "m";
     public static final String IMPERIAL_ALTITUDE_UNIT_ENG = "ft";
     public static final String AVIATION_ALTITUDE_UNIT_ENG = "ft";
+    public static final String FEEDBACK_COMMAND_TEXT = """
+            *Write feedback here*
+                        
+            If you don't want to send feedback, write __"cancel"__
+            """;
+    public static final String FEEDBACK_SENT_TEXT = "Thank you for the feedback!";
+    public static final String CANCEL_FEEDBACK_SEND_TEXT = "Sending feedback is canceled";
 }

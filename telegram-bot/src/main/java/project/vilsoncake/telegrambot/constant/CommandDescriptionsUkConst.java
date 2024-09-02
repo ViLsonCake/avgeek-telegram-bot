@@ -13,4 +13,5 @@ public class CommandDescriptionsUkConst {
     public static final String CHANGE_LANGUAGE_COMMAND_UK_DESCRIPTION = "Змінити мову бота";
     public static final String CHANGE_UNITS_COMMAND_UK_DESCRIPTION = "Змінити систему одиниць виміру";
     public static final String CURRENT_UNITS_COMMAND_UK_DESCRIPTION = "Отримати поточну систему одиниць виміру";
+    public static final String FEEDBACK_COMMAND_UK_DESCRIPTION = "Надіслати зворотній зв'язок";
 }

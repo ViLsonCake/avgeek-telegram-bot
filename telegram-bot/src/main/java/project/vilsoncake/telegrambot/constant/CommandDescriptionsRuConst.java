@@ -13,4 +13,5 @@ public class CommandDescriptionsRuConst {
     public static final String CHANGE_LANGUAGE_COMMAND_RU_DESCRIPTION = "Изменить язык бота";
     public static final String CHANGE_UNITS_COMMAND_RU_DESCRIPTION = "Изменить систему единиц измерения";
     public static final String CURRENT_UNITS_COMMAND_RU_DESCRIPTION = "Получить текущую систему единиц измерения";
+    public static final String FEEDBACK_COMMAND_RU_DESCRIPTION = "Отправить обратную связь";
 }

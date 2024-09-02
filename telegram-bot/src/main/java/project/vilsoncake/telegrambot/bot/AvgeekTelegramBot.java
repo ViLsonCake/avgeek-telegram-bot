@@ -44,6 +44,7 @@ public class AvgeekTelegramBot extends AbilityBot {
         botCommandsEng.add(new BotCommand(CURRENT_MODE_COMMAND_NAME, CURRENT_MODE_COMMAND_ENG_DESCRIPTION));
         botCommandsEng.add(new BotCommand(CHANGE_UNITS_COMMAND_NAME, CHANGE_UNITS_COMMAND_ENG_DESCRIPTION));
         botCommandsEng.add(new BotCommand(CURRENT_UNITS_COMMAND_NAME, CURRENT_UNITS_COMMAND_ENG_DESCRIPTION));
+        botCommandsEng.add(new BotCommand(FEEDBACK_COMMAND_NAME, FEEDBACK_COMMAND_ENG_DESCRIPTION));
         botCommandsEng.add(new BotCommand(CHANGE_LANGUAGE_COMMAND_NAME, CHANGE_LANGUAGE_COMMAND_ENG_DESCRIPTION));
         botCommandsEng.add(new BotCommand(SET_EMAIL_COMMAND_NAME, SET_EMAIL_COMMAND_ENG_DESCRIPTION));
         botCommandsEng.add(new BotCommand(MY_EMAIL_COMMAND_NAME, MY_EMAIL_COMMAND_ENG_DESCRIPTION));
@@ -58,6 +59,7 @@ public class AvgeekTelegramBot extends AbilityBot {
         botCommandsRu.add(new BotCommand(CURRENT_MODE_COMMAND_NAME, CURRENT_MODE_COMMAND_RU_DESCRIPTION));
         botCommandsRu.add(new BotCommand(CHANGE_UNITS_COMMAND_NAME, CHANGE_UNITS_COMMAND_RU_DESCRIPTION));
         botCommandsRu.add(new BotCommand(CURRENT_UNITS_COMMAND_NAME, CURRENT_UNITS_COMMAND_RU_DESCRIPTION));
+        botCommandsRu.add(new BotCommand(FEEDBACK_COMMAND_NAME, FEEDBACK_COMMAND_RU_DESCRIPTION));
         botCommandsRu.add(new BotCommand(CHANGE_LANGUAGE_COMMAND_NAME, CHANGE_LANGUAGE_COMMAND_RU_DESCRIPTION));
         botCommandsRu.add(new BotCommand(SET_EMAIL_COMMAND_NAME, SET_EMAIL_COMMAND_RU_DESCRIPTION));
         botCommandsRu.add(new BotCommand(MY_EMAIL_COMMAND_NAME, MY_EMAIL_COMMAND_RU_DESCRIPTION));
@@ -72,6 +74,7 @@ public class AvgeekTelegramBot extends AbilityBot {
         botCommandsUk.add(new BotCommand(CURRENT_MODE_COMMAND_NAME, CURRENT_MODE_COMMAND_UK_DESCRIPTION));
         botCommandsUk.add(new BotCommand(CHANGE_UNITS_COMMAND_NAME, CHANGE_UNITS_COMMAND_UK_DESCRIPTION));
         botCommandsUk.add(new BotCommand(CURRENT_UNITS_COMMAND_NAME, CURRENT_UNITS_COMMAND_UK_DESCRIPTION));
+        botCommandsUk.add(new BotCommand(FEEDBACK_COMMAND_NAME, FEEDBACK_COMMAND_UK_DESCRIPTION));
         botCommandsUk.add(new BotCommand(CHANGE_LANGUAGE_COMMAND_NAME, CHANGE_LANGUAGE_COMMAND_UK_DESCRIPTION));
         botCommandsUk.add(new BotCommand(SET_EMAIL_COMMAND_NAME, SET_EMAIL_COMMAND_UK_DESCRIPTION));
         botCommandsUk.add(new BotCommand(MY_EMAIL_COMMAND_NAME, MY_EMAIL_COMMAND_UK_DESCRIPTION));
