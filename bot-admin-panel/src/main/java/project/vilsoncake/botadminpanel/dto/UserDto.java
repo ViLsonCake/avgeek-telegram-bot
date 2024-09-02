@@ -33,7 +33,7 @@ public class UserDto {
         userDto.setEmail(userEntity.getEmail());
         userDto.setEmailVerified(userEntity.isEmailVerified());
         userDto.setEmailCode(userEntity.getEmailCode());
-        userDto.setAirport(userEntity.getAirport().toUpperCase());
+        userDto.setAirport(userEntity.getAirport());
         userDto.setState(userEntity.getState());
         userDto.setBotMode(reformatBotMode(userEntity.getBotMode()));
         userDto.setBotLanguage(userEntity.getBotLanguage());
