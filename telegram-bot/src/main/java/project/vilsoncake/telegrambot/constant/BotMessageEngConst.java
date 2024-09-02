@@ -2,7 +2,7 @@ package project.vilsoncake.telegrambot.constant;
 
 public class BotMessageEngConst {
     public static final String START_TEXT = """
-            Hello, %s. Welcome to *Avgeek bot*!
+            Hello dear user. Welcome to *Avgeek bot*!
                         
             *What can this bot do?*
             

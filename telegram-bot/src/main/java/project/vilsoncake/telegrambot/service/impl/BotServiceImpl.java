@@ -73,7 +73,7 @@ public class BotServiceImpl implements BotService {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setParseMode(MARKDOWN_PARSE_MODE);
-        message.setText(String.format(botMessageUtils.getMessageByLanguage(START_TEXT, user.getBotLanguage()), username));
+        message.setText(botMessageUtils.getMessageByLanguage(START_TEXT, user.getBotLanguage()));
 
         return message;
     }

@@ -2,7 +2,7 @@ package project.vilsoncake.telegrambot.constant;
 
 public class BotMessageUkConst {
     public static final String START_TEXT = """
-            Вітаю, %s. Ласкаво просимо до бота *Avgeek*!
+            Вітаю дорогий користувач. Ласкаво прошу до бота *Avgeek*!
                         
             *Що вміє цей бот?*
             
