@@ -1,6 +1,6 @@
 # Plane Spotting Telegram Bot
 
-[![Stack](https://skillicons.dev/icons?i=java,spring,maven,gradle,postgres,python,fastapi,rabbitmq,docker&perline=10&theme=dark)](https://skillicons.dev)
+[![Stack](https://skillicons.dev/icons?i=java,spring,maven,gradle,postgres,python,fastapi,rabbitmq,mongo,docker&perline=10&theme=dark)](https://skillicons.dev)
 
 ## Introduction
 
@@ -29,6 +29,19 @@ More notification examples you can find [here](./telegram-bot/src/main/resources
     + **An-124** - You will receive notifications **only** about An-124 flights.
     + **Mute** - You will not receive **any** notifications.
 - **/currentmode** - Get current bot mode.
+- **/changeunits** - Change System of Units.
+    + **Metric**
+        + _Altitude_ - meters
+        + _Distance_ - kilometers
+        + _Speed_ - kilometers per hour
+    + **Imperial**
+        + _Altitude_ - feet
+        + _Distance_ - miles
+        + _Speed_ - miles per hour
+    + **Aviation**
+        + _Altitude_ - feet
+        + _Distance_ - nautical miles
+        + _Speed_ - knots
 - **/lang** - Change bot language.
     + English
     + Ukrainian
