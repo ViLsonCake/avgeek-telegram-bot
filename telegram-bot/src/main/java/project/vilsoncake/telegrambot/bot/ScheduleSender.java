@@ -12,6 +12,7 @@ import project.vilsoncake.telegrambot.dto.*;
 import project.vilsoncake.telegrambot.entity.FlightEntity;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
+import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
 import project.vilsoncake.telegrambot.service.FlightService;
 import project.vilsoncake.telegrambot.service.GeonameService;
@@ -52,6 +53,11 @@ public class ScheduleSender {
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
+
+            if (!user.getState().equals(UserState.CHOSEN_AIRPORT)) {
+                continue;
+            }
+
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
 
                 FlightsDto flightsDto = apiWebClient.get()
@@ -125,6 +131,11 @@ public class ScheduleSender {
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
+
+            if (!user.getState().equals(UserState.CHOSEN_AIRPORT)) {
+                continue;
+            }
+
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
                 List<FlightEntity> flights = flightService.findAllByUser(user);
 
@@ -182,6 +193,11 @@ public class ScheduleSender {
                 .block();
 
         for (UserEntity user : users) {
+
+            if (!user.getState().equals(UserState.CHOSEN_AIRPORT)) {
+                continue;
+            }
+
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
                 for (An124FlightDto flight : an124FlightsDto.getFlights()) {
                     AirportDto userAirport = airportsUtils.getAirportByIataCode(user.getAirport());
