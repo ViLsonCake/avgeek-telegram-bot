@@ -452,6 +452,10 @@ public class BotServiceImpl implements BotService {
         List<SendMessage> messages = new ArrayList<>();
 
         for (UserEntity user : users) {
+            if (user.getBotMode().equals(BotMode.MUTE)) {
+                continue;
+            }
+
             SendMessage message = new SendMessage();
             message.setChatId(user.getChatId());
             message.setParseMode(MARKDOWN_PARSE_MODE);
