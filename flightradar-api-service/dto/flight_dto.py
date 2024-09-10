@@ -39,6 +39,7 @@ class An124Flight:
     code: str
     callsign: str
     aircraft: str
+    airline: str
     origin_airport_iata: str
     destination_airport_iata: str
     altitude: int
@@ -52,6 +53,7 @@ class An124Flight:
         self.code = flight.aircraft_code
         self.callsign = flight.callsign
         self.aircraft = get_aircraft_name_by_code(self.code)
+        self.airline = flight.airline_icao
         self.origin_airport_iata = flight.origin_airport_iata
         self.destination_airport_iata = flight.destination_airport_iata
         self.altitude = convert_feet_to_meters(flight.altitude)

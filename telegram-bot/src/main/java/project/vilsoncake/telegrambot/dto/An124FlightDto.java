@@ -18,6 +18,9 @@ public class An124FlightDto {
     @JsonAlias("aircraft")
     private String aircraft;
 
+    @JsonAlias
+    private String airline;
+
     @JsonAlias("origin_airport_iata")
     private String originAirportIata;
 

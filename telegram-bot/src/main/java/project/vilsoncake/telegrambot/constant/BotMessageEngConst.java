@@ -76,7 +76,8 @@ public class BotMessageEngConst {
     public static final String AN_124_FLIGHT_TEXT = """
             ✈️ *An-124* (*%s*) in the air right now.
             
-            Altitude: *%s*:
+            Airline: *%s*
+            Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
             
@@ -85,8 +86,7 @@ public class BotMessageEngConst {
     public static final String AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT = """
             ✈️ *An-124* (*%s*) preparing for takeoff from *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%sm*
-            Ground speed: *%s*
+            Airline: *%s*
             Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
@@ -94,8 +94,7 @@ public class BotMessageEngConst {
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%s*
-            Ground speed: *%s*
+            Airline: *%s*
             Distance from your airport: *%s*
             
             [View here](https://www.flightradar24.com/%s/%s)
@@ -103,8 +102,7 @@ public class BotMessageEngConst {
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_KNOWN_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
             
-            Altitude: *%s*
-            Ground speed: *%s*
+            Airline: *%s*
             Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
@@ -113,6 +111,7 @@ public class BotMessageEngConst {
     public static final String AN_124_LANDING_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -122,6 +121,7 @@ public class BotMessageEngConst {
     public static final String AN_124_LANDING_KNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -132,6 +132,7 @@ public class BotMessageEngConst {
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) is _landing_.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -141,6 +142,7 @@ public class BotMessageEngConst {
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_KNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) is _landing_.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -151,6 +153,7 @@ public class BotMessageEngConst {
     public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -160,6 +163,7 @@ public class BotMessageEngConst {
     public static final String AN_124_TAKEOFF_FROM_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff from *%s* (*%s*), *%s*, *%s*.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -169,6 +173,7 @@ public class BotMessageEngConst {
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
             ‼️ *An-124 (*%s*) WILL MOST LIKELY TO LAND AT YOUR AIRPORT* ‼️
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -178,6 +183,7 @@ public class BotMessageEngConst {
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) _flying near_ your airport.
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -187,6 +193,7 @@ public class BotMessageEngConst {
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
             ‼️ *An-124 (*%s*) IN YOUR AIRPORT RIGHT NOW* ‼️
             
+            Airline: *%s*
             Altitude: *%s*
             Ground speed: *%s*
             Distance from your airport: *%s*
@@ -276,4 +283,5 @@ public class BotMessageEngConst {
             """;
     public static final String FEEDBACK_SENT_TEXT = "Thank you for the feedback!";
     public static final String CANCEL_FEEDBACK_SEND_TEXT = "Sending feedback is canceled";
+    public static final String ANTONOV_AIRLINES_NAME = "Antonov Airlines";
 }

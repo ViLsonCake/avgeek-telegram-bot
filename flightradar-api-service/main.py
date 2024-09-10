@@ -19,6 +19,17 @@ async def pong(api_key=Depends(api_key_auth)):
 async def get_aircraft_by_code(aircraft_code: str, api_key=Depends(api_key_auth)):
     flights: list = flightradar_api.get_flights(aircraft_type=aircraft_code)
     flights = [An124Flight(flight) for flight in flights]
+
+    for flight in flights:
+        airline_name = list(filter(lambda airline: airline['ICAO'] == flight.airline, flightradar_api.get_airlines()))
+
+        if len(airline_name) == 0:
+            airline_name = ''
+        else:
+            airline_name = airline_name[0]['Name']
+
+        flight.airline = airline_name
+
     return {'flights': flights}
 
 
