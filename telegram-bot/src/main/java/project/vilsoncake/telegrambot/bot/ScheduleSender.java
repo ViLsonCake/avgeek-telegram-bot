@@ -212,7 +212,7 @@ public class ScheduleSender {
                         flightEntity.setDistance(flight.getDistance());
                         flightService.addFlightToUser(flightEntity);
 
-                        if (flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_IN_AIRPORT_ALTITUDE_IN_M) {
+                        if (flight.getAltitude() == ON_GROUND_ALTITUDE && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM) {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
                             message.setParseMode(MARKDOWN_PARSE_MODE);
@@ -224,7 +224,7 @@ public class ScheduleSender {
                                     flight.getCallsign(), flight.getId()
                             ));
                             botSender.sendMessage(message);
-                        } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
+                        } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M && flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
                             message.setParseMode(MARKDOWN_PARSE_MODE);
@@ -237,6 +237,8 @@ public class ScheduleSender {
                             ));
                             botSender.sendMessage(message);
                         } else if (flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
+                            flightService.changeFlightFlyingNear(flightEntity, true);
+
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
                             message.setParseMode(MARKDOWN_PARSE_MODE);
@@ -336,7 +338,8 @@ public class ScheduleSender {
 
                     } else {
                         FlightEntity flightEntity = flightService.findByUserAndFlightId(user, flight.getId());
-                        if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_IN_AIRPORT_ALTITUDE_IN_M && flightEntity.isActive()) {
+
+                        if (flight.getAltitude() == ON_GROUND_ALTITUDE && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM) {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
@@ -363,7 +366,7 @@ public class ScheduleSender {
                                 );
                             }
 
-                        } else if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M && !flightEntity.isActive()) {
+                        } else if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() < FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M && !flightEntity.isActive() && flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
                             flightService.changeFlightActive(flightEntity, true);
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
                             SendMessage message = new SendMessage();
@@ -377,8 +380,9 @@ public class ScheduleSender {
                                     flight.getCallsign(), flight.getId()
                             ));
                             botSender.sendMessage(message);
-                        } else if (flight.getDistance() < flightEntity.getDistance() && flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
-                            flightService.changeFlightDistance(flightEntity, flight.getDistance());
+                        } else if (!flightEntity.isFlyingNear() && flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
+                            flightService.changeFlightFlyingNear(flightEntity, true);
+
                             SendMessage message = new SendMessage();
                             message.setChatId(user.getChatId());
                             message.setParseMode(MARKDOWN_PARSE_MODE);
