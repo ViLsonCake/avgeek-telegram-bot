@@ -17,10 +17,11 @@ public class BotMessageEngConst {
             Open the *command menu* for more details.
             
             
-            *Now select the airport you're interested in*
+            *Now let's select the airport you're interested in*
             
             For this, write the *icao/iata* code of your airport.
             For example: *(FRA) - Frankfurt Airport*.
+            The airport name and brackets don't need to be written, only the code.
             
             You can get it on [Flightradar24](https://www.flightradar24.com).
             """;
