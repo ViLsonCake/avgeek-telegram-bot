@@ -24,6 +24,8 @@ public class BotMessageEngConst {
             The airport name and brackets don't need to be written, only the code.
             
             You can get it on [Flightradar24](https://www.flightradar24.com).
+            
+            *Please note!* The bot will start working only after selecting an airport.
             """;
     public static final String CHOOSE_AIRPORT_TEXT = "Great! Now your airport is *%s*.";
     public static final String CHANGE_AIRPORT_TEXT = "Write the *iata/icao* code of your airport, you can get it on [flightradar24](https://www.flightradar24.com).";

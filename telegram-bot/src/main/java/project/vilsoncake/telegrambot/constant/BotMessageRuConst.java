@@ -24,6 +24,8 @@ public class BotMessageRuConst {
             Название аэропорта и скобки писать не требуется, только код.
             
             Вы можете узнать его на [Flightradar24](https://www.flightradar24.com).
+            
+            *Обратите внимание!* Бот начнет работу только после выбора аэропорта.
             """;
     public static final String CHOOSE_AIRPORT_TEXT = "Отлично! теперь ваш аэропорт это *%s*.";
     public static final String CHANGE_AIRPORT_TEXT = "Напишите *iata/icao* код вашего аэропорта, вы можете получить его на [flightradar24](https://www.flightradar24.com).";
