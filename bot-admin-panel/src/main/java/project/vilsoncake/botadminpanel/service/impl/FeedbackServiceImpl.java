@@ -25,12 +25,16 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Value("${github.repository-link}")
     private String repositoryLink;
 
+    @Value("${better-stack.link}")
+    private String betterStackLink;
+
     @Override
     public String getFeedbackPage(Model model) {
         List<FormattedFeedbackDto> usersFeedback = feedbackRepository.findAll().stream().map(FormattedFeedbackDto::fromDocument).toList();
 
         model.addAttribute("usersFeedback", usersFeedback);
         model.addAttribute("repositoryLink", repositoryLink);
+        model.addAttribute("betterStackLink", betterStackLink);
 
         return "feedback.html";
     }

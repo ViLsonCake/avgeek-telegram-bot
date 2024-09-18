@@ -83,5 +83,8 @@ rabbitmq:
 github:
   repository-link: ${GITHUB_REPOSITORY_URL}
 
+better-stack:
+  link: ${BETTER_STACK_LINK}
+
 server:
   port: 8888

@@ -24,9 +24,13 @@ public class UserStatisticServiceImpl implements UserStatisticService {
     @Value("${github.repository-link}")
     private String repositoryLink;
 
+    @Value("${better-stack.link}")
+    private String betterStackLink;
+
     @Override
     public String getUsersStatisticPage(Model model) {
         model.addAttribute("repositoryLink", repositoryLink);
+        model.addAttribute("betterStackLink", betterStackLink);
         model.addAttribute("usersActivity", userStatisticRepository.getFormattedUsersStatistic());
         model.addAttribute("usersLastActivity", userStatisticRepository.findAllByOrderByCreatedAtDesc(PageRequest.of(0, 20)).getContent());
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotLanguage;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotMode;
+import project.vilsoncake.botadminpanel.entity.enumerated.UnitsSystem;
 import project.vilsoncake.botadminpanel.entity.enumerated.UserState;
 
 import java.util.Date;
@@ -54,6 +55,10 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "bot_language")
     private BotLanguage botLanguage = BotLanguage.ENG;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "units_system")
+    private UnitsSystem unitsSystem = UnitsSystem.METRIC;
 
     @Column(name = "created_at", updatable = false)
     private Date createdAt = new Date();

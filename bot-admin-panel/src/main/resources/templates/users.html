@@ -22,6 +22,7 @@
                     <li><a href="/custom-messages">Messages</a></li>
                     <li><a href="/statistics/users">Statistics</a></li>
                     <li><a href="/feedback">Feedback</a></li>
+                    <li><a th:href="${betterStackLink}">Better Stack</a></li>
                     <li><a th:href="${repositoryLink}">Github</a></li>
                 </ul>
             </div>
@@ -41,6 +42,7 @@
                     <th>email-verified</th>
                     <th>email-code</th>
                     <th>bot-language</th>
+                    <th>units-system</th>
                     <th>created-at</th>
                 </tr>
             </thead>
@@ -55,6 +57,7 @@
                 <td th:text="${user.isEmailVerified()}"></td>
                 <td th:text="${user.getEmailCode()}"></td>
                 <td th:text="${user.getBotLanguage()}"></td>
+                <td th:text="${user.getUnitsSystem()}"></td>
                 <td th:text="${user.getCreatedAt()}"></td>
             </tr>
         </table>

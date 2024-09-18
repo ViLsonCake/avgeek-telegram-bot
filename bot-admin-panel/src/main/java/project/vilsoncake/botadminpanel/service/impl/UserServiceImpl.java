@@ -19,12 +19,16 @@ public class UserServiceImpl implements UserService {
     @Value("${github.repository-link}")
     private String repositoryLink;
 
+    @Value("${better-stack.link}")
+    private String betterStackLink;
+
     @Override
     public String getUsersPage(Model model) {
         List<UserDto> users = userRepository.findAllByOrderByCreatedAtDesc().stream().map(UserDto::fromEntity).toList();
         model.addAttribute("users", users);
         model.addAttribute("usersCount", users.size());
         model.addAttribute("repositoryLink", repositoryLink);
+        model.addAttribute("betterStackLink", betterStackLink);
 
         if (!users.isEmpty()) {
             model.addAttribute("lastAddedUser", users.get(0));

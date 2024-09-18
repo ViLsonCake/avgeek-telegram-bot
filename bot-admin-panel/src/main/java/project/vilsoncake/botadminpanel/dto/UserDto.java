@@ -1,6 +1,7 @@
 package project.vilsoncake.botadminpanel.dto;
 
 import lombok.Data;
+import project.vilsoncake.botadminpanel.entity.enumerated.UnitsSystem;
 import project.vilsoncake.botadminpanel.entity.jpa.UserEntity;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotLanguage;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotMode;
@@ -21,6 +22,7 @@ public class UserDto {
     private UserState state;
     private String botMode;
     private BotLanguage botLanguage;
+    private UnitsSystem unitsSystem;
     private String createdAt;
 
     public static UserDto fromEntity(UserEntity userEntity) {
@@ -37,6 +39,7 @@ public class UserDto {
         userDto.setState(userEntity.getState());
         userDto.setBotMode(reformatBotMode(userEntity.getBotMode()));
         userDto.setBotLanguage(userEntity.getBotLanguage());
+        userDto.setUnitsSystem(userEntity.getUnitsSystem());
         userDto.setCreatedAt(simpleDateFormat.format(userEntity.getCreatedAt()));
 
         return userDto;
