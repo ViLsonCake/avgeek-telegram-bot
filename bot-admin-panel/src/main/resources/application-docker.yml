@@ -33,6 +33,8 @@ spring:
             url: ${APPLICATION_HOST}/statistics/users
           - label: Feedback
             url: ${APPLICATION_HOST}/feedback
+          - label: Better Stack
+            url: ${BETTER_STACK_LINK}
           - label: Github
             url: ${GITHUB_REPOSITORY_URL}
         view-settings:
