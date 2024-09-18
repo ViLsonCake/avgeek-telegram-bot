@@ -46,8 +46,9 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
 1. Install Docker [here](https://docs.docker.com/engine/install/).
 2. Create a Telegram bot using [BotFather](https://t.me/BotFather).
 3. Create Geonames account [here](https://www.geonames.org/export/web-services.html).
+4. Create an account and an application in [Better Stack](https://logs.betterstack.com/).
 
-4. Create an **.env** file
+5. Create an **.env** file
     ```dotenv
     API_KEY=YOUR_RANDOM_API_KEY
     API_URL=http://localhost:8000
@@ -90,9 +91,11 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
     APPLICATION_HOST=YOUR_ADMIN_APPLICATION_HOST
 
     GITHUB_REPOSITORY_URL=LINK_TO_YOUR_REPOSITORY
+
+    LOGGING_TOKEN=YOUR_BETTER_STACK_TOKEN
     ```
 
-5. Run the application in **Docker**:
+6. Run the application in **Docker**:
     ```
     docker compose up --build -d
     ```
