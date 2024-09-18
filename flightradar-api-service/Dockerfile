@@ -1,11 +1,11 @@
 FROM python:3.9
 
-WORKDIR /code
+WORKDIR /app
 
 COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY . /code/app
+COPY . /app/
 
-CMD ["fastapi", "run", "app/main.py"]
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000", "--log-config=config/log_config.yml"]

@@ -1,12 +1,16 @@
+import uvicorn
+
+from FlightRadar24 import FlightRadar24API
 from FlightRadar24.errors import AirportNotFoundError
 from fastapi import FastAPI, Depends, HTTPException, status
-from security.api_key_security import api_key_auth
-from FlightRadar24 import FlightRadar24API
-from utils.flight_utils import get_white_list_plane_codes
 
 from dto.flight_dto import Flight, An124Flight, ScheduledFlight
+from logger.middleware import LoggingMiddleware
+from security.api_key_security import api_key_auth
+from utils.flight_utils import get_white_list_plane_codes
 
 app = FastAPI()
+app.add_middleware(LoggingMiddleware)
 flightradar_api: FlightRadar24API = FlightRadar24API()
 
 
@@ -75,3 +79,8 @@ async def get_white_list_planes(code: str, api_key=Depends(api_key_auth)):
 
     return {'flights': [ScheduledFlight(flight) for flight in row_white_list_arrivals]}
 
+
+
+
+if __name__ == '__main__':
+    uvicorn.run(app)

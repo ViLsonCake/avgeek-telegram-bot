@@ -3,7 +3,7 @@ import json
 
 
 def get_json_config() -> dict[str, str]:
-    with open(os.getcwd() + '/app/config/whitelist-aircraft-codes.json', 'r') as config_file:
+    with open(os.getcwd() + '/config/whitelist-aircraft-codes.json', 'r') as config_file:
         string_json = config_file.read()
 
     return json.loads(string_json)['white_list_codes']
