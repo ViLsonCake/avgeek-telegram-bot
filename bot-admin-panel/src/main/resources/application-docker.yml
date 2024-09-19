@@ -88,5 +88,8 @@ github:
 better-stack:
   link: ${BETTER_STACK_LINK}
 
+app:
+  timezone: ${TIMEZONE}
+
 server:
   port: 8888

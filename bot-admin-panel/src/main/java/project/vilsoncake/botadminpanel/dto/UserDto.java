@@ -1,13 +1,13 @@
 package project.vilsoncake.botadminpanel.dto;
 
 import lombok.Data;
-import project.vilsoncake.botadminpanel.entity.enumerated.UnitsSystem;
-import project.vilsoncake.botadminpanel.entity.jpa.UserEntity;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotLanguage;
 import project.vilsoncake.botadminpanel.entity.enumerated.BotMode;
+import project.vilsoncake.botadminpanel.entity.enumerated.UnitsSystem;
 import project.vilsoncake.botadminpanel.entity.enumerated.UserState;
+import project.vilsoncake.botadminpanel.entity.jpa.UserEntity;
+import project.vilsoncake.botadminpanel.utils.LocalApplicationDate;
 
-import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 @Data
@@ -26,8 +26,6 @@ public class UserDto {
     private String createdAt;
 
     public static UserDto fromEntity(UserEntity userEntity) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss-dd.MM.yyyy");
-
         UserDto userDto = new UserDto();
         userDto.setId(userEntity.getId());
         userDto.setUsername(userEntity.getUsername());
@@ -40,7 +38,7 @@ public class UserDto {
         userDto.setBotMode(reformatBotMode(userEntity.getBotMode()));
         userDto.setBotLanguage(userEntity.getBotLanguage());
         userDto.setUnitsSystem(userEntity.getUnitsSystem());
-        userDto.setCreatedAt(simpleDateFormat.format(userEntity.getCreatedAt()));
+        userDto.setCreatedAt(new LocalApplicationDate(userEntity.getCreatedAt()).getTime());
 
         return userDto;
     }

@@ -2,8 +2,7 @@ package project.vilsoncake.botadminpanel.dto;
 
 import lombok.Data;
 import project.vilsoncake.botadminpanel.entity.document.FeedbackDocument;
-
-import java.text.SimpleDateFormat;
+import project.vilsoncake.botadminpanel.utils.LocalApplicationDate;
 
 @Data
 public class FormattedFeedbackDto {
@@ -12,10 +11,8 @@ public class FormattedFeedbackDto {
     private String createdAt;
 
     public static FormattedFeedbackDto fromDocument(FeedbackDocument feedbackDocument) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss-dd.MM.yyyy");
-
         FormattedFeedbackDto formattedFeedbackDto = new FormattedFeedbackDto();
-        formattedFeedbackDto.setCreatedAt(simpleDateFormat.format(feedbackDocument.getCreatedAt()));
+        formattedFeedbackDto.setCreatedAt(new LocalApplicationDate(feedbackDocument.getCreatedAt()).getTime());
         formattedFeedbackDto.setUsername(feedbackDocument.getUsername());
         formattedFeedbackDto.setText(feedbackDocument.getText());
 
