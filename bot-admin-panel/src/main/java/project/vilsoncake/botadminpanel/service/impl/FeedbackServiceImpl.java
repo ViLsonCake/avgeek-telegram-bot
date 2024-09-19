@@ -28,9 +28,15 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Value("${better-stack.link}")
     private String betterStackLink;
 
+    @Value("${app.timezone}")
+    private String timezone;
+
     @Override
     public String getFeedbackPage(Model model) {
-        List<FormattedFeedbackDto> usersFeedback = feedbackRepository.findAll().stream().map(FormattedFeedbackDto::fromDocument).toList();
+        List<FormattedFeedbackDto> usersFeedback = feedbackRepository.findAll()
+                .stream()
+                .map(feedback -> FormattedFeedbackDto.fromDocument(feedback, timezone))
+                .toList();
 
         model.addAttribute("usersFeedback", usersFeedback);
         model.addAttribute("repositoryLink", repositoryLink);

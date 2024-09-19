@@ -22,9 +22,16 @@ public class UserServiceImpl implements UserService {
     @Value("${better-stack.link}")
     private String betterStackLink;
 
+    @Value("${app.timezone}")
+    private String timezone;
+
     @Override
     public String getUsersPage(Model model) {
-        List<UserDto> users = userRepository.findAllByOrderByCreatedAtDesc().stream().map(UserDto::fromEntity).toList();
+        List<UserDto> users = userRepository.findAllByOrderByCreatedAtDesc()
+                .stream()
+                .map(user -> UserDto.fromEntity(user, timezone))
+                .toList();
+
         model.addAttribute("users", users);
         model.addAttribute("usersCount", users.size());
         model.addAttribute("repositoryLink", repositoryLink);

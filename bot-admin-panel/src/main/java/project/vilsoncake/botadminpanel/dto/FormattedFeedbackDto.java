@@ -10,9 +10,9 @@ public class FormattedFeedbackDto {
     private String text;
     private String createdAt;
 
-    public static FormattedFeedbackDto fromDocument(FeedbackDocument feedbackDocument) {
+    public static FormattedFeedbackDto fromDocument(FeedbackDocument feedbackDocument, String timezone) {
         FormattedFeedbackDto formattedFeedbackDto = new FormattedFeedbackDto();
-        formattedFeedbackDto.setCreatedAt(new LocalApplicationDate(feedbackDocument.getCreatedAt()).getTime());
+        formattedFeedbackDto.setCreatedAt(new LocalApplicationDate(feedbackDocument.getCreatedAt(), timezone).getTime());
         formattedFeedbackDto.setUsername(feedbackDocument.getUsername());
         formattedFeedbackDto.setText(feedbackDocument.getText());
 

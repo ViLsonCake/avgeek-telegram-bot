@@ -25,7 +25,7 @@ public class UserDto {
     private UnitsSystem unitsSystem;
     private String createdAt;
 
-    public static UserDto fromEntity(UserEntity userEntity) {
+    public static UserDto fromEntity(UserEntity userEntity, String timezone) {
         UserDto userDto = new UserDto();
         userDto.setId(userEntity.getId());
         userDto.setUsername(userEntity.getUsername());
@@ -38,7 +38,7 @@ public class UserDto {
         userDto.setBotMode(reformatBotMode(userEntity.getBotMode()));
         userDto.setBotLanguage(userEntity.getBotLanguage());
         userDto.setUnitsSystem(userEntity.getUnitsSystem());
-        userDto.setCreatedAt(new LocalApplicationDate(userEntity.getCreatedAt()).getTime());
+        userDto.setCreatedAt(new LocalApplicationDate(userEntity.getCreatedAt(), timezone).getTime());
 
         return userDto;
     }
