@@ -93,7 +93,10 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
     GITHUB_REPOSITORY_URL=LINK_TO_YOUR_REPOSITORY
 
     LOGGING_TOKEN=YOUR_BETTER_STACK_TOKEN
+    BETTER_STACK_LINK=https://logs.betterstack.com
+    TIMEZONE=Europe/London
     ```
+   _All Timezones you can find [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)._
 
 6. Run the application in **Docker**:
     ```
