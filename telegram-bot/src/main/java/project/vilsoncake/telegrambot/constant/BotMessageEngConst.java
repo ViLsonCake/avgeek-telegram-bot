@@ -27,7 +27,11 @@ public class BotMessageEngConst {
             
             *Please note!* The bot will start working only after selecting an airport.
             """;
-    public static final String CHOOSE_AIRPORT_TEXT = "Great! Now your airport is *%s*.";
+    public static final String CHOOSE_AIRPORT_TEXT = """
+            Great! Now your airport is *%s*.
+            
+            The bot will update arrivals every 10 minutes.
+            """;
     public static final String CHANGE_AIRPORT_TEXT = "Write the *iata/icao* code of your airport, you can get it on [flightradar24](https://www.flightradar24.com).";
     public static final String CURRENT_AIRPORT_TEXT = "Your current airport is *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "The code __%s__ is *invalid*, make sure you didn't make a typo.";
@@ -38,9 +42,9 @@ public class BotMessageEngConst {
             Aircraft: *%s*
             Airline: *%s*
             
-            [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
+            ✈️ [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
             
-            [Arrivals to your airport](https://www.flightradar24.com/airport/%s/arrivals)
+            🛬 [Arrivals to your airport](https://www.flightradar24.com/airport/%s/arrivals)
             """;
     public static final String FLIGHT_WITHOUT_REGISTRATION_TEXT = """
             ⌛️ _Scheduled_ flight to your airport from *%s* (*%s*), *%s*.
@@ -48,7 +52,7 @@ public class BotMessageEngConst {
             Aircraft: *%s*
             Airline: *%s*
             
-            [Arrivals to your airport](https://www.flightradar24.com/airport/%s/arrivals)
+            🛬 [Arrivals to your airport](https://www.flightradar24.com/airport/%s/arrivals)
             """;
     public static final String DEPARTED_FLIGHT_TEXT = """
             🛫 Flight (*%s*) _departed_ for your airport from *%s* (*%s*), *%s*.
@@ -59,9 +63,9 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
+            ✈️ [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String LANDING_FLIGHT_TEXT = """
             🛬 Flight (*%s*) _approaches_ your airport from *%s* (*%s*), *%s*.
@@ -72,9 +76,9 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
+            ✈️ [Aircraft info](https://www.flightradar24.com/data/aircraft/%s)
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLIGHT_TEXT = """
             ✈️ *An-124* (*%s*) in the air right now.
@@ -84,7 +88,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_BEFORE_FLIGHT_TEXT = """
             ✈️ *An-124* (*%s*) preparing for takeoff from *%s* (*%s*), *%s*, *%s*.
@@ -92,7 +96,7 @@ public class BotMessageEngConst {
             Airline: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
@@ -100,7 +104,7 @@ public class BotMessageEngConst {
             Airline: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_KNOWN_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) landed at *%s* (*%s*), *%s*, *%s*.
@@ -109,7 +113,7 @@ public class BotMessageEngConst {
             Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
@@ -119,7 +123,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_KNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) _landing_ near *%s* (*%s*), *%s*, *%s*.
@@ -130,7 +134,7 @@ public class BotMessageEngConst {
             Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_UNKNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) is _landing_.
@@ -140,7 +144,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_KNOWN_AIRPORT_TEXT = """
             🛬 *An-124* (*%s*) is _landing_.
@@ -151,7 +155,7 @@ public class BotMessageEngConst {
             Distance from your airport: *%s*
             Departure airport: *%s* (*%s*), *%s*, *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff near *%s* (*%s*), *%s*, *%s*.
@@ -161,7 +165,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_FROM_TEXT = """
             🛫 *An-124* (*%s*) _gaining altitude_ after takeoff from *%s* (*%s*), *%s*, *%s*.
@@ -171,7 +175,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
             ‼️ *An-124 (*%s*) WILL MOST LIKELY TO LAND AT YOUR AIRPORT* ‼️
@@ -181,7 +185,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
             ✈️ *An-124* (*%s*) _flying near_ your airport.
@@ -191,7 +195,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
             ‼️ *An-124 (*%s*) IN YOUR AIRPORT RIGHT NOW* ‼️
@@ -201,7 +205,7 @@ public class BotMessageEngConst {
             Ground speed: *%s*
             Distance from your airport: *%s*
             
-            [View here](https://www.flightradar24.com/%s/%s)
+            📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_CODE = "A124";
     public static final String CHOOSING_MODE_TEXT = "Choose _mode_ please:";

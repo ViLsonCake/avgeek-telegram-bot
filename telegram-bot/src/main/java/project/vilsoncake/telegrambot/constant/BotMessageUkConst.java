@@ -27,7 +27,11 @@ public class BotMessageUkConst {
             
             *Зверніть увагу!* Бот почне працювати тільки після вибору аеропорту.
             """;
-    public static final String CHOOSE_AIRPORT_TEXT = "Чудово! Тепер ваш аеропорт це *%s*.";
+    public static final String CHOOSE_AIRPORT_TEXT = """
+            Чудово! Тепер ваш аеропорт це *%s*.
+            
+            Бот оновлюватиме інформацію про прибуття кожні 10 хвилин.
+            """;
     public static final String CHANGE_AIRPORT_TEXT = "Напишіть *iata/icao* код вашого аеропорту, ви можете знайти його на [flightradar24](https://www.flightradar24.com).";
     public static final String CURRENT_AIRPORT_TEXT = "Ваш поточний аеропорт це *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
     public static final String INVALID_AIRPORT_CODE_TEXT = "Код __%s__ *некоректний*, будь ласка перевірте чи не допустили ви помилку.";
@@ -38,9 +42,9 @@ public class BotMessageUkConst {
             Повітряне судно: *%s*
             Авіакомпанія: *%s*
             
-            [Інформація про повітряне судно](https://www.flightradar24.com/data/aircraft/%s)
+            ✈️ [Інформація про повітряне судно](https://www.flightradar24.com/data/aircraft/%s)
             
-            [Прибуття до вашого аеропорту](https://www.flightradar24.com/airport/%s/arrivals)
+            🛬 [Прибуття до вашого аеропорту](https://www.flightradar24.com/airport/%s/arrivals)
             """;
     public static final String FLIGHT_WITHOUT_REGISTRATION_TEXT = """
             ⌛️ _Запланований_ рейс до вашого аеропорту з *%s* (*%s*), *%s*.
@@ -48,7 +52,7 @@ public class BotMessageUkConst {
             Повітряне судно: *%s*
             Авіакомпанія: *%s*
                         
-            [Прибуття до вашого аеропорту](https://www.flightradar24.com/airport/%s/arrivals)
+            🛬 [Прибуття до вашого аеропорту](https://www.flightradar24.com/airport/%s/arrivals)
             """;
     public static final String DEPARTED_FLIGHT_TEXT = """
             🛫 Рейс (*%s*) _вилетів_ до вашого аеропорту з *%s* (*%s*), *%s*.
@@ -59,9 +63,9 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Інформація про повітряне судно](https://www.flightradar24.com/data/aircraft/%s)
+            ✈️ [Інформація про повітряне судно](https://www.flightradar24.com/data/aircraft/%s)
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String LANDING_FLIGHT_TEXT = """
             🛬 Рейс (*%s*) _заходить на посадку_ до вашого аеропорту з *%s* (*%s*), *%s*.
@@ -72,9 +76,9 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Інформація про повітряне судно](https://www.flightradar24.com/data/aircraft/%s)
+            ✈️ [Інформація про повітряне судно](https://www.flightradar24.com/data/aircraft/%s)
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLIGHT_TEXT = """
             ✈️ *Ан-124* (*%s*) знаходиться зараз у повітрі.
@@ -84,7 +88,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_BEFORE_TEXT = """
             ✈️ *Ан-124* (*%s*) готується до зльоту з *%s* (*%s*), *%s*, *%s*.
@@ -92,7 +96,7 @@ public class BotMessageUkConst {
             Авіакомпанія: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_UNKNOWN_AIRPORT_TEXT = """
             ✈️ *Ан-124* (*%s*) приземлився в *%s* (*%s*), *%s*, *%s*.
@@ -100,7 +104,7 @@ public class BotMessageUkConst {
             Авіакомпанія: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_ON_GROUND_AFTER_FLIGHT_KNOWN_AIRPORT_TEXT = """
             ✈️ *Ан-124* (*%s*) приземлився в *%s* (*%s*), *%s*, *%s*.
@@ -109,7 +113,7 @@ public class BotMessageUkConst {
             Відстань від вашого аеропорту: *%s*
             Аеропорт вильоту: *%s* (*%s*), *%s*, *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_UNKNOWN_AIRPORT_TEXT = """
             🛬 *Ан-124* (*%s*) _заходить на посадку_ поблизу *%s* (*%s*), *%s*, *%s*.
@@ -119,7 +123,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_KNOWN_AIRPORT_TEXT = """
             🛬 *Ан-124* (*%s*) _заходить на посадку_ поблизу *%s* (*%s*), *%s*, *%s*.
@@ -130,7 +134,7 @@ public class BotMessageUkConst {
             Відстань від вашого аеропорту: *%s*
             Аеропорт вильоту: *%s* (*%s*), *%s*, *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_UNKNOWN_AIRPORT_TEXT = """
             🛬 *Ан-124* (*%s*) _заходить на посадку_.
@@ -140,7 +144,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LANDING_NO_NEAR_AIRPORT_KNOWN_AIRPORT_TEXT = """
             🛬 *Ан-124* (*%s*) _заходить на посадку_.
@@ -151,7 +155,7 @@ public class BotMessageUkConst {
             Відстань від вашого аеропорту: *%s*
             Аеропорт вильоту: *%s* (*%s*), *%s*, *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_NEAR_TEXT = """
             🛫 *Ан-124* (*%s*) _набирає висоту_ після зльоту поблизу *%s* (*%s*), *%s*, *%s*.
@@ -161,7 +165,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_TAKEOFF_FROM_TEXT = """
             🛫 *Ан-124* (*%s*) _набирає висоту_ після зльоту з *%s* (*%s*), *%s*, *%s*.
@@ -171,7 +175,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_LIKELY_TO_LAND_AIRPORT_TEXT = """
             ‼️ *Ан-124 (*%s*) СКОРІШ ЗА ВСЕ СІДАЄ В ВАШ АЕРОПОРТ* ‼️
@@ -181,7 +185,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_FLYING_NEAR_YOUR_AIRPORT_TEXT = """
             ✈️ *Ан-124* (*%s*) _пролітає біля_ вашого аеропорту.
@@ -191,7 +195,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_IN_YOUR_AIRPORT_NOW_TEXT = """
             ‼️ *Ан-124 (*%s*) ЗНАХОДИТЬСЯ У ВАШОМУ АЕРОПОРТУ ПРЯМО ЗАРАЗ* ‼️
@@ -201,7 +205,7 @@ public class BotMessageUkConst {
             Швидкість: *%s*
             Відстань від вашого аеропорту: *%s*
             
-            [Дивіться тут](https://www.flightradar24.com/%s/%s)
+            📍 [Дивіться тут](https://www.flightradar24.com/%s/%s)
             """;
     public static final String CHOOSING_MODE_TEXT = "Виберіть _режим_";
     public static final String CHOSEN_MODE_ALL_TEXT = "Ви будете отримувати сповіщення про польоти Ан-124 *а також* про польоти широкофюзеляжних літаках летящих у ваш аеропорт.";
