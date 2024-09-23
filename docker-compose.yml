@@ -9,6 +9,8 @@ services:
       - .env
     ports:
       - '8000:8000'
+    networks:
+      - avgeek_bot_network
 
   avgeek-telegram-bot:
     container_name: avgeek-telegram-bot
@@ -26,6 +28,8 @@ services:
         condition: service_started
       flightradar-api:
         condition: service_started
+    networks:
+      - avgeek_bot_network
 
   bot-admin-panel:
     container_name: bot-admin-panel
@@ -45,6 +49,8 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_started
+    networks:
+      - avgeek_bot_network
 
   postgres:
     container_name: avgeek_bot_postgres
@@ -59,6 +65,8 @@ services:
       - postgres_storage:/data/postgres
     ports:
       - '5433:5432'
+    networks:
+      - avgeek_bot_network
 
   rabbitmq:
     container_name: avgeek-rabbitmq
@@ -76,6 +84,8 @@ services:
       retries: 5
     volumes:
       - rabbitmq_storage:/data/rabbitmq
+    networks:
+      - avgeek_bot_network
 
   mongodb:
     image: mongo:latest
@@ -88,8 +98,14 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - mongo_storage:/mongo/data
+    networks:
+      - avgeek_bot_network
 
 volumes:
   postgres_storage:
   rabbitmq_storage:
   mongo_storage:
+
+networks:
+  avgeek_bot_network:
+    driver: bridge
