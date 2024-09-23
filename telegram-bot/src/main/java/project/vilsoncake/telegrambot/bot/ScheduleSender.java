@@ -1,6 +1,7 @@
 package project.vilsoncake.telegrambot.bot;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,7 @@ import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTempla
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class ScheduleSender {
 
@@ -51,6 +53,7 @@ public class ScheduleSender {
     @Transactional
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() {
+        log.info("Schedule sending wide body flights started.");
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
@@ -126,10 +129,12 @@ public class ScheduleSender {
                 }
             }
         }
+        log.info("Schedule sending wide body flights finished.");
     }
 
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() {
+        log.info("Schedule sending landing flights started.");
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
@@ -180,10 +185,12 @@ public class ScheduleSender {
                 }
             }
         }
+        log.info("Schedule sending landing flights finished.");
     }
 
     @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
+        log.info("Schedule sending An-124 flights started.");
         List<UserEntity> users = userService.findAllUsers();
 
         An124FlightsDto an124FlightsDto = apiWebClient.get()
@@ -502,5 +509,6 @@ public class ScheduleSender {
                 }
             }
         }
+        log.info("Schedule sending An-124 flights finished.");
     }
 }
