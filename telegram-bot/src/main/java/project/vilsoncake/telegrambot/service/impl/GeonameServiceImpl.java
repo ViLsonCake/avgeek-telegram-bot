@@ -27,13 +27,26 @@ public class GeonameServiceImpl implements GeonameService {
         queryParams.add("maxRows", "1");
         queryParams.add("username", geonamesProperties.getUsername());
 
-        return geoNamesWebClient.get()
+
+        GeonamesDto geonamesDto = geoNamesWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParams(queryParams)
                         .build()
                 )
                 .retrieve()
                 .bodyToMono(GeonamesDto.class)
-                .block().getGeonames().get(0);
+                .block();
+
+        if (geonamesDto.getGeonames() != null && !geonamesDto.getGeonames().isEmpty()) {
+            return geonamesDto.getGeonames().get(0);
+        }
+
+        GeonameDto geonameDto = new GeonameDto();
+        geonameDto.setName(q);
+        geonameDto.setCountryName(country);
+        geonameDto.setLatitude(0);
+        geonameDto.setLongitude(0);
+
+        return geonameDto;
     }
 }

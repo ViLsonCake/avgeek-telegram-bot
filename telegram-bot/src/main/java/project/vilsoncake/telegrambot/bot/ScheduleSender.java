@@ -71,10 +71,10 @@ public class ScheduleSender {
                         .block();
 
                 for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
-                    if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
-                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
-                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
+                    AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
+                    GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
 
+                    if (!flightService.existsByUserAndFlightId(user, flight.getId())) {
                         FlightEntity flightEntity = new FlightEntity(flight.getId(), user);
                         flightEntity.setRegistration(flight.getRegistration());
 
@@ -96,9 +96,6 @@ public class ScheduleSender {
 
                         flightService.addFlightToUser(flightEntity);
                     } else if (flightService.existsByUserAndFlightId(user, flight.getId()) && flight.isLive() && !flightService.findByUserAndFlightId(user, flight.getId()).isActive()) {
-                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
-                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
-
                         flightService.changeFlightActive(flightService.findByUserAndFlightId(user, flight.getId()), true);
 
                         FlightDataDto flightDataDto;
