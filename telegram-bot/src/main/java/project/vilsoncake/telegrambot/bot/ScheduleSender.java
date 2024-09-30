@@ -64,11 +64,18 @@ public class ScheduleSender {
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
 
-                FlightsDto flightsDto = apiWebClient.get()
-                        .uri("/airport/flights/" + user.getAirport())
-                        .retrieve()
-                        .bodyToMono(FlightsDto.class)
-                        .block();
+                FlightsDto flightsDto;
+
+                try {
+                    flightsDto = apiWebClient.get()
+                            .uri("/airport/flights/" + user.getAirport())
+                            .retrieve()
+                            .bodyToMono(FlightsDto.class)
+                            .block();
+                } catch (WebClientResponseException e) {
+                    log.error("Error when requesting API for scheduled flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+                    continue;
+                }
 
                 for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
                     AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
@@ -147,6 +154,7 @@ public class ScheduleSender {
                     if (flightEntity.isActive() && flightEntity.getRegistration() != null && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
 
                         FlightDataDto flight;
+
                         try {
                             flight = apiWebClient.get()
                                     .uri("/registration/" + flightEntity.getRegistration() + "/" + user.getAirport())
@@ -154,6 +162,7 @@ public class ScheduleSender {
                                     .bodyToMono(FlightDataDto.class)
                                     .block();
                         } catch (WebClientResponseException e) {
+                            log.error("Error when requesting API for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
                             continue;
                         }
 
@@ -161,10 +170,9 @@ public class ScheduleSender {
                             continue;
                         }
 
-                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getOriginAirportIata());
-                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
-
                         if (flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
+                            AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getOriginAirportIata());
+                            GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
                             flightService.changeFlightLanding(flightEntity, true);
 
                             SendMessage message = BaseBotMessage.getBaseBotMessage(user.getChatId());
@@ -190,11 +198,18 @@ public class ScheduleSender {
         log.info("Schedule sending An-124 flights started.");
         List<UserEntity> users = userService.findAllUsers();
 
-        An124FlightsDto an124FlightsDto = apiWebClient.get()
-                .uri("/aircraft/" + BotMessageEngConst.AN_124_CODE)
-                .retrieve()
-                .bodyToMono(An124FlightsDto.class)
-                .block();
+        An124FlightsDto an124FlightsDto;
+
+        try {
+            an124FlightsDto = apiWebClient.get()
+                    .uri("/aircraft/" + BotMessageEngConst.AN_124_CODE)
+                    .retrieve()
+                    .bodyToMono(An124FlightsDto.class)
+                    .block();
+        } catch (WebClientResponseException e) {
+            log.error("Error when requesting API for An-124 flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+            return;
+        }
 
         for (UserEntity user : users) {
 
