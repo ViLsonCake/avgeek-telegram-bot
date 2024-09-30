@@ -12,4 +12,9 @@ textarea {
 
 .button-container {
     padding-left: 30px;
+    padding-top: 15px;
+}
+
+.radio-buttons {
+    padding-left: 30px;
 }

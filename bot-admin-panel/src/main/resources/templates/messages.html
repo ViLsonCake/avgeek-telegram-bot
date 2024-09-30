@@ -48,7 +48,20 @@
 
     <div class="alert alert-info">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Info!</strong> The message will be sent in <b>Markdown</b> mode. Check the <a href="https://core.telegram.org/bots/api#markdownv2-style">Telegram Markdown Syntax</a>
+        <strong>Info!</strong> The message will be sent in <b>Markdown</b> mode. Check the <a href="https://core.telegram.org/bots/api#markdownv2-style">Telegram Markdown Syntax</a>.
+    </div>
+
+    <div class="radio-buttons">
+        <h2>Send this message to</h2>
+        <div class="radio">
+            <label><input type="radio" name="users-group" value="ALL" checked>All users</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="users-group" value="ONLY_SELECTED">Only those users who have selected an airport</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="users-group" value="ONLY_NOT_SELECTED">Only those users who have <b>not</b> selected an airport</label>
+        </div>
     </div>
 
     <div class="button-container">

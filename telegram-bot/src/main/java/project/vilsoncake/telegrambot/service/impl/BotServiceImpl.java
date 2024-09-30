@@ -11,10 +11,7 @@ import project.vilsoncake.telegrambot.dto.AirportCodesDto;
 import project.vilsoncake.telegrambot.dto.AirportDto;
 import project.vilsoncake.telegrambot.dto.MessageDto;
 import project.vilsoncake.telegrambot.entity.UserEntity;
-import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
-import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
-import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
-import project.vilsoncake.telegrambot.entity.enumerated.UserState;
+import project.vilsoncake.telegrambot.entity.enumerated.*;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
 import project.vilsoncake.telegrambot.service.BotService;
 import project.vilsoncake.telegrambot.service.MailService;
@@ -30,6 +27,8 @@ import java.util.List;
 import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.PING_COMMAND_TEXT;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
+import static project.vilsoncake.telegrambot.entity.enumerated.CustomMessageMode.ONLY_NOT_SELECTED;
+import static project.vilsoncake.telegrambot.entity.enumerated.CustomMessageMode.ONLY_SELECTED;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_SUBJECT;
 import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.CODE_MESSAGE_TEXT;
 import static project.vilsoncake.telegrambot.entity.enumerated.UserState.*;
@@ -397,6 +396,14 @@ public class BotServiceImpl implements BotService {
 
         for (UserEntity user : users) {
             if (user.getBotMode().equals(BotMode.MUTE)) {
+                continue;
+            }
+
+            if (messageDto.getMode().equals(ONLY_SELECTED) && user.getAirport() == null) {
+                continue;
+            }
+
+            if (messageDto.getMode().equals(ONLY_NOT_SELECTED) && user.getAirport() != null) {
                 continue;
             }
 

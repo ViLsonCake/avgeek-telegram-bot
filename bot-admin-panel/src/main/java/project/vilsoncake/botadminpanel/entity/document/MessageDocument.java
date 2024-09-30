@@ -19,4 +19,5 @@ public class MessageDocument {
     private String englishText;
     private String russianText;
     private String ukrainianText;
+    private String mode;
 }
