@@ -2,6 +2,8 @@ package project.vilsoncake.telegrambot.bot;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
+import project.vilsoncake.telegrambot.exception.FlightNotFoundException;
 import project.vilsoncake.telegrambot.service.FlightService;
 import project.vilsoncake.telegrambot.service.GeonameService;
 import project.vilsoncake.telegrambot.service.MailService;
@@ -24,6 +27,7 @@ import project.vilsoncake.telegrambot.utils.BotMessageUtils;
 import project.vilsoncake.telegrambot.utils.MailMessageUtils;
 import project.vilsoncake.telegrambot.utils.UnitsUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +57,7 @@ public class ScheduleSender {
     @Transactional
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() {
-        log.info("Schedule sending wide body flights started.");
+        log.info("Schedule sending wide body flights started...");
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
@@ -138,7 +142,30 @@ public class ScheduleSender {
 
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() {
-        log.info("Schedule sending landing flights started.");
+        log.info("Schedule sending landing flights started...");
+
+        List<FlightEntity> uniqueRegistrations = flightService.findUniqueFlightsRegistrations();
+        List<FlightDataDto> flightDataDtos = new ArrayList<>();
+
+        for (FlightEntity flightEntity : uniqueRegistrations) {
+
+            FlightDataDto flight;
+            try {
+                flight = apiWebClient.get()
+                        .uri("/registration/" + flightEntity.getRegistration() + "/" + flightEntity.getUser().getAirport())
+                        .retrieve()
+                        .bodyToMono(FlightDataDto.class)
+                        .block();
+            } catch (WebClientResponseException e) {
+                if (!e.getStatusCode().equals(HttpStatusCode.valueOf(HttpStatus.SC_NOT_FOUND))) {
+                    log.error("Error when requesting API for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+                }
+                continue;
+            }
+
+            flightDataDtos.add(flight);
+        }
+
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
@@ -148,28 +175,21 @@ public class ScheduleSender {
             }
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
-                List<FlightEntity> flights = flightService.findAllByUser(user);
+                for (FlightDataDto flight : flightDataDtos) {
 
-                for (FlightEntity flightEntity : flights) {
+                    if (flight.getOriginAirportIata() == null || flight.getOriginAirportIata().isBlank() || !flight.getDestinationAirportIata().equalsIgnoreCase(user.getAirport())) {
+                        continue;
+                    }
+
+                    FlightEntity flightEntity;
+
+                    try {
+                        flightEntity = flightService.findByUserAndRegistration(user, flight.getRegistration());
+                    } catch (FlightNotFoundException e) {
+                        continue;
+                    }
+
                     if (flightEntity.isActive() && flightEntity.getRegistration() != null && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
-
-                        FlightDataDto flight;
-
-                        try {
-                            flight = apiWebClient.get()
-                                    .uri("/registration/" + flightEntity.getRegistration() + "/" + user.getAirport())
-                                    .retrieve()
-                                    .bodyToMono(FlightDataDto.class)
-                                    .block();
-                        } catch (WebClientResponseException e) {
-                            log.error("Error when requesting API for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
-                            continue;
-                        }
-
-                        if (flight.getOriginAirportIata() == null || flight.getOriginAirportIata().isBlank() || !flight.getDestinationAirportIata().equalsIgnoreCase(user.getAirport())) {
-                            continue;
-                        }
-
                         if (flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
                             AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getOriginAirportIata());
                             GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
@@ -195,7 +215,7 @@ public class ScheduleSender {
 
     @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
-        log.info("Schedule sending An-124 flights started.");
+        log.info("Schedule sending An-124 flights started...");
         List<UserEntity> users = userService.findAllUsers();
 
         An124FlightsDto an124FlightsDto;

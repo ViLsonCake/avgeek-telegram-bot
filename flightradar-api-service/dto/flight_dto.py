@@ -8,6 +8,7 @@ class Flight:
     code: str
     callsign: str
     aircraft: str
+    registration: str
     origin_airport_iata: str
     destination_airport_iata: str
     airline: str
@@ -24,6 +25,7 @@ class Flight:
         self.callsign = flight.callsign
         self.airline = airline
         self.aircraft = get_aircraft_name_by_code(self.code)
+        self.registration = flight.registration
         self.origin_airport_iata = flight.origin_airport_iata
         self.destination_airport_iata = flight.destination_airport_iata
         self.altitude = convert_feet_to_meters(flight.altitude)
