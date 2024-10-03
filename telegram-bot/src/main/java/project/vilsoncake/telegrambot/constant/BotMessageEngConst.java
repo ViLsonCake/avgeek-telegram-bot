@@ -30,7 +30,7 @@ public class BotMessageEngConst {
     public static final String CHOOSE_AIRPORT_TEXT = """
             Great! Now your airport is *%s*.
             
-            The bot will update arrivals every 10 minutes.
+            The bot will update arrivals every 15 minutes.
             """;
     public static final String CHANGE_AIRPORT_TEXT = "Write the *iata/icao* code of your airport, you can get it on [flightradar24](https://www.flightradar24.com).";
     public static final String CURRENT_AIRPORT_TEXT = "Your current airport is *%s* ([%s](https://www.flightradar24.com/airport/%s)).";

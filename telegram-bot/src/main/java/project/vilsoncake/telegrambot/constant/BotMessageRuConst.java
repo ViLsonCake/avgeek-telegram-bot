@@ -30,7 +30,7 @@ public class BotMessageRuConst {
     public static final String CHOOSE_AIRPORT_TEXT = """
             Отлично! теперь ваш аэропорт это *%s*.
             
-            Бот будет обновлять информацию о прибытиях каждые 10 минут.
+            Бот будет обновлять информацию о прибытиях каждые 15 минут.
             """;
     public static final String CHANGE_AIRPORT_TEXT = "Напишите *iata/icao* код вашего аэропорта, вы можете получить его на [flightradar24](https://www.flightradar24.com).";
     public static final String CURRENT_AIRPORT_TEXT = "Ваш текущий аэропорт это *%s* ([%s](https://www.flightradar24.com/airport/%s)).";
