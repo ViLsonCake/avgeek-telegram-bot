@@ -28,7 +28,9 @@ import project.vilsoncake.telegrambot.utils.MailMessageUtils;
 import project.vilsoncake.telegrambot.utils.UnitsUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.ANTONOV_AIRLINES_NAME;
@@ -58,6 +60,27 @@ public class ScheduleSender {
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() {
         log.info("Schedule sending wide body flights started...");
+
+        List<String> uniqueAirports = userService.findUniqueAirports();
+        Map<String, FlightsDto> uniqueAirportsFlights = new HashMap<>();
+
+        for (String airport : uniqueAirports) {
+            FlightsDto flightsDto;
+
+            try {
+                flightsDto = apiWebClient.get()
+                        .uri("/airport/flights/" + airport.toUpperCase())
+                        .retrieve()
+                        .bodyToMono(FlightsDto.class)
+                        .block();
+            } catch (WebClientResponseException e) {
+                log.error("Error when requesting API for scheduled flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+                continue;
+            }
+
+            uniqueAirportsFlights.put(airport.toUpperCase(), flightsDto);
+        }
+
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
@@ -67,19 +90,7 @@ public class ScheduleSender {
             }
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
-
-                FlightsDto flightsDto;
-
-                try {
-                    flightsDto = apiWebClient.get()
-                            .uri("/airport/flights/" + user.getAirport())
-                            .retrieve()
-                            .bodyToMono(FlightsDto.class)
-                            .block();
-                } catch (WebClientResponseException e) {
-                    log.error("Error when requesting API for scheduled flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
-                    continue;
-                }
+                FlightsDto flightsDto = uniqueAirportsFlights.get(user.getAirport().toUpperCase());
 
                 for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
                     AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());

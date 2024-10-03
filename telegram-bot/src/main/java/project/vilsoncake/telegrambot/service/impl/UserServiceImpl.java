@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> findUniqueAirports() {
+        return userRepository.findUniqueAirports();
+    }
+
+    @Override
     public boolean addNewUser(UserEntity user) {
         if (isUserExistsByUsername(user.getUsername())) {
             return false;

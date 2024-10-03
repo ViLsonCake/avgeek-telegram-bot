@@ -12,6 +12,7 @@ public interface UserService {
     boolean isUserExistsByUsername(String username);
     UserEntity getUserByUsername(String username);
     List<UserEntity> findAllUsers();
+    List<String> findUniqueAirports();
     boolean addNewUser(UserEntity user);
     UserEntity changeUserState(String username, UserState state);
     UserEntity changeUserBotMode(String username, BotMode botMode);
