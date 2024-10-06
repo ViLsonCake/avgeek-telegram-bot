@@ -17,4 +17,5 @@ public class NumberConst {
     public static final double FLATTENING = 1 / 298.257223563;
     public static final double ERROR_TOLERANCE = 1e-12;
     public static final int ON_GROUND_RADIUS = 7;
+    public static final int REQUESTS_DELAY_IN_MILLIS = 1000;
 }

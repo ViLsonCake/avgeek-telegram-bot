@@ -58,13 +58,15 @@ public class ScheduleSender {
 
     @Transactional
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
-    public void sendNewScheduledAndLiveWideBodyFlights() {
+    public void sendNewScheduledAndLiveWideBodyFlights() throws InterruptedException {
         log.info("Schedule sending wide body flights started...");
 
         List<String> uniqueAirports = userService.findUniqueAirports();
         Map<String, FlightsDto> uniqueAirportsFlights = new HashMap<>();
 
         for (String airport : uniqueAirports) {
+            Thread.sleep(REQUESTS_DELAY_IN_MILLIS);
+
             FlightsDto flightsDto;
 
             try {
@@ -91,6 +93,10 @@ public class ScheduleSender {
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
                 FlightsDto flightsDto = uniqueAirportsFlights.get(user.getAirport().toUpperCase());
+
+                if (flightsDto == null) {
+                    continue;
+                }
 
                 for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
                     AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
@@ -152,13 +158,14 @@ public class ScheduleSender {
     }
 
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
-    public void sendLandingWideBodyFlights() {
+    public void sendLandingWideBodyFlights() throws InterruptedException {
         log.info("Schedule sending landing flights started...");
 
         List<FlightEntity> uniqueRegistrations = flightService.findUniqueFlightsRegistrations();
         List<FlightDataDto> flightDataDtos = new ArrayList<>();
 
         for (FlightEntity flightEntity : uniqueRegistrations) {
+            Thread.sleep(REQUESTS_DELAY_IN_MILLIS);
 
             FlightDataDto flight;
             try {
