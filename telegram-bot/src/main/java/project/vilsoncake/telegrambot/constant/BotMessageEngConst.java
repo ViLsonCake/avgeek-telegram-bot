@@ -208,7 +208,17 @@ public class BotMessageEngConst {
             📍 [View here](https://www.flightradar24.com/%s/%s)
             """;
     public static final String AN_124_CODE = "A124";
-    public static final String CHOOSING_MODE_TEXT = "Choose _mode_ please:";
+    public static final String CHOOSING_MODE_TEXT = """
+            Please select the _mode_
+            
+            All - You will receive notifications about An-124 flights *and* wide-body aircraft flights.
+            
+            Wide-body - You will receive notifications *only* for wide-body aircraft.
+            
+            An-124 - You will receive notifications *only* about An-124 flights.
+            
+            Mute - You will not receive *any* notifications.
+            """;
     public static final String CHOSEN_MODE_ALL_TEXT = "You will receive notifications about An-124 flights *and* wide-body aircraft flights.";
     public static final String CHOSEN_MODE_ONLY_AN_124_TEXT = "You will receive notifications *only* about An-124 flights.";
     public static final String CHOSEN_MODE_ONLY_WIDE_BODY_TEXT = "You will receive notifications *only* for wide-body aircraft.";
