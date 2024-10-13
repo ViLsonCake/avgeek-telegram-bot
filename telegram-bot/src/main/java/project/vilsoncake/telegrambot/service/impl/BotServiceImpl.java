@@ -475,10 +475,6 @@ public class BotServiceImpl implements BotService {
         List<SendMessage> messages = new ArrayList<>();
 
         for (UserEntity user : users) {
-            if (user.getBotMode().equals(BotMode.MUTE)) {
-                continue;
-            }
-
             if (messageDto.getMode().equals(ONLY_SELECTED) && user.getAirport() == null) {
                 continue;
             }
