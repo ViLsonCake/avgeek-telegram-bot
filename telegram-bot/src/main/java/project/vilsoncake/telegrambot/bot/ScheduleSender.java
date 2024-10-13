@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import project.vilsoncake.telegrambot.constant.BotMessageEngConst;
@@ -74,8 +75,11 @@ public class ScheduleSender {
                         .retrieve()
                         .bodyToMono(FlightsDto.class)
                         .block();
+            } catch (WebClientRequestException e) {
+                log.error("Error when requesting API for scheduled flights. URL: {}, Message: {}", e.getUri(), e.getMessage());
+                continue;
             } catch (WebClientResponseException e) {
-                log.error("Error when requesting API for scheduled flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+                log.error("Response API error for scheduled flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
                 continue;
             }
 
@@ -152,7 +156,7 @@ public class ScheduleSender {
                             ));
 
                             botSender.sendMessage(message);
-                        } catch (WebClientResponseException ignored) {
+                        } catch (WebClientRequestException | WebClientResponseException ignored) {
 
                         }
                     }
@@ -180,9 +184,12 @@ public class ScheduleSender {
                         .retrieve()
                         .bodyToMono(FlightDataDto.class)
                         .block();
+            } catch (WebClientRequestException e) {
+                log.error("Error when requesting API for landing flights. URL: {}, Message: {}", e.getUri(), e.getMessage());
+                continue;
             } catch (WebClientResponseException e) {
                 if (!e.getStatusCode().equals(HttpStatusCode.valueOf(HttpStatus.SC_NOT_FOUND))) {
-                    log.error("Error when requesting API for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+                    log.error("Response API error for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
                 }
                 continue;
             }
@@ -256,8 +263,11 @@ public class ScheduleSender {
                     .retrieve()
                     .bodyToMono(An124FlightsDto.class)
                     .block();
+        } catch (WebClientRequestException e) {
+            log.error("Error when requesting API for An-124 flights. URL: {}, Message: {}", e.getUri(), e.getMessage());
+            return;
         } catch (WebClientResponseException e) {
-            log.error("Error when requesting API for An-124 flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+            log.error("Response API error for An-124 flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
             return;
         }
 
