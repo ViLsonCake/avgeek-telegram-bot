@@ -67,6 +67,9 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<FlightEntity> flights;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<AircraftEntity> aircraft;
+
     public UserEntity(String username, Long chatId, UserState state) {
         this.username = username;
         this.chatId = chatId;

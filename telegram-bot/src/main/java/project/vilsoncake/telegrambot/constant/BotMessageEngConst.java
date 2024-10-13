@@ -223,6 +223,8 @@ public class BotMessageEngConst {
     public static final String MY_EMAIL_TEXT = "Your _email_ is %s";
     public static final String REMOVE_EMAIL_TEXT = "Your _email_ has been *removed* from bot.";
     public static final String CANCEL_TRIGGER = "cancel";
+    public static final String CALLBACK_ACCEPT_TRIGGER = "ACCEPT";
+    public static final String CALLBACK_CANCEL_TRIGGER = "CANCEL";
     public static final String CANCEL_ADDING_EMAIL_TEXT = "Adding _email_ has been *canceled*.";
     public static final String WAIT_FOR_CODE_TEXT = """
             A *confirmation code* has been sent to your _email_, *enter it*
@@ -291,4 +293,25 @@ public class BotMessageEngConst {
     public static final String FEEDBACK_SENT_TEXT = "Thank you for the feedback!";
     public static final String CANCEL_FEEDBACK_SEND_TEXT = "Sending feedback is canceled";
     public static final String ANTONOV_AIRLINES_NAME = "Antonov Airlines";
+    public static final String CHOOSE_AIRCRAFT_TEXT = """
+            *Select 1-5 wide-body aircraft whose scheduled flights you want to track.*
+
+            When you have selected all of the desired aircraft, press ✅.
+            If you want to deselect, press ❌, in which case you will have to use this command again.
+            """;
+    public static final String AIRCRAFT_ALREADY_CHOSEN_TEXT = "Aircraft *%s* already chosen. Choose different";
+    public static final String CHOSEN_MAX_AIRCRAFT_COUNT_TEXT = """
+            Great! There are your selected aircraft:
+            
+            %s
+            Now you will only receive notifications about them.
+            """;
+    public static final String CHOSEN_AIRCRAFT_COUNT_TEXT = """
+            There are your selected aircraft:
+            
+            %s
+            You will receive notifications only about them.
+            """;
+    public static final String CHOSEN_AIRCRAFT_TEXT = "You have selected *%s*, you can select %s more aircraft";
+    public static final String CANCEL_CHOOSING_AIRCRAFT_TEXT = "All your selected aircraft have been canceled, if you want to re-select the aircraft again use the command " + CommandNamesConst.SELECT_AIRCRAFT_COMMAND_NAME + ".";
 }

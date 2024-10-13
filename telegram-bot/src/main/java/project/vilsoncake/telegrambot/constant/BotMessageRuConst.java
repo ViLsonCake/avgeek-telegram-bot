@@ -288,4 +288,24 @@ public class BotMessageRuConst {
             """;
     public static final String FEEDBACK_SENT_TEXT = "Благодарю за обратную связь!";
     public static final String CANCEL_FEEDBACK_SEND_TEXT = "Отправление обратной связи отменено";
+    public static final String CHOOSE_AIRCRAFT_TEXT = """
+            *Выберите 1-5 широкофюзеляжных воздушных судов, запланированные рейсы которых вы хотите отслеживать.*
+            
+            Когда выберите все нужные воздушные судна, нажмите на ✅.
+            Если вы хотите отменить выбор, нажмите на ❌, в таком случае вам прийдется заново использовать данную команду. 
+            """;
+    public static final String AIRCRAFT_ALREADY_CHOSEN_TEXT = "Воздушное судно *%s* уже выбрано, выберите другое";
+    public static final String CHOSEN_MAX_AIRCRAFT_COUNT_TEXT = """
+            Отлично! Вот выбранные вами воздушные суда:
+            
+            %s
+            Теперь вы будете получать оповещения только о них.""";
+    public static final String CHOSEN_AIRCRAFT_COUNT_TEXT = """
+            Вот выбранные вами воздушные суда:
+            
+            %s
+            Вы будете получать оповещения только о них.
+            """;
+    public static final String CHOSEN_AIRCRAFT_TEXT = "Вы выбрали *%s*, вы можете выбрать еще %s воздушных судна";
+    public static final String CANCEL_CHOOSING_AIRCRAFT_TEXT = "Все выбранные вами воздушные суда были отменены, если хотите заново выбрать воздушные суда заново используйте команду " + CommandNamesConst.SELECT_AIRCRAFT_COMMAND_NAME + ".";
 }

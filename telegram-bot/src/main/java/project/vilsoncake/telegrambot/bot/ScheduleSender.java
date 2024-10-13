@@ -22,10 +22,7 @@ import project.vilsoncake.telegrambot.service.FlightService;
 import project.vilsoncake.telegrambot.service.GeonameService;
 import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
-import project.vilsoncake.telegrambot.utils.AirportsUtils;
-import project.vilsoncake.telegrambot.utils.BotMessageUtils;
-import project.vilsoncake.telegrambot.utils.MailMessageUtils;
-import project.vilsoncake.telegrambot.utils.UnitsUtils;
+import project.vilsoncake.telegrambot.utils.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +49,8 @@ public class ScheduleSender {
     private final BotMessageUtils botMessageUtils;
     private final MailMessageUtils mailMessageUtils;
     private final AirportsUtils airportsUtils;
+    private final AircraftUtils aircraftUtils;
+    private final List<Map<String, List<String>>> aircraftFamiliesCodes;
     private final UnitsUtils unitsUtils;
     private final WebClient apiWebClient;
     private final BotSender botSender;
@@ -99,6 +98,12 @@ public class ScheduleSender {
                 }
 
                 for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
+                    List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
+
+                    if (!userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
+                        continue;
+                    }
+
                     AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
                     GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
 
@@ -157,6 +162,7 @@ public class ScheduleSender {
         log.info("Schedule sending wide body flights finished.");
     }
 
+    @Transactional
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() throws InterruptedException {
         log.info("Schedule sending landing flights started...");
@@ -196,6 +202,12 @@ public class ScheduleSender {
                 for (FlightDataDto flight : flightDataDtos) {
 
                     if (flight.getOriginAirportIata() == null || flight.getOriginAirportIata().isBlank() || !flight.getDestinationAirportIata().equalsIgnoreCase(user.getAirport())) {
+                        continue;
+                    }
+
+                    List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
+
+                    if (userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
                         continue;
                     }
 

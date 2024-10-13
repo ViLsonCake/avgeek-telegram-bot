@@ -49,6 +49,12 @@ public class BotMessageUtils {
             case CHOSEN_MODE_ONLY_WIDE_BODY_TEXT -> BotMessageEngConst.CHOSEN_MODE_ONLY_WIDE_BODY_TEXT;
             case CHOSEN_MODE_MUTE_TEXT -> BotMessageEngConst.CHOSEN_MODE_MUTE_TEXT;
             case INCORRECT_MODE_TEXT -> BotMessageEngConst.INCORRECT_MODE_TEXT;
+            case CHOOSE_AIRCRAFT_TEXT -> BotMessageEngConst.CHOOSE_AIRCRAFT_TEXT;
+            case CHOSEN_AIRCRAFT_TEXT -> BotMessageEngConst.CHOSEN_AIRCRAFT_TEXT;
+            case CHOSEN_MAX_AIRCRAFT_COUNT_TEXT -> BotMessageEngConst.CHOSEN_MAX_AIRCRAFT_COUNT_TEXT;
+            case AIRCRAFT_ALREADY_CHOSEN_TEXT -> BotMessageEngConst.AIRCRAFT_ALREADY_CHOSEN_TEXT;
+            case CHOSEN_AIRCRAFT_COUNT_TEXT -> BotMessageEngConst.CHOSEN_AIRCRAFT_COUNT_TEXT;
+            case CANCEL_CHOOSING_AIRCRAFT_TEXT -> BotMessageEngConst.CANCEL_CHOOSING_AIRCRAFT_TEXT;
             case CHANGE_UNITS_TEXT -> BotMessageEngConst.CHANGE_UNITS_TEXT;
             case CHANGED_UNITS_TEXT -> BotMessageEngConst.CHANGED_UNITS_TEXT;
             case CURRENT_METRIC_UNITS_TEXT -> BotMessageEngConst.CURRENT_METRIC_UNITS_TEXT;
@@ -106,6 +112,12 @@ public class BotMessageUtils {
             case CHOSEN_MODE_ONLY_WIDE_BODY_TEXT -> BotMessageRuConst.CHOSEN_MODE_ONLY_WIDE_BODY_TEXT;
             case CHOSEN_MODE_MUTE_TEXT -> BotMessageRuConst.CHOSEN_MODE_MUTE_TEXT;
             case INCORRECT_MODE_TEXT -> BotMessageRuConst.INCORRECT_MODE_TEXT;
+            case CHOOSE_AIRCRAFT_TEXT -> BotMessageRuConst.CHOOSE_AIRCRAFT_TEXT;
+            case CHOSEN_AIRCRAFT_TEXT -> BotMessageRuConst.CHOSEN_AIRCRAFT_TEXT;
+            case CHOSEN_MAX_AIRCRAFT_COUNT_TEXT -> BotMessageRuConst.CHOSEN_MAX_AIRCRAFT_COUNT_TEXT;
+            case AIRCRAFT_ALREADY_CHOSEN_TEXT -> BotMessageRuConst.AIRCRAFT_ALREADY_CHOSEN_TEXT;
+            case CHOSEN_AIRCRAFT_COUNT_TEXT -> BotMessageRuConst.CHOSEN_AIRCRAFT_COUNT_TEXT;
+            case CANCEL_CHOOSING_AIRCRAFT_TEXT -> BotMessageRuConst.CANCEL_CHOOSING_AIRCRAFT_TEXT;
             case CHANGE_UNITS_TEXT -> BotMessageRuConst.CHANGE_UNITS_TEXT;
             case CHANGED_UNITS_TEXT -> BotMessageRuConst.CHANGED_UNITS_TEXT;
             case CURRENT_METRIC_UNITS_TEXT -> BotMessageRuConst.CURRENT_METRIC_UNITS_TEXT;
@@ -163,6 +175,12 @@ public class BotMessageUtils {
             case CHOSEN_MODE_ONLY_WIDE_BODY_TEXT -> BotMessageUkConst.CHOSEN_MODE_ONLY_WIDE_BODY_TEXT;
             case CHOSEN_MODE_MUTE_TEXT -> BotMessageUkConst.CHOSEN_MODE_MUTE_TEXT;
             case INCORRECT_MODE_TEXT -> BotMessageUkConst.INCORRECT_MODE_TEXT;
+            case CHOOSE_AIRCRAFT_TEXT -> BotMessageUkConst.CHOOSE_AIRCRAFT_TEXT;
+            case CHOSEN_AIRCRAFT_TEXT -> BotMessageUkConst.CHOSEN_AIRCRAFT_TEXT;
+            case CHOSEN_MAX_AIRCRAFT_COUNT_TEXT -> BotMessageUkConst.CHOSEN_MAX_AIRCRAFT_COUNT_TEXT;
+            case AIRCRAFT_ALREADY_CHOSEN_TEXT -> BotMessageUkConst.AIRCRAFT_ALREADY_CHOSEN_TEXT;
+            case CHOSEN_AIRCRAFT_COUNT_TEXT -> BotMessageUkConst.CHOSEN_AIRCRAFT_COUNT_TEXT;
+            case CANCEL_CHOOSING_AIRCRAFT_TEXT -> BotMessageUkConst.CANCEL_CHOOSING_AIRCRAFT_TEXT;
             case CHANGE_UNITS_TEXT -> BotMessageUkConst.CHANGE_UNITS_TEXT;
             case CHANGED_UNITS_TEXT -> BotMessageUkConst.CHANGED_UNITS_TEXT;
             case CURRENT_METRIC_UNITS_TEXT -> BotMessageUkConst.CURRENT_METRIC_UNITS_TEXT;

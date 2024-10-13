@@ -2,10 +2,7 @@ package project.vilsoncake.telegrambot.service;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import project.vilsoncake.telegrambot.dto.MessageDto;
-import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
-import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
-import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
-import project.vilsoncake.telegrambot.entity.enumerated.UserState;
+import project.vilsoncake.telegrambot.entity.enumerated.*;
 
 import java.util.List;
 
@@ -24,6 +21,11 @@ public interface BotService {
     SendMessage changeBotModeCommand(String username, Long chatId);
     SendMessage changeBotMode(String username, BotMode botMode, Long chatId);
     SendMessage getBotMode(String username, Long chatId);
+    SendMessage chooseAircraftCommand(String username, Long chatId);
+    SendMessage chooseAircraft(String username, AircraftFamily aircraftFamily, Long chatId);
+    SendMessage chosenAircraftCommand(String username, Long chatId);
+    SendMessage acceptAircraft(String username, Long chatId);
+    SendMessage cancelAircraft(String username, Long chatId);
     SendMessage changeBotLanguageCommand(String username, Long chatId);
     SendMessage changeBotLanguage(String username, BotLanguage botLanguage, Long chatId);
     SendMessage incorrectBotLanguage(String username, Long chatId);

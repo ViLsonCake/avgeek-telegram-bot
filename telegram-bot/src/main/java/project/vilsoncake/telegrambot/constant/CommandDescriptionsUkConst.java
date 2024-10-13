@@ -14,4 +14,6 @@ public class CommandDescriptionsUkConst {
     public static final String CHANGE_UNITS_COMMAND_UK_DESCRIPTION = "Змінити систему одиниць виміру";
     public static final String CURRENT_UNITS_COMMAND_UK_DESCRIPTION = "Отримати поточну систему одиниць виміру";
     public static final String FEEDBACK_COMMAND_UK_DESCRIPTION = "Надіслати зворотній зв'язок";
+    public static final String CHOOSE_AIRCRAFT_COMMAND_UK_DESCRIPTION = "Змінити літаки які ви хочете відстежувати";
+    public static final String CHOSEN_AIRCRAFT_COMMAND_UK_DESCRIPTION = "Отримати літаки які ви відстежуєте";
 }

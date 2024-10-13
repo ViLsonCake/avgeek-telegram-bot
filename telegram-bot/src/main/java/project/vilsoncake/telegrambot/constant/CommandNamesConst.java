@@ -32,4 +32,6 @@ public class CommandNamesConst {
     public static final String AVIATION_UNITS_BUTTON_TEXT = "Aviation";
     public static final List<String> UNITS = List.of(METRIC_UNITS_BUTTON_TEXT, IMPERIAL_UNITS_BUTTON_TEXT, AVIATION_UNITS_BUTTON_TEXT);
     public static final String FEEDBACK_COMMAND_NAME = "/feedback";
+    public static final String SELECT_AIRCRAFT_COMMAND_NAME = "/selectaircraft";
+    public static final String CHOSEN_AIRCRAFT_COMMAND_NAME = "/chosenaircraft";
 }

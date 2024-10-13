@@ -1,0 +1,74 @@
+[
+  {
+    "callback_data": "BOEING_747",
+    "text": "Boeing 747"
+  },
+  {
+    "callback_data": "BOEING_777",
+    "text": "Boeing 777"
+  },
+  {
+    "callback_data": "BOEING_787",
+    "text": "Boeing 787"
+  },
+  {
+    "callback_data": "BOEING_767",
+    "text": "Boeing 767"
+  },
+  {
+    "callback_data": "BOEING_757",
+    "text": "Boeing 757"
+  },
+  {
+    "callback_data": "BOEING_C17",
+    "text": "Boeing C17"
+  },
+  {
+    "callback_data": "AIRBUS_A380",
+    "text": "Airbus A380"
+  },
+  {
+    "callback_data": "AIRBUS_A350",
+    "text": "Airbus A350"
+  },
+  {
+    "callback_data": "AIRBUS_A340",
+    "text": "Airbus A340"
+  },
+  {
+    "callback_data": "AIRBUS_A330",
+    "text": "Airbus A330"
+  },
+  {
+    "callback_data": "AIRBUS_A310",
+    "text": "Airbus A310"
+  },
+  {
+    "callback_data": "AIRBUS_A300",
+    "text": "Airbus A300"
+  },
+  {
+    "callback_data": "AIRBUS_A400",
+    "text": "Airbus A400"
+  },
+  {
+    "callback_data": "MD11",
+    "text": "MD-11"
+  },
+  {
+    "callback_data": "AN124",
+    "text": "An-124"
+  },
+  {
+    "callback_data": "C5_GALAXY",
+    "text": "C-5 Galaxy"
+  },
+  {
+    "callback_data": "C130_HERCULES",
+    "text": "C-130 Hercules"
+  },
+  {
+    "callback_data": "ILYUSHIN_IL76",
+    "text": "Ilyushin IL-76"
+  }
+]

@@ -2,30 +2,32 @@ package project.vilsoncake.telegrambot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import project.vilsoncake.telegrambot.bot.BaseBotMessage;
+import project.vilsoncake.telegrambot.dto.AircraftFamilyDto;
 import project.vilsoncake.telegrambot.dto.AirportCodesDto;
 import project.vilsoncake.telegrambot.dto.AirportDto;
 import project.vilsoncake.telegrambot.dto.MessageDto;
+import project.vilsoncake.telegrambot.entity.AircraftEntity;
 import project.vilsoncake.telegrambot.entity.UserEntity;
 import project.vilsoncake.telegrambot.entity.enumerated.*;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
+import project.vilsoncake.telegrambot.service.AircraftService;
 import project.vilsoncake.telegrambot.service.BotService;
 import project.vilsoncake.telegrambot.service.MailService;
 import project.vilsoncake.telegrambot.service.UserService;
-import project.vilsoncake.telegrambot.utils.AirportsUtils;
-import project.vilsoncake.telegrambot.utils.BotMessageUtils;
-import project.vilsoncake.telegrambot.utils.MailMessageUtils;
-import project.vilsoncake.telegrambot.utils.VerifyUtils;
+import project.vilsoncake.telegrambot.utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.PING_COMMAND_TEXT;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
+import static project.vilsoncake.telegrambot.constant.NumberConst.MAX_SELECTED_AIRCRAFT_COUNT;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.CustomMessageMode.ONLY_NOT_SELECTED;
 import static project.vilsoncake.telegrambot.entity.enumerated.CustomMessageMode.ONLY_SELECTED;
@@ -38,11 +40,14 @@ import static project.vilsoncake.telegrambot.entity.enumerated.UserState.*;
 public class BotServiceImpl implements BotService {
 
     private final UserService userService;
+    private final AircraftService aircraftService;
     private final MailService mailService;
     private final VerifyUtils verifyUtils;
     private final AirportsUtils airportsUtils;
     private final BotMessageUtils botMessageUtils;
     private final MailMessageUtils mailMessageUtils;
+    private final AircraftUtils aircraftUtils;
+    private final List<AircraftFamilyDto> aircraft;
 
     @Override
     public SendMessage pingCommand(Long chatId) {
@@ -270,6 +275,81 @@ public class BotServiceImpl implements BotService {
             case ONLY_AN_124_FLIGHTS -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_ONLY_AN_124_TEXT, user.getBotLanguage()));
             case MUTE -> message.setText(botMessageUtils.getMessageByLanguage(CHOSEN_MODE_MUTE_TEXT, user.getBotLanguage()));
         }
+
+        return message;
+    }
+
+    @Override
+    public SendMessage chooseAircraftCommand(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+        aircraftService.deleteAircraftFromUser(user);
+        userService.changeUserState(username, CHOOSING_AIRCRAFT);
+
+        SendMessage message = BaseBotMessage.getBaseBotMessage(chatId);
+
+        message.setText(botMessageUtils.getMessageByLanguage(CHOOSE_AIRCRAFT_TEXT, user.getBotLanguage()));
+        message.setReplyMarkup(aircraftUtils.getAircraftButtons(aircraft));
+
+        return message;
+    }
+
+    @Transactional
+    @Override
+    public SendMessage chooseAircraft(String username, AircraftFamily aircraftFamily, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+
+        AircraftEntity aircraftEntity = new AircraftEntity(aircraftFamily, user);
+
+        SendMessage message = BaseBotMessage.getBaseBotMessage(chatId);
+
+        String aircraftName = aircraftUtils.getAircraftNameByCallback(aircraft, aircraftFamily);
+
+        if (!aircraftService.addAircraftToUser(aircraftEntity)) {
+            message.setText(String.format(botMessageUtils.getMessageByLanguage(AIRCRAFT_ALREADY_CHOSEN_TEXT, user.getBotLanguage()), aircraftName));
+            return message;
+        }
+
+        int selectedAircraftCount = aircraftService.findAllAircraftByUser(user).size();
+
+        if (selectedAircraftCount == MAX_SELECTED_AIRCRAFT_COUNT) {
+            userService.changeUserState(username, CHOSEN_AIRPORT);
+            message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOSEN_MAX_AIRCRAFT_COUNT_TEXT, user.getBotLanguage()), aircraftUtils.getUserAircraftList(user.getAircraft(), aircraft)));
+            return message;
+        }
+
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOSEN_AIRCRAFT_TEXT, user.getBotLanguage()), aircraftName, MAX_SELECTED_AIRCRAFT_COUNT - selectedAircraftCount));
+        return message;
+    }
+
+    @Transactional
+    @Override
+    public SendMessage chosenAircraftCommand(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+
+        SendMessage message = BaseBotMessage.getBaseBotMessage(chatId);
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOSEN_AIRCRAFT_COUNT_TEXT, user.getBotLanguage()), aircraftUtils.getUserAircraftList(user.getAircraft(), aircraft)));
+        return message;
+    }
+
+    @Transactional
+    @Override
+    public SendMessage acceptAircraft(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+        userService.changeUserState(username, CHOSEN_AIRPORT);
+
+        SendMessage message = BaseBotMessage.getBaseBotMessage(chatId);
+        message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOSEN_AIRCRAFT_COUNT_TEXT, user.getBotLanguage()), aircraftUtils.getUserAircraftList(user.getAircraft(), aircraft)));
+        return message;
+    }
+
+    @Override
+    public SendMessage cancelAircraft(String username, Long chatId) {
+        UserEntity user = userService.getUserByUsername(username);
+        aircraftService.deleteAircraftFromUser(user);
+        userService.changeUserState(username, CHOSEN_AIRPORT);
+
+        SendMessage message = BaseBotMessage.getBaseBotMessage(chatId);
+        message.setText(botMessageUtils.getMessageByLanguage(CANCEL_CHOOSING_AIRCRAFT_TEXT, user.getBotLanguage()));
 
         return message;
     }

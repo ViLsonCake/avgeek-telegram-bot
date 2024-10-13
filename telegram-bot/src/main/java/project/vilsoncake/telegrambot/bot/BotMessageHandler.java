@@ -6,13 +6,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import project.vilsoncake.telegrambot.dto.FeedbackDto;
 import project.vilsoncake.telegrambot.dto.UserStatisticDto;
+import project.vilsoncake.telegrambot.entity.enumerated.AircraftFamily;
 import project.vilsoncake.telegrambot.entity.enumerated.BotLanguage;
 import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UnitsSystem;
 import project.vilsoncake.telegrambot.rabbitmq.producer.RabbitMQProducer;
 import project.vilsoncake.telegrambot.service.BotService;
 
-import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.CANCEL_TRIGGER;
+import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.*;
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotLanguage.*;
 
@@ -24,21 +25,32 @@ public class BotMessageHandler {
     private final RabbitMQProducer rabbitMQProducer;
 
     public void handleMessage(Update update, AvgeekTelegramBot bot) {
-        if (!update.getMessage().hasText()) {
-            return;
+        String username;
+        String languageCode;
+        Long chatId;
+
+        if (!update.hasCallbackQuery()) {
+            username = update.getMessage().getChat().getUserName();
+
+            if (username == null) {
+                username = update.getMessage().getFrom().getId().toString();
+            }
+
+            languageCode = update.getMessage().getFrom().getLanguageCode();
+            chatId = update.getMessage().getChatId();
+        } else {
+            username = update.getCallbackQuery().getMessage().getChat().getUserName();
+
+            if (username == null) {
+                username = update.getCallbackQuery().getMessage().getFrom().getId().toString();
+            }
+
+            languageCode = update.getCallbackQuery().getMessage().getFrom().getLanguageCode();
+            chatId = update.getCallbackQuery().getMessage().getChatId();
         }
-
-        String username = update.getMessage().getChat().getUserName();
-
-        if (username == null) {
-            username = update.getMessage().getFrom().getId().toString();
-        }
-
-        String languageCode = update.getMessage().getFrom().getLanguageCode();
-        Long chatId = update.getMessage().getChatId();
 
         try {
-            if (update.getMessage().isCommand()) {
+            if (!update.hasCallbackQuery() && update.getMessage().isCommand()) {
 
                 UserStatisticDto userStatisticDto = new UserStatisticDto(username, update.getMessage().getText());
                 rabbitMQProducer.sendUserStatistic(userStatisticDto);
@@ -61,6 +73,12 @@ public class BotMessageHandler {
                         break;
                     case CURRENT_MODE_COMMAND_NAME:
                         bot.execute(botService.getBotMode(username, chatId));
+                        break;
+                    case SELECT_AIRCRAFT_COMMAND_NAME:
+                        bot.execute(botService.chooseAircraftCommand(username, chatId));
+                        break;
+                    case CHOSEN_AIRCRAFT_COMMAND_NAME:
+                        bot.execute(botService.chosenAircraftCommand(username, chatId));
                         break;
                     case CHANGE_UNITS_COMMAND_NAME:
                         bot.execute(botService.changeUnitsCommand(username, chatId));
@@ -161,6 +179,26 @@ public class BotMessageHandler {
 
                         FeedbackDto feedbackDto = new FeedbackDto(username, feedback);
                         rabbitMQProducer.sendFeedback(feedbackDto);
+                        break;
+                    case CHOOSING_AIRCRAFT:
+                        if (!update.hasCallbackQuery()) {
+                            return;
+                        }
+
+                        String data = update.getCallbackQuery().getData();
+
+                        if (data.equals(CALLBACK_ACCEPT_TRIGGER)) {
+                            bot.execute(botService.acceptAircraft(username, chatId));
+                            return;
+                        }
+
+                        if (data.equals(CALLBACK_CANCEL_TRIGGER)) {
+                            bot.execute(botService.cancelAircraft(username, chatId));
+                            return;
+                        }
+
+                        AircraftFamily aircraftFamily = AircraftFamily.valueOf(data);
+                        bot.execute(botService.chooseAircraft(username, aircraftFamily, chatId));
                         break;
                 }
             }

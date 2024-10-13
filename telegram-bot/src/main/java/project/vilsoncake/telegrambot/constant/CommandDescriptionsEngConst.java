@@ -14,5 +14,6 @@ public class CommandDescriptionsEngConst {
     public static final String CHANGE_UNITS_COMMAND_ENG_DESCRIPTION = "Change system of units";
     public static final String CURRENT_UNITS_COMMAND_ENG_DESCRIPTION = "Get your current system of units";
     public static final String FEEDBACK_COMMAND_ENG_DESCRIPTION = "Send feedback";
-
+    public static final String CHOOSE_AIRCRAFT_COMMAND_ENG_DESCRIPTION = "Select the aircraft you want to track";
+    public static final String CHOSEN_AIRCRAFT_COMMAND_ENG_DESCRIPTION = "Get the selected aircraft";
 }
