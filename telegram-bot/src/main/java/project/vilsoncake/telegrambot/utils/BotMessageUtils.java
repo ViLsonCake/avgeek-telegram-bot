@@ -55,6 +55,7 @@ public class BotMessageUtils {
             case AIRCRAFT_ALREADY_CHOSEN_TEXT -> BotMessageEngConst.AIRCRAFT_ALREADY_CHOSEN_TEXT;
             case CHOSEN_AIRCRAFT_COUNT_TEXT -> BotMessageEngConst.CHOSEN_AIRCRAFT_COUNT_TEXT;
             case CANCEL_CHOOSING_AIRCRAFT_TEXT -> BotMessageEngConst.CANCEL_CHOOSING_AIRCRAFT_TEXT;
+            case USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT -> BotMessageEngConst.USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT;
             case CHANGE_UNITS_TEXT -> BotMessageEngConst.CHANGE_UNITS_TEXT;
             case CHANGED_UNITS_TEXT -> BotMessageEngConst.CHANGED_UNITS_TEXT;
             case CURRENT_METRIC_UNITS_TEXT -> BotMessageEngConst.CURRENT_METRIC_UNITS_TEXT;
@@ -118,6 +119,7 @@ public class BotMessageUtils {
             case AIRCRAFT_ALREADY_CHOSEN_TEXT -> BotMessageRuConst.AIRCRAFT_ALREADY_CHOSEN_TEXT;
             case CHOSEN_AIRCRAFT_COUNT_TEXT -> BotMessageRuConst.CHOSEN_AIRCRAFT_COUNT_TEXT;
             case CANCEL_CHOOSING_AIRCRAFT_TEXT -> BotMessageRuConst.CANCEL_CHOOSING_AIRCRAFT_TEXT;
+            case USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT -> BotMessageRuConst.USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT;
             case CHANGE_UNITS_TEXT -> BotMessageRuConst.CHANGE_UNITS_TEXT;
             case CHANGED_UNITS_TEXT -> BotMessageRuConst.CHANGED_UNITS_TEXT;
             case CURRENT_METRIC_UNITS_TEXT -> BotMessageRuConst.CURRENT_METRIC_UNITS_TEXT;
@@ -181,6 +183,7 @@ public class BotMessageUtils {
             case AIRCRAFT_ALREADY_CHOSEN_TEXT -> BotMessageUkConst.AIRCRAFT_ALREADY_CHOSEN_TEXT;
             case CHOSEN_AIRCRAFT_COUNT_TEXT -> BotMessageUkConst.CHOSEN_AIRCRAFT_COUNT_TEXT;
             case CANCEL_CHOOSING_AIRCRAFT_TEXT -> BotMessageUkConst.CANCEL_CHOOSING_AIRCRAFT_TEXT;
+            case USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT -> BotMessageUkConst.USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT;
             case CHANGE_UNITS_TEXT -> BotMessageUkConst.CHANGE_UNITS_TEXT;
             case CHANGED_UNITS_TEXT -> BotMessageUkConst.CHANGED_UNITS_TEXT;
             case CURRENT_METRIC_UNITS_TEXT -> BotMessageUkConst.CURRENT_METRIC_UNITS_TEXT;

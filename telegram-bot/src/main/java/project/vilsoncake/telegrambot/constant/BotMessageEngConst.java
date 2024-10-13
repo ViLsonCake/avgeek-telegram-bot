@@ -315,13 +315,16 @@ public class BotMessageEngConst {
             
             %s
             Now you will only receive notifications about them.
+            If you want to track all wide-body aircraft again, use the /selectaircraft command and press ❌ without selecting any aircraft.
             """;
     public static final String CHOSEN_AIRCRAFT_COUNT_TEXT = """
             There are your selected aircraft:
             
             %s
             You will receive notifications only about them.
+            If you want to track all wide-body aircraft again, use the /selectaircraft command and press ❌ without selecting any aircraft.
             """;
     public static final String CHOSEN_AIRCRAFT_TEXT = "You have selected *%s*, you can select %s more aircraft";
     public static final String CANCEL_CHOOSING_AIRCRAFT_TEXT = "All your selected aircraft have been canceled, if you want to re-select the aircraft again use the command " + CommandNamesConst.SELECT_AIRCRAFT_COMMAND_NAME + ".";
+    public static final String USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT = "You will receive notifications of all wide-body aircraft, if you want to select specific aircraft, use the /selectaircraft command.";
 }

@@ -327,6 +327,12 @@ public class BotServiceImpl implements BotService {
         UserEntity user = userService.getUserByUsername(username);
 
         SendMessage message = BaseBotMessage.getBaseBotMessage(chatId);
+
+        if (user.getAircraft().isEmpty()) {
+            message.setText(botMessageUtils.getMessageByLanguage(USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT, user.getBotLanguage()));
+            return message;
+        }
+
         message.setText(String.format(botMessageUtils.getMessageByLanguage(CHOSEN_AIRCRAFT_COUNT_TEXT, user.getBotLanguage()), aircraftUtils.getUserAircraftList(user.getAircraft(), aircraft)));
         return message;
     }

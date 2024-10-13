@@ -310,13 +310,16 @@ public class BotMessageUkConst {
             
             %s
             Тепер ви будете отримувати сповіщення тільки про них.
+            Якщо ви знову хочете відстежувати всі широкофюзеляжні літаки, використовуйте команду /selectaircraft і натисніть на ❌ не обираючи жодне повітряне судно.
             """;
     public static final String CHOSEN_AIRCRAFT_COUNT_TEXT = """
             Ось обрані вами повітряні судна:
             
             %s
             Ви будете отримувати сповіщення тільки про них.
+            Якщо ви знову хочете відстежувати всі широкофюзеляжні літаки, використовуйте команду /selectaircraft і натисніть на ❌ не обираючи жодне повітряне судно.
             """;
     public static final String CHOSEN_AIRCRAFT_TEXT = "Ви обрали *%s*, ви можете обрати ще %s повітряних судна";
     public static final String CANCEL_CHOOSING_AIRCRAFT_TEXT = "Усі вибрані вами повітряні судна було скасовано, якщо хочете наново вибрати повітряні судна наново використайте команду " + CommandNamesConst.SELECT_AIRCRAFT_COMMAND_NAME + ".";
+    public static final String USER_NOT_HAVE_CHOSEN_AIRCRAFT_TEXT = "Ви будете отримувати сповіщення про всі широкофюзеляжні літаки, якщо ви хочете обрати конкретні повітряні судна, скористайтеся командою /selectaircraft.";
 }
