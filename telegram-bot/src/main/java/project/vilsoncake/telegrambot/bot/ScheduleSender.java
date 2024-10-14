@@ -104,8 +104,10 @@ public class ScheduleSender {
                 for (ScheduledFlightDataDto flight : flightsDto.getFlights()) {
                     List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
 
-                    if (!userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
-                        continue;
+                    if (!user.getAircraft().isEmpty()) {
+                        if (!userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
+                            continue;
+                        }
                     }
 
                     AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getIata());
@@ -214,8 +216,10 @@ public class ScheduleSender {
 
                     List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
 
-                    if (userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
-                        continue;
+                    if (!user.getAircraft().isEmpty()) {
+                        if (userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
+                            continue;
+                        }
                     }
 
                     FlightEntity flightEntity;
