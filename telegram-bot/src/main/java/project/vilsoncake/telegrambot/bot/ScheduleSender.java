@@ -294,6 +294,8 @@ public class ScheduleSender {
                         flightEntity.setDistance(flight.getDistance());
 
                         if (flight.getAltitude() == ON_GROUND_ALTITUDE && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM) {
+                            flightService.changeFlightInUserAirport(flightEntity, true);
+
                             SendMessage message = BaseBotMessage.getBaseBotMessage(user.getChatId());
                             message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_IN_YOUR_AIRPORT_NOW_TEXT, user.getBotLanguage()),
                                     flight.getId().substring(flight.getId().length() - 4), flight.getAirline(),
@@ -404,8 +406,9 @@ public class ScheduleSender {
                     } else {
                         FlightEntity flightEntity = flightService.findByUserAndFlightId(user, flight.getId());
 
-                        if (flight.getAltitude() == ON_GROUND_ALTITUDE && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM) {
+                        if (flight.getAltitude() == ON_GROUND_ALTITUDE && flight.getDistance() < FLIGHT_IN_AIRPORT_DISTANCE_IN_KM && !flightEntity.isInUserAirport()) {
                             flightService.changeFlightDistance(flightEntity, flight.getDistance());
+                            flightService.changeFlightInUserAirport(flightEntity, true);
                             SendMessage message = BaseBotMessage.getBaseBotMessage(user.getChatId());
                             message.setText(String.format(botMessageUtils.getMessageByLanguage(AN_124_IN_YOUR_AIRPORT_NOW_TEXT, user.getBotLanguage()),
                                     flight.getId().substring(flight.getId().length() - 4), flight.getAirline(),

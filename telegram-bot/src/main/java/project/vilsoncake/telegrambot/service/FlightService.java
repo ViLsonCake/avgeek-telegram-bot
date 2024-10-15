@@ -18,6 +18,7 @@ public interface FlightService {
     boolean changeFlightOnGround(FlightEntity flight, boolean onGround);
     boolean changeFlightDistance(FlightEntity flight, Integer distance);
     boolean changeFlightFlyingNear(FlightEntity flight, boolean flyingNear);
+    boolean changeFlightInUserAirport(FlightEntity flight, boolean inUserAirport);
     boolean changeFlightDepartureAirport(FlightEntity flight, String departureAirport);
     boolean existsByUserAndFlightId(UserEntity user, String flightId);
 }

@@ -107,6 +107,14 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public boolean changeFlightInUserAirport(FlightEntity flight, boolean inUserAirport) {
+        flight.setInUserAirport(inUserAirport);
+        flightRepository.save(flight);
+
+        return true;
+    }
+
+    @Override
     public boolean changeFlightDepartureAirport(FlightEntity flight, String departureAirport) {
         flight.setDepartureAirport(departureAirport);
         flightRepository.save(flight);
