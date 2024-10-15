@@ -49,6 +49,9 @@ public class FlightEntity {
     @Column(name = "flying_near")
     private boolean flyingNear = false;
 
+    @Column(name = "in_user_airport")
+    private boolean inUserAirport = false;
+
     @Setter(AccessLevel.NONE)
     @Column(name = "created_at", updatable = false)
     private Date createdAt = new Date();
