@@ -1,5 +1,14 @@
 [
   {
+    "icao": "KTTS",
+    "iata": "QQS",
+    "name": "NASA Shuttle Landing Facility",
+    "city": "Merritt Island",
+    "country": "US",
+    "lat": 28.615,
+    "lon": -80.6945
+  },
+  {
     "icao": "19AK",
     "iata": "ICY",
     "name": "Icy Bay Airport",
