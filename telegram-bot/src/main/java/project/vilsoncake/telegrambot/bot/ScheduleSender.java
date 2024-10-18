@@ -217,7 +217,7 @@ public class ScheduleSender {
                     List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
 
                     if (!user.getAircraft().isEmpty()) {
-                        if (userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
+                        if (!userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
                             continue;
                         }
                     }
