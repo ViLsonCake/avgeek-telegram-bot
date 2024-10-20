@@ -4,18 +4,21 @@
 
 ## Introduction
 
-Since I am an avgeek and plane spotter, I use Flightradar24 like everyone else, but I am missing some features.
+Since I am an avgeek and plane spotter, I use [Flightradar24](https://www.flightradar24.com) like everyone else, but I am missing some features.
 
 - First of all, even though flightradar has an alert system, it does not track flights with flight number N/A. This is a problem for me since almost all An-124s have little to no flight information.
 - Secondly it doesn't notify about scheduled flights I am interested in.
 
 Of course, there may be simpler solutions to these problems, but I decided to create my own in the form of a Telegram bot.
 The bot is able to **notify** about all flying **An-124s**, as well as about **all wide-body aircraft** (**and Boeing 757**) that will make a scheduled flight to the airport of your choice.
+Also, you can select 1 to 5 specific aircraft, and you will only receive notifications about them. And if you want to receive notifications only about wide-body flights or only about An-124s, you can always change the bot mode.
+
+Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCake_Bot).
 
 #### An-124 and Wide-body flight notification example
 <div style="display: flex; justify-content: space-between;">
     <img src="telegram-bot/src/main/resources/images/An-124-landed-example.jpg" alt="An-124 notification example" style="height: 320px">
-    <img src="telegram-bot/src/main/resources/images/Scheduled-wide-body-flight-example.jpg" alt="Wide-body flight notification example" style="height: 320px">
+    <img src="telegram-bot/src/main/resources/images/Schedule-wide-body-flight-example.jpg" alt="Wide-body flight notification example" style="height: 320px">
 </div>
 
 More notification examples you can find [here](./telegram-bot/src/main/resources/images).
@@ -28,6 +31,8 @@ More notification examples you can find [here](./telegram-bot/src/main/resources
     + **Wide-body** - You will receive notifications **only** for wide-body aircraft.
     + **An-124** - You will receive notifications **only** about An-124 flights.
     + **Mute** - You will not receive **any** notifications.
+- **/selectaircraft** - Select from 1 to 5 specific aircraft.
+- **/chosenaircraft** - Get your chosen aircraft.
 - **/currentmode** - Get current bot mode.
 - **/changeunits** - Change System of Units.
 - **/lang** - Change bot language
@@ -38,8 +43,6 @@ More notification examples you can find [here](./telegram-bot/src/main/resources
 - **/setemail** - Add email to send you mail if An-124 in your airport.
 - **/myemail** - Get your email.
 - **/removeemail** - Remove your email from the bot.
-
-Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCake_Bot).
 
 ## Installation
 
