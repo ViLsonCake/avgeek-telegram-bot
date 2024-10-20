@@ -17,8 +17,8 @@ Project **deployed**, and you can try it out [here](https://t.me/Avgeek_ViLsonCa
 
 #### An-124 and Wide-body flight notification example
 <div style="display: flex; justify-content: space-between;">
-    <img src="telegram-bot/src/main/resources/images/An-124-landed-example.jpg" alt="An-124 notification example" style="height: 320px; width: 500px">
-    <img src="telegram-bot/src/main/resources/images/Schedule-wide-body-flight-example.jpg" alt="Wide-body flight notification example" style="height: 320px; width: 500px">
+    <img src="telegram-bot/src/main/resources/images/An-124-landed-example.jpg" alt="An-124 notification example" style="height: 200px">
+    <img src="telegram-bot/src/main/resources/images/Schedule-wide-body-flight-example.jpg" alt="Wide-body flight notification example" style="height: 200px">
 </div>
 
 More notification examples you can find [here](./telegram-bot/src/main/resources/images).
