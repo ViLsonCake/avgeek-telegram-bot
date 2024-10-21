@@ -53,13 +53,16 @@ public class ScheduleSender {
     private final AircraftUtils aircraftUtils;
     private final List<Map<String, List<String>>> aircraftFamiliesCodes;
     private final UnitsUtils unitsUtils;
+    private final LoggingUtils loggingUtils;
     private final WebClient apiWebClient;
     private final BotSender botSender;
 
     @Transactional
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() throws InterruptedException {
-        log.info("Schedule sending wide body flights started...");
+        log.info("Schedule sending wide-body flights started...");
+
+        long startTime = System.currentTimeMillis();
 
         List<String> uniqueAirports = userService.findUniqueAirports();
         Map<String, FlightsDto> uniqueAirportsFlights = new HashMap<>();
@@ -165,13 +168,18 @@ public class ScheduleSender {
                 }
             }
         }
-        log.info("Schedule sending wide body flights finished.");
+
+        long endTime = System.currentTimeMillis();
+
+        log.info("Schedule sending wide-body flights finished. {}", loggingUtils.getFinishedProcessTime(startTime, endTime));
     }
 
     @Transactional
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() throws InterruptedException {
         log.info("Schedule sending landing flights started...");
+
+        long startTime = System.currentTimeMillis();
 
         List<FlightEntity> uniqueRegistrations = flightService.findUniqueFlightsRegistrations();
         List<FlightDataDto> flightDataDtos = new ArrayList<>();
@@ -251,12 +259,18 @@ public class ScheduleSender {
                 }
             }
         }
-        log.info("Schedule sending landing flights finished.");
+
+        long endTime = System.currentTimeMillis();
+
+        log.info("Schedule sending landing flights finished. {}", loggingUtils.getFinishedProcessTime(startTime, endTime));
     }
 
     @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
         log.info("Schedule sending An-124 flights started...");
+
+        long startTime = System.currentTimeMillis();
+
         List<UserEntity> users = userService.findAllUsers();
 
         An124FlightsDto an124FlightsDto;
@@ -588,6 +602,9 @@ public class ScheduleSender {
                 }
             }
         }
-        log.info("Schedule sending An-124 flights finished.");
+
+        long endTime = System.currentTimeMillis();
+
+        log.info("Schedule sending An-124 flights finished. {}", loggingUtils.getFinishedProcessTime(startTime, endTime));
     }
 }
