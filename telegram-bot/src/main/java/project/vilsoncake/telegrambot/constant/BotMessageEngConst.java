@@ -3,7 +3,8 @@ package project.vilsoncake.telegrambot.constant;
 public class BotMessageEngConst {
     public static final String START_TEXT = """
             Hello dear user. Welcome to *Avgeek bot*!
-                        
+
+
             *What can this bot do?*
             
             ✅ Send scheduled flights of *wide-body aircraft* to the airport of your choice so you can photograph them properly.
@@ -12,9 +13,12 @@ public class BotMessageEngConst {
             
             ✅ You can change the mode of the bot, for example, to select notifications only about scheduled flights of wide-body airliners, or only about An-124s.
             
+            ✅ You can track specific *wide-body aircraft*, such as only Boeing 747 or Airbus A350 and Airbus A380, you can select from 1 to 5 aircraft.
+            
             ✅ The bot supports 3 languages: English, Ukrainian and Russian.
             
             Open the *command menu* for more details.
+            
             
             
             *Now let's select the airport you're interested in*
@@ -238,7 +242,7 @@ public class BotMessageEngConst {
     public static final String CANCEL_ADDING_EMAIL_TEXT = "Adding _email_ has been *canceled*.";
     public static final String WAIT_FOR_CODE_TEXT = """
             A *confirmation code* has been sent to your _email_, *enter it*
-                        
+
             If you have entered the wrong _email_ address or want to *cancel* adding _email_, please write __cancel__
             """;
     public static final String SELECT_LANGUAGE_TEXT = "Select _language_";
@@ -246,17 +250,17 @@ public class BotMessageEngConst {
     public static final String INCORRECT_LANGUAGE_TEXT = "Selected _language_ is *incorrect*. Select _language_ from the buttons on the keyboard.";
     public static final String CHANGE_UNITS_TEXT = """
             *Please select a system of units*
-                        
+
             *Metric*
             _Altitude_ - meters
             _Distance_ - kilometers
             _Speed_ - kilometers per hour
-                        
+
             *Imperial*
             _Altitude_ - feet
             _Distance_ - miles
             _Speed_ - miles per hour
-                        
+
             *Aviation*
             _Altitude_ - feet
             _Distance_ - nautical miles
@@ -297,7 +301,7 @@ public class BotMessageEngConst {
     public static final String AVIATION_ALTITUDE_UNIT_ENG = "ft";
     public static final String FEEDBACK_COMMAND_TEXT = """
             *Write feedback here*
-                        
+
             If you don't want to send feedback, write __"cancel"__
             """;
     public static final String FEEDBACK_SENT_TEXT = "Thank you for the feedback!";

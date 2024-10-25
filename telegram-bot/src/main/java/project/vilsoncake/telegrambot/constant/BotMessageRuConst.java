@@ -3,7 +3,8 @@ package project.vilsoncake.telegrambot.constant;
 public class BotMessageRuConst {
     public static final String START_TEXT = """
             Здравствуй дорогой пользователь. Добро пожаловать в бот *Avgeek*!
-                        
+
+
             *Что умеет этот бот?*
             
             ✅ Отправлять запланированные рейсы *широкофюзеляжных авиалайнеров* в выбранный вами аэропорт для того чтобы вы смогли как следует их сфотографировать.
@@ -12,9 +13,12 @@ public class BotMessageRuConst {
             
             ✅ Вы можете изменить режим работы бота, например выбрать только оповещения насчет запланированных рейсов широкофюзеляжных авиалайнеров, либо только оповещения об Ан-124.
             
+            ✅ Вы можете отслеживать конкретные *широкофюзеляжные авиалайнеры*, например только Boeing 747 или Airbus A350 и Airbus A380, вы можете выбрать от 1 до 5 авиалайнеров.
+            
             ✅ Бот поддерживает 3 языка на выбор: английский, украинский и русский.
             
             Откройте *меню команд* для более детального ознакомления.
+            
             
             
             *Теперь давайте выберем интересующий вас аэропорт*
@@ -235,7 +239,7 @@ public class BotMessageRuConst {
     public static final String CANCEL_ADDING_EMAIL_TEXT = "Добавление _email_ было *отменено*.";
     public static final String WAIT_FOR_CODE_TEXT = """
             *Код подтверждения* был отправлен на ваш _email_, введите его
-                        
+
             Если вы ввели неправильный _email_ или хотите *отменить* его добавление, напишите __cancel__
             """;
     public static final String SELECT_LANGUAGE_TEXT = "Выберите _язык_";
@@ -293,7 +297,7 @@ public class BotMessageRuConst {
     public static final String AVIATION_ALTITUDE_UNIT_RU = "фут";
     public static final String FEEDBACK_COMMAND_TEXT = """
             *Напишите обратную связь сюда*
-                        
+
             Если вы не хотите отправлять обратную связь, введите __"cancel"__
             """;
     public static final String FEEDBACK_SENT_TEXT = "Благодарю за обратную связь!";
@@ -302,7 +306,7 @@ public class BotMessageRuConst {
             *Выберите 1-5 широкофюзеляжных воздушных судов, запланированные рейсы которых вы хотите отслеживать.*
             
             Когда выберите все нужные воздушные судна, нажмите на ✅.
-            Если вы хотите отменить выбор, нажмите на ❌, в таком случае вам прийдется заново использовать данную команду. 
+            Если вы хотите отменить выбор, нажмите на ❌, в таком случае вам прийдется заново использовать данную команду.
             """;
     public static final String AIRCRAFT_ALREADY_CHOSEN_TEXT = "Воздушное судно *%s* уже выбрано, выберите другое";
     public static final String CHOSEN_MAX_AIRCRAFT_COUNT_TEXT = """
