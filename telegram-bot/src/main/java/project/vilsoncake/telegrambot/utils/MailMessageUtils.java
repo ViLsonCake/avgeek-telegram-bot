@@ -24,6 +24,8 @@ public class MailMessageUtils {
             case CODE_MESSAGE_TEXT -> MailMessageEngConst.CODE_MESSAGE_TEXT;
             case AN_124_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageEngConst.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
             case AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageEngConst.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
+            case AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageEngConst.AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT;
+            case AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageEngConst.AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT;
         };
     }
 
@@ -33,6 +35,8 @@ public class MailMessageUtils {
             case CODE_MESSAGE_TEXT -> MailMessageRuConst.CODE_MESSAGE_TEXT;
             case AN_124_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageRuConst.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
             case AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageRuConst.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
+            case AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageRuConst.AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT;
+            case AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageRuConst.AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT;
         };
     }
 
@@ -42,6 +46,8 @@ public class MailMessageUtils {
             case CODE_MESSAGE_TEXT -> MailMessageUkConst.CODE_MESSAGE_TEXT;
             case AN_124_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageUkConst.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
             case AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageUkConst.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
+            case AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT -> MailMessageUkConst.AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT;
+            case AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT -> MailMessageUkConst.AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT;
         };
     }
 }

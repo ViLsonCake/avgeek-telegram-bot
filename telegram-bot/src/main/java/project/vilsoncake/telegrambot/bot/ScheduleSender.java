@@ -35,8 +35,7 @@ import static project.vilsoncake.telegrambot.constant.BotMessageEngConst.ANTONOV
 import static project.vilsoncake.telegrambot.constant.CommandNamesConst.MARKDOWN_PARSE_MODE;
 import static project.vilsoncake.telegrambot.constant.NumberConst.*;
 import static project.vilsoncake.telegrambot.entity.enumerated.BotMessageTemplate.*;
-import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.AN_124_IN_AIRPORT_MESSAGE_SUBJECT;
-import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.AN_124_IN_YOUR_AIRPORT_MESSAGE_TEXT;
+import static project.vilsoncake.telegrambot.entity.enumerated.MailMessageTemplate.*;
 
 @Component
 @Slf4j
@@ -458,6 +457,20 @@ public class ScheduleSender {
                                     flight.getCallsign(), flight.getId()
                             ));
                             botSender.sendMessage(message);
+
+                            if (user.isEmailVerified()) {
+                                mailService.sendMessage(
+                                        user.getEmail(),
+                                        mailMessageUtils.getMessageByLanguage(AN_124_LIKELY_IN_AIRPORT_MESSAGE_SUBJECT, user.getBotLanguage()),
+                                        String.format(mailMessageUtils.getMessageByLanguage(AN_124_LIKELY_IN_YOUR_AIRPORT_MESSAGE_TEXT, user.getBotLanguage()),
+                                                flight.getAirline(),
+                                                unitsUtils.convertAltitudeToUserUnitsSystem(flight.getAltitude(), user.getUnitsSystem(), user.getBotLanguage()),
+                                                unitsUtils.convertSpeedToUserUnitsSystem(flight.getGroundSpeed(), user.getUnitsSystem(), user.getBotLanguage()),
+                                                unitsUtils.convertDistanceToUserUnitsSystem(flight.getDistance(), user.getUnitsSystem(), user.getBotLanguage()),
+                                                flight.getCallsign(), flight.getId())
+                                );
+                            }
+
                         } else if (!flightEntity.isFlyingNear() && flight.getDistance() < FLIGHT_CLOSE_TO_AIRPORT_DISTANCE_IN_KM && flight.getAltitude() > FLIGHT_MAYBE_IN_AIRPORT_ALTITUDE_IN_M) {
                             flightService.changeFlightFlyingNear(flightEntity, true);
 
