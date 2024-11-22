@@ -23,7 +23,9 @@ public class MailServiceImpl implements MailService {
         message.setTo(recipient);
         message.setSubject(subject);
         message.setText(text);
-        sender.send(message);
+
+        Thread mailThread = new Thread(() -> sender.send(message));
+        mailThread.start();
 
         return true;
     }
