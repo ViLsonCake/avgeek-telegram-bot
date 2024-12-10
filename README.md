@@ -96,8 +96,12 @@ More notification examples you can find [here](./telegram-bot/src/main/resources
     GITHUB_REPOSITORY_URL=LINK_TO_YOUR_REPOSITORY
 
     LOGGING_TOKEN=YOUR_BETTER_STACK_TOKEN
+
     BETTER_STACK_LINK=https://logs.betterstack.com
+
     TIMEZONE=Europe/London
+
+    COOKIE_SECRET_KEY=YOUR_COOKIE_SECRET_KEY
     ```
    _All Timezones you can find [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)._
 
