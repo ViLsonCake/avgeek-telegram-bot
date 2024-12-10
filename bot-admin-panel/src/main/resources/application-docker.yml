@@ -90,6 +90,7 @@ better-stack:
 
 app:
   timezone: ${TIMEZONE}
+  cookie-secret-key: ${COOKIE_SECRET_KEY}
 
 server:
   port: 8888
