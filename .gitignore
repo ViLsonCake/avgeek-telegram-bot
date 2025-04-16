@@ -41,6 +41,7 @@ out/
 /telegram-bot/*.log
 /bot-admin-panel/*.log
 
+._*
 .env
 *.env
 
