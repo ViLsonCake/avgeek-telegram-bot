@@ -65,9 +65,9 @@ bot:
   name: ${BOT_MAME}
   token: ${BOT_TOKEN}
   creator-id: ${BOT_CREATOR_ID}
-  send-an-124-flights: false
-  send-scheduled-flights: true
-  send-landing-flights: true
+  send-an-124-flights: ${SEND_AN_124_FLIGHTS}
+  send-scheduled-flights: ${SEND_SCHEDULED_FLIGHTS}
+  send-landing-flights: ${SEND_LANDING_FLIGHTS}
 
 flightradar-api:
   api-key: ${API_KEY}
