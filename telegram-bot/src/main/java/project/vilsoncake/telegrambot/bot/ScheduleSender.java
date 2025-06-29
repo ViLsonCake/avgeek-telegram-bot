@@ -3,6 +3,7 @@ package project.vilsoncake.telegrambot.bot;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -56,9 +57,23 @@ public class ScheduleSender {
     private final WebClient apiWebClient;
     private final BotSender botSender;
 
+    @Value("${bot.send-an-124-flights}")
+    private boolean sendAn124Flights;
+
+    @Value("${bot.send-scheduled-flights}")
+    private boolean sendScheduledFlights;
+
+    @Value("${bot.send-landing-flights}")
+    private boolean sendLandingFlights;
+
     @Transactional
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() throws InterruptedException {
+        if (!sendScheduledFlights) {
+            log.info("Skipping sending new scheduled flights because of disable flag.");
+            return;
+        }
+
         log.info("Schedule sending wide-body flights started...");
 
         long startTime = System.currentTimeMillis();
@@ -176,6 +191,11 @@ public class ScheduleSender {
     @Transactional
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() throws InterruptedException {
+        if (!sendLandingFlights) {
+            log.info("Skipping sending new landing flights because of disable flag.");
+            return;
+        }
+
         log.info("Schedule sending landing flights started...");
 
         long startTime = System.currentTimeMillis();
@@ -266,6 +286,11 @@ public class ScheduleSender {
 
     @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
+        if (!sendAn124Flights) {
+            log.info("Skipping sending new An-124 flights because of disable flag.");
+            return;
+        }
+
         log.info("Schedule sending An-124 flights started...");
 
         long startTime = System.currentTimeMillis();
