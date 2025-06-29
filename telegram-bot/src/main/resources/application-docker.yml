@@ -70,6 +70,9 @@ bot:
   send-an-124-flights: ${SEND_AN_124_FLIGHTS}
   send-scheduled-flights: ${SEND_SCHEDULED_FLIGHTS}
   send-landing-flights: ${SEND_LANDING_FLIGHTS}
+  an-124-flights-delay: ${AN_124_FLIGHTS_DELAY}
+  scheduled-flights-delay: ${SCHEDULED_FLIGHTS_DELAY}
+  landing_flights_delay: ${LANDING_FLIGHTS_DELAY}
 
 flightradar-api:
   api-key: ${API_KEY}

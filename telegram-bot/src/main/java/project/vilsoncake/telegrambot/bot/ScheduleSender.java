@@ -67,7 +67,7 @@ public class ScheduleSender {
     private boolean sendLandingFlights;
 
     @Transactional
-    @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelayString = "${bot.scheduled-flights-delay}", timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() throws InterruptedException {
         if (!sendScheduledFlights) {
             log.info("Skipping sending new scheduled flights because of disable flag.");
@@ -189,7 +189,7 @@ public class ScheduleSender {
     }
 
     @Transactional
-    @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelayString = "${bot.landing_flights_delay}", timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() throws InterruptedException {
         if (!sendLandingFlights) {
             log.info("Skipping sending new landing flights because of disable flag.");
@@ -284,7 +284,7 @@ public class ScheduleSender {
         log.info("Schedule sending landing flights finished. {}", loggingUtils.getFinishedProcessTime(startTime, endTime));
     }
 
-    @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelayString = "${bot.an-124-flights-delay}", timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
         if (!sendAn124Flights) {
             log.info("Skipping sending new An-124 flights because of disable flag.");
