@@ -1,11 +1,4 @@
 spring:
-  application:
-    name: telegram-bot
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_DOCKER_PORT}/${POSTGRES_DB}
     username: ${POSTGRES_USER}
@@ -15,63 +8,3 @@ spring:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_DOCKER_PORT}/${POSTGRES_DB}
     user: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
-
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
-  boot:
-    admin:
-      client:
-        url: ${ADMIN_SERVER_URL}
-        username: ${ADMIN_USERNAME}
-        password: ${ADMIN_PASSWORD}
-        instance:
-          metadata:
-            user:
-              name: ${CLIENT_USERNAME}
-              password: ${CLIENT_PASSWORD}
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
-
-rabbitmq:
-  username: ${RABBITMQ_USERNAME}
-  password: ${RABBITMQ_PASSWORD}
-  connection-host: ${RABBITMQ_DOCKER_HOST}
-  feedback-queue: feedback-queue
-  users-statistic-queue: users-statistic-queue
-  notification-queue: notification-queue
-
-logging:
-  pattern:
-    dateformat: 'HH:mm:ss-dd.MM.yyyy'
-  file:
-    name: telegram-bot.log
-
-bot:
-  name: ${BOT_MAME}
-  token: ${BOT_TOKEN}
-  creator-id: ${BOT_CREATOR_ID}
-
-flightradar-api:
-  api-key: ${API_KEY}
-  url: ${API_DOCKER_URL}
-
-geonames:
-  url: ${GEONAMES_URL}
-  username: ${GEONAMES_USERNAME}

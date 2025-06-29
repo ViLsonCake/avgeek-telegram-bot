@@ -1,7 +1,8 @@
 import FlightRadar24
 
-from utils.flight_utils import convert_knots_to_kmh, convert_feet_to_meters, get_aircraft_name_by_code
+from utils.flight_utils import convert_knots_to_kmh, convert_feet_to_meters, AircraftUtils
 
+aircraft_utils: AircraftUtils = AircraftUtils()
 
 class Flight:
     id: str
@@ -24,7 +25,7 @@ class Flight:
         self.code = flight.aircraft_code
         self.callsign = flight.callsign
         self.airline = airline
-        self.aircraft = get_aircraft_name_by_code(self.code)
+        self.aircraft = aircraft_utils.get_aircraft_name_by_code(self.code)
         self.registration = flight.registration
         self.origin_airport_iata = flight.origin_airport_iata
         self.destination_airport_iata = flight.destination_airport_iata
@@ -54,7 +55,7 @@ class An124Flight:
         self.id = flight.id
         self.code = flight.aircraft_code
         self.callsign = flight.callsign
-        self.aircraft = get_aircraft_name_by_code(self.code)
+        self.aircraft = aircraft_utils.get_aircraft_name_by_code(self.code)
         self.airline = flight.airline_icao
         self.origin_airport_iata = flight.origin_airport_iata
         self.destination_airport_iata = flight.destination_airport_iata
@@ -94,7 +95,7 @@ class ScheduledFlight:
 
         try:
             self.code: str = row_flight['flight']['aircraft']['model']['code']
-            self.aircraft = get_aircraft_name_by_code(self.code)
+            self.aircraft = aircraft_utils.get_aircraft_name_by_code(self.code)
         except TypeError:
             self.code = 'Unknown'
             self.aircraft = 'Unknown'

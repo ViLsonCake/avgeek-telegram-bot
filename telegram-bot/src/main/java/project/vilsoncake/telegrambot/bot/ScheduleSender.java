@@ -59,7 +59,7 @@ public class ScheduleSender {
     private final BotProperties botProperties;
 
     @Transactional
-    @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelayString = "${bot.scheduled-flights-delay}", timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() throws InterruptedException {
         if (!botProperties.isEnableScheduledFlights()) {
             log.info("Skipping sending new scheduled flights because of disable flag.");
@@ -181,7 +181,7 @@ public class ScheduleSender {
     }
 
     @Transactional
-    @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelayString = "${bot.landing_flights_delay}", timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() throws InterruptedException {
         if (!botProperties.isEnableLandingFlights()) {
             log.info("Skipping sending new landing flights because of disable flag.");
@@ -281,7 +281,7 @@ public class ScheduleSender {
         log.info("Schedule sending landing flights finished. {}", loggingUtils.getFinishedProcessTime(startTime, endTime));
     }
 
-    @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelayString = "${bot.an-124-flights-delay}", timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
         if (!botProperties.isEnableAn124Flights()) {
             log.info("Skipping sending new An-124 flights because of disable flag.");
@@ -318,7 +318,7 @@ public class ScheduleSender {
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
                 for (An124FlightDto flight : an124FlightsDto.getFlights()) {
-                    if (flight.getAirline().isBlank()) {
+                    if (flight.getAirline().isBlank() || flight.getAirline().equalsIgnoreCase("Unknown")) {
                         flight.setAirline(ANTONOV_AIRLINES_NAME);
                     }
 

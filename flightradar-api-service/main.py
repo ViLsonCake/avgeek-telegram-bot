@@ -7,7 +7,10 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from dto.flight_dto import Flight, An124Flight, ScheduledFlight
 from logger.middleware import LoggingMiddleware
 from security.api_key_security import api_key_auth
-from utils.flight_utils import get_white_list_plane_codes
+from utils.flight_utils import AircraftUtils, AirlinesUtils
+
+aircraft_utils: AircraftUtils = AircraftUtils()
+airlines_utils: AirlinesUtils = AirlinesUtils()
 
 app = FastAPI()
 app.add_middleware(LoggingMiddleware)
@@ -25,14 +28,7 @@ async def get_aircraft_by_code(aircraft_code: str, api_key=Depends(api_key_auth)
     flights = [An124Flight(flight) for flight in flights]
 
     for flight in flights:
-        airline_name = list(filter(lambda airline: airline['ICAO'] == flight.airline, flightradar_api.get_airlines()))
-
-        if len(airline_name) == 0:
-            airline_name = ''
-        else:
-            airline_name = airline_name[0]['Name']
-
-        flight.airline = airline_name
+        flight.airline = airlines_utils.get_airline_by_icao(flight.airline)
 
     return {'flights': flights}
 
@@ -49,12 +45,7 @@ async def get_flight_by_registration(registration: str, airport_code: str, api_k
 
     flight = flights[0]
     airport = flightradar_api.get_airport(airport_code)
-    airline_name = list(filter(lambda airline: airline['ICAO'] == flight.airline_icao, flightradar_api.get_airlines()))
-
-    if len(airline_name) == 0:
-        airline_name = 'Unknown'
-    else:
-        airline_name = airline_name[0]['Name']
+    airline_name = airlines_utils.get_airline_by_icao(flight.airline_icao)
 
     return Flight(flight, airport, airline_name)
 
@@ -75,7 +66,7 @@ async def get_white_list_planes(code: str, api_key=Depends(api_key_auth)):
         )
 
     arrivals: list = details['airport']['pluginData']['schedule']['arrivals']['data']
-    row_white_list_arrivals: list = get_white_list_plane_codes(arrivals)
+    row_white_list_arrivals: list = aircraft_utils.get_white_list_plane_codes(arrivals)
 
     return {'flights': [ScheduledFlight(flight) for flight in row_white_list_arrivals]}
 
