@@ -321,7 +321,7 @@ public class ScheduleSender {
 
             if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_AN_124_FLIGHTS)) {
                 for (An124FlightDto flight : an124FlightsDto.getFlights()) {
-                    if (flight.getAirline().isBlank()) {
+                    if (flight.getAirline().isBlank() || flight.getAirline().equalsIgnoreCase("Unknown")) {
                         flight.setAirline(ANTONOV_AIRLINES_NAME);
                     }
 
