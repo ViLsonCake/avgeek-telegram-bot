@@ -10,8 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface FlightRepository extends CrudRepository<FlightEntity, UUID> {
-    @Query(value = "SELECT DISTINCT ON (f.registration) * from flight f WHERE f.active = true AND f.registration IS NOT NULL", nativeQuery = true)
-    List<FlightEntity> findUniqueFlightsRegistrations();
+    @Query(value = "SELECT DISTINCT ON (f.registration) * from flight f WHERE f.active = true AND f.registration IS NOT NULL AND f.user_id = :user.getId()", nativeQuery = true)
+    List<FlightEntity> findUniqueFlightsRegistrationsByUser(UserEntity user);
     List<FlightEntity> findByUserOrderByCreatedAt(UserEntity user);
     List<FlightEntity> findAllByUser(UserEntity user);
     Optional<FlightEntity> findByUserAndFlightId(UserEntity user, String flightId);

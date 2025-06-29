@@ -9,7 +9,7 @@ public interface FlightService {
     boolean addFlightToUser(FlightEntity flightEntity);
     List<FlightEntity> findByUserOrderByCreatedAt(UserEntity user);
     List<FlightEntity> findAllByUser(UserEntity user);
-    List<FlightEntity> findUniqueFlightsRegistrations();
+    List<FlightEntity> findUniqueFlightsRegistrationsByUser(UserEntity user);
     FlightEntity findByUserAndFlightId(UserEntity user, String flightId);
     FlightEntity findByUserAndRegistration(UserEntity user, String registration);
     boolean changeFlightActive(FlightEntity flight, boolean active);

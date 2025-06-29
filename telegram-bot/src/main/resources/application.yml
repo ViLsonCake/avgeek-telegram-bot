@@ -65,9 +65,10 @@ bot:
   name: ${BOT_MAME}
   token: ${BOT_TOKEN}
   creator-id: ${BOT_CREATOR_ID}
-  send-an-124-flights: false
-  send-scheduled-flights: true
-  send-landing-flights: true
+  enable-an-124-flights: true
+  enable-scheduled-flights: true
+  enable-landing-flights: true
+  landing-whitelist-users: ["vilsoncake"]
 
 flightradar-api:
   api-key: ${API_KEY}

@@ -3,7 +3,6 @@ package project.vilsoncake.telegrambot.bot;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,6 +19,7 @@ import project.vilsoncake.telegrambot.entity.enumerated.BotMode;
 import project.vilsoncake.telegrambot.entity.enumerated.UserState;
 import project.vilsoncake.telegrambot.exception.AirportNotFoundException;
 import project.vilsoncake.telegrambot.exception.FlightNotFoundException;
+import project.vilsoncake.telegrambot.property.BotProperties;
 import project.vilsoncake.telegrambot.service.FlightService;
 import project.vilsoncake.telegrambot.service.GeonameService;
 import project.vilsoncake.telegrambot.service.MailService;
@@ -56,20 +56,12 @@ public class ScheduleSender {
     private final LoggingUtils loggingUtils;
     private final WebClient apiWebClient;
     private final BotSender botSender;
-
-    @Value("${bot.send-an-124-flights}")
-    private boolean sendAn124Flights;
-
-    @Value("${bot.send-scheduled-flights}")
-    private boolean sendScheduledFlights;
-
-    @Value("${bot.send-landing-flights}")
-    private boolean sendLandingFlights;
+    private final BotProperties botProperties;
 
     @Transactional
     @Scheduled(fixedDelay = SCHEDULED_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewScheduledAndLiveWideBodyFlights() throws InterruptedException {
-        if (!sendScheduledFlights) {
+        if (!botProperties.isEnableScheduledFlights()) {
             log.info("Skipping sending new scheduled flights because of disable flag.");
             return;
         }
@@ -191,7 +183,7 @@ public class ScheduleSender {
     @Transactional
     @Scheduled(fixedDelay = LANDING_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendLandingWideBodyFlights() throws InterruptedException {
-        if (!sendLandingFlights) {
+        if (!botProperties.isEnableLandingFlights()) {
             log.info("Skipping sending new landing flights because of disable flag.");
             return;
         }
@@ -200,80 +192,85 @@ public class ScheduleSender {
 
         long startTime = System.currentTimeMillis();
 
-        List<FlightEntity> uniqueRegistrations = flightService.findUniqueFlightsRegistrations();
-        List<FlightDataDto> flightDataDtos = new ArrayList<>();
-
-        for (FlightEntity flightEntity : uniqueRegistrations) {
-            Thread.sleep(REQUESTS_DELAY_IN_MILLIS);
-
-            FlightDataDto flight;
-            try {
-                flight = apiWebClient.get()
-                        .uri("/registration/" + flightEntity.getRegistration() + "/" + flightEntity.getUser().getAirport())
-                        .retrieve()
-                        .bodyToMono(FlightDataDto.class)
-                        .block();
-            } catch (WebClientRequestException e) {
-                log.error("Error when requesting API for landing flights. URL: {}, Message: {}", e.getUri(), e.getMessage());
-                continue;
-            } catch (WebClientResponseException e) {
-                if (!e.getStatusCode().equals(HttpStatusCode.valueOf(HttpStatus.SC_NOT_FOUND))) {
-                    log.error("Response API error for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
-                }
-                continue;
-            }
-
-            flightDataDtos.add(flight);
-        }
-
         List<UserEntity> users = userService.findAllUsers();
 
         for (UserEntity user : users) {
-
             if (!user.getState().equals(UserState.CHOSEN_AIRPORT)) {
                 continue;
             }
 
-            if (user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS)) {
-                for (FlightDataDto flight : flightDataDtos) {
+            if (!(user.getBotMode().equals(BotMode.ALL) || user.getBotMode().equals(BotMode.ONLY_WIDE_BODY_AIRCRAFT_FLIGHTS))) {
+                continue;
+            }
 
-                    if (flight.getOriginAirportIata() == null || flight.getOriginAirportIata().isBlank() || !flight.getDestinationAirportIata().equalsIgnoreCase(user.getAirport())) {
+            if (!(botProperties.getLandingWhitelistUsers().isEmpty() || botProperties.getLandingWhitelistUsers().contains(user.getUsername().toLowerCase()))) {
+                continue;
+            }
+
+            List<FlightEntity> uniqueRegistrations = flightService.findUniqueFlightsRegistrationsByUser(user);
+            List<FlightDataDto> flightDataDtos = new ArrayList<>();
+
+            for (FlightEntity flightEntity : uniqueRegistrations) {
+                Thread.sleep(REQUESTS_DELAY_IN_MILLIS);
+
+                FlightDataDto flight;
+                try {
+                    flight = apiWebClient.get()
+                            .uri("/registration/" + flightEntity.getRegistration() + "/" + flightEntity.getUser().getAirport())
+                            .retrieve()
+                            .bodyToMono(FlightDataDto.class)
+                            .block();
+                } catch (WebClientRequestException e) {
+                    log.error("Error when requesting API for landing flights. URL: {}, Message: {}", e.getUri(), e.getMessage());
+                    continue;
+                } catch (WebClientResponseException e) {
+                    if (!e.getStatusCode().equals(HttpStatusCode.valueOf(HttpStatus.SC_NOT_FOUND))) {
+                        log.error("Response API error for landing flights. URL: {}, Status code: {}, Status text: {}, Message: {}", e.getRequest().getURI(), e.getStatusCode(), e.getStatusText(), e.getMessage());
+                    }
+                    continue;
+                }
+
+                flightDataDtos.add(flight);
+            }
+
+            for (FlightDataDto flight : flightDataDtos) {
+
+                if (flight.getOriginAirportIata() == null || flight.getOriginAirportIata().isBlank() || !flight.getDestinationAirportIata().equalsIgnoreCase(user.getAirport())) {
+                    continue;
+                }
+
+                List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
+
+                if (!user.getAircraft().isEmpty()) {
+                    if (!userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
                         continue;
                     }
+                }
 
-                    List<String> userSelectedAircraftFamiliesCodes = aircraftUtils.getUserSelectedAircraftFamiliesCodes(user.getAircraft(), aircraftFamiliesCodes);
+                FlightEntity flightEntity;
 
-                    if (!user.getAircraft().isEmpty()) {
-                        if (!userSelectedAircraftFamiliesCodes.contains(flight.getCode())) {
-                            continue;
-                        }
-                    }
+                try {
+                    flightEntity = flightService.findByUserAndRegistration(user, flight.getRegistration());
+                } catch (FlightNotFoundException e) {
+                    continue;
+                }
 
-                    FlightEntity flightEntity;
+                if (flightEntity.isActive() && flightEntity.getRegistration() != null && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
+                    if (flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
+                        AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getOriginAirportIata());
+                        GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
+                        flightService.changeFlightLanding(flightEntity, true);
 
-                    try {
-                        flightEntity = flightService.findByUserAndRegistration(user, flight.getRegistration());
-                    } catch (FlightNotFoundException e) {
-                        continue;
-                    }
+                        SendMessage message = BaseBotMessage.getBaseBotMessage(user.getChatId());
+                        message.setText(String.format(botMessageUtils.getMessageByLanguage(LANDING_FLIGHT_TEXT, user.getBotLanguage()),
+                                flightEntity.getRegistration(), airportDto.getName(), flight.getOriginAirportIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirline(),
+                                unitsUtils.convertAltitudeToUserUnitsSystem(flight.getAltitude(), user.getUnitsSystem(), user.getBotLanguage()),
+                                unitsUtils.convertSpeedToUserUnitsSystem(flight.getGroundSpeed(), user.getUnitsSystem(), user.getBotLanguage()),
+                                unitsUtils.convertDistanceToUserUnitsSystem(flight.getDistance(), user.getUnitsSystem(), user.getBotLanguage()),
+                                flightEntity.getRegistration(), flight.getCallsign(), flight.getId()
+                        ));
 
-                    if (flightEntity.isActive() && flightEntity.getRegistration() != null && !flightEntity.getRegistration().isBlank() && !flightEntity.isLanding()) {
-                        if (flight.getVerticalSpeed() < APPROACHING_VERTICAL_SPEED_IN_FPM) {
-                            AirportDto airportDto = airportsUtils.getAirportByIataCode(flight.getOriginAirportIata());
-                            GeonameDto geonameCityDto = geonameService.getObject(airportDto.getCity(), airportDto.getCountry(), user.getBotLanguage().name());
-                            flightService.changeFlightLanding(flightEntity, true);
-
-                            SendMessage message = BaseBotMessage.getBaseBotMessage(user.getChatId());
-                            message.setText(String.format(botMessageUtils.getMessageByLanguage(LANDING_FLIGHT_TEXT, user.getBotLanguage()),
-                                    flightEntity.getRegistration(), airportDto.getName(), flight.getOriginAirportIata(), geonameCityDto.getCountryName(), flight.getAircraft(), flight.getAirline(),
-                                    unitsUtils.convertAltitudeToUserUnitsSystem(flight.getAltitude(), user.getUnitsSystem(), user.getBotLanguage()),
-                                    unitsUtils.convertSpeedToUserUnitsSystem(flight.getGroundSpeed(), user.getUnitsSystem(), user.getBotLanguage()),
-                                    unitsUtils.convertDistanceToUserUnitsSystem(flight.getDistance(), user.getUnitsSystem(), user.getBotLanguage()),
-                                    flightEntity.getRegistration(), flight.getCallsign(), flight.getId()
-                            ));
-
-                            botSender.sendMessage(message);
-                        }
+                        botSender.sendMessage(message);
                     }
                 }
             }
@@ -286,7 +283,7 @@ public class ScheduleSender {
 
     @Scheduled(fixedDelay = AN_124_FLIGHTS_CHECK_DELAY_IN_MINUTES, timeUnit = TimeUnit.MINUTES)
     public void sendNewAn124Flights() {
-        if (!sendAn124Flights) {
+        if (!botProperties.isEnableAn124Flights()) {
             log.info("Skipping sending new An-124 flights because of disable flag.");
             return;
         }

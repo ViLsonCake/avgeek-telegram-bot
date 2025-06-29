@@ -42,8 +42,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<FlightEntity> findUniqueFlightsRegistrations() {
-        return flightRepository.findUniqueFlightsRegistrations();
+    public List<FlightEntity> findUniqueFlightsRegistrationsByUser(UserEntity user) {
+        return flightRepository.findUniqueFlightsRegistrationsByUser(user);
     }
 
     @Override
