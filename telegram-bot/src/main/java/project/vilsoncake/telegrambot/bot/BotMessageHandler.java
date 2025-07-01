@@ -29,7 +29,15 @@ public class BotMessageHandler {
         String languageCode;
         Long chatId;
 
+        if (update == null) {
+            return;
+        }
+
         if (!update.hasCallbackQuery()) {
+            if (update.getMessage() == null || update.getMessage().getChat() == null) {
+                return;
+            }
+
             username = update.getMessage().getChat().getUserName();
 
             if (username == null) {
